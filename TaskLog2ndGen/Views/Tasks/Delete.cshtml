@@ -1,0 +1,171 @@
+﻿@model TaskLog2ndGen.Models.Task
+
+<h2>Delete Task</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Status Code
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskStatu.taskStatusCode)
+        </dd>
+
+        <dt>
+            Primary Contact
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.firstName) @Html.DisplayFor(model => model.Employee.lastName)
+        </dd>
+
+        <dt>
+            Secondary Contact
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee1.firstName) @Html.DisplayFor(model => model.Employee1.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateLogged)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateLogged)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateSubmmited)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateSubmmited)
+        </dd>
+
+        <dt>
+            Service Team
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Team.name)
+        </dd>
+
+        <dt>
+            Service Group
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceGroup1.name)
+        </dd>
+
+        <dt>
+            Business Unit
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessUnit1.description)
+        </dd>
+
+        <dt>
+            Platform
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Platform1.platformCode)
+        </dd>
+
+        <dt>
+            Environment
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Environment1.environmentCode)
+        </dd>
+
+        <dt>
+            Category
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category1.categoryCode)
+        </dd>
+
+        <dt>
+            Urgency
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Urgency1.urgencyCode)
+        </dd>
+
+        <dt>
+            Application
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Application1.name)
+        </dd>
+
+        <dt>
+            Reference Number
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reference1.referenceNo)
+        </dd>
+
+        <dt>
+            Reference Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reference1.referenceType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.links)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.links)
+        </dd>
+
+        <dt>
+            High Level Estimate
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HighLevelEstimate1.highLevelEstimateCode)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirm" class="btn btn-default" />
+            @Html.ActionLink("Cancel", "", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

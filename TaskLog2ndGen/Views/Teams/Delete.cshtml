@@ -1,0 +1,27 @@
+﻿@model TaskLog2ndGen.Models.Team
+
+<h2>Delete Team</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirm" class="btn btn-default" />
+            @Html.ActionLink("Cancel", "", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

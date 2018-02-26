@@ -1,0 +1,152 @@
+﻿@model IEnumerable<TaskLog2ndGen.Models.Task>
+
+<h2>List of Tasks</h2>
+
+<p>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.ActionLink("Create Task", "Create")
+        </div>
+        <div class="col-md-6 text-right">
+            @using (Html.BeginForm())
+            {
+                <div class="form-inline">
+                    <div class="form-group">
+                        @Html.TextBox("criterion", "", new { @class = "form-control", placeholder = "Search task..." })
+                        <input type="submit" value="Search" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Task Status
+        </th>
+        <th>
+            Primary Contact
+        </th>
+        <th>
+            Secondary Contact
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateLogged)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateSubmmited)
+        </th>
+        <th>
+            Service Team
+        </th>
+        <th>
+            Service Group
+        </th>
+        <th>
+            Business Unit
+        </th>
+        <th>
+            Platform
+        </th>
+        <th>
+            Environment
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Urgency
+        </th>
+        <th>
+            Application
+        </th>
+        <th>
+            Reference Number
+        </th>
+        <th>
+            Reference Type
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.links)
+        </th>
+        <th>
+            High Level Estimate
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskStatu.taskStatusCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.firstName) @Html.DisplayFor(modelItem => item.Employee.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee1.firstName) @Html.DisplayFor(modelItem => item.Employee1.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateLogged)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateSubmmited)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceGroup1.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BusinessUnit1.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Platform1.platformCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Environment1.environmentCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category1.categoryCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Urgency1.urgencyCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Application1.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reference1.referenceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reference1.referenceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.links)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HighLevelEstimate1.highLevelEstimateCode)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.taskId }) |
+                @Html.ActionLink("View", "Details", new { id = item.taskId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.taskId })
+            </td>
+        </tr>
+    }
+</table>
