@@ -242,6 +242,7 @@
       <DependentUpon>GB_Tasklogtracker_D1Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelsMetadata\AccountViewModelMetadata.cs" />
     <Compile Include="ViewModelsMetadata\TaskViewModelMetadata.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />

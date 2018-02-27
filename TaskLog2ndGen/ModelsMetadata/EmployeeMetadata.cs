@@ -8,7 +8,6 @@ namespace TaskLog2ndGen.Models
 
     }
 
-
     public class EmployeeMetadata
     {
         [Display(Name = "Last Name")]

@@ -10,7 +10,7 @@ namespace TaskLog2ndGen.Tests.Controllers
     public class LoginControllerTest
     {
         [TestMethod]
-        public void LogsInSucceed()
+        public void LogInSucceed()
         {
             // Arrange
             LoginController controller = new LoginController();
@@ -30,7 +30,7 @@ namespace TaskLog2ndGen.Tests.Controllers
         }
 
         [TestMethod]
-        public void LogsInFail()
+        public void LogInFail()
         {
             // Arrange
             LoginController controller = new LoginController();

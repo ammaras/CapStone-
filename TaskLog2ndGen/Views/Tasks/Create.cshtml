@@ -36,7 +36,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.dateLogged, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.dateLogged, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.dateLogged, @disabled=true } })*@
                 @Html.EditorFor(model => model.dateLogged, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.dateLogged, @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.dateLogged, "", new { @class = "text-danger" })
             </div>

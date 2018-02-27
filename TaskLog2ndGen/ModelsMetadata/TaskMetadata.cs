@@ -8,7 +8,6 @@ namespace TaskLog2ndGen.Models
 
     }
 
-
     public class TaskMetadata
     {
         [Display(Name = "Primary Contact")]

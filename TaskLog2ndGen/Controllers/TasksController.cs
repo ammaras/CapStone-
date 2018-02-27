@@ -31,7 +31,7 @@ namespace TaskLog2ndGen.Controllers
             {
                 tasks = await db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.Reference1).Include(t => t.ServiceGroup1).Include(t => t.Urgency1).Include(t => t.Team).Include(t => t.TaskStatu).ToListAsync();
             }
-            return View(tasks);
+            return View("Index", tasks);
         }
 
         // GET: Tasks/Details/5
@@ -50,7 +50,7 @@ namespace TaskLog2ndGen.Controllers
             {
                 return HttpNotFound();
             }
-            return View(task);
+            return View("Details", task);
         }
 
         // GET: Tasks/Create
@@ -88,37 +88,46 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
+
             taskViewModel.dateSubmmited = DateTime.Now;
+            Reference reference = await db.References.FindAsync(taskViewModel.referenceNo);
+            if (reference != null)
+            {
+                ModelState.AddModelError("referenceNo", "Reference number already exists.");
+            }
 
             if (ModelState.IsValid)
             {
-                Reference reference = new Reference();
-                reference.referenceNo = taskViewModel.referenceNo;
-                reference.referenceType = taskViewModel.referenceType;
+                reference = new Reference
+                {
+                    referenceNo = taskViewModel.referenceNo,
+                    referenceType = taskViewModel.referenceType
+                };
                 db.References.Add(reference);
-                await db.SaveChangesAsync();
-                Models.Task task = new Models.Task();
-                task.primaryContact = taskViewModel.primaryContact;
-                task.secondaryContact = taskViewModel.secondaryContact;
-                task.dateLogged = taskViewModel.dateLogged;
-                task.dateSubmmited = taskViewModel.dateSubmmited;
-                task.serviceTeam = taskViewModel.serviceTeam;
-                task.serviceGroup = taskViewModel.serviceGroup;
-                task.platform = taskViewModel.platform;
-                task.urgency = taskViewModel.urgency;
-                task.businessUnit = taskViewModel.businessUnit;
-                task.environment = taskViewModel.environment;
-                task.category = taskViewModel.category;
-                task.application = taskViewModel.application;
-                task.reference = reference.referenceNo;
-                task.title = taskViewModel.title;
-                task.description = taskViewModel.description;
-                task.highLevelEstimate = taskViewModel.highLevelEstimate;
-                task.links = taskViewModel.links;
-                task.taskStatusCode = taskViewModel.taskStatusCode;
+                Models.Task task = new Models.Task
+                {
+                    primaryContact = taskViewModel.primaryContact,
+                    secondaryContact = taskViewModel.secondaryContact,
+                    dateLogged = taskViewModel.dateLogged,
+                    dateSubmmited = taskViewModel.dateSubmmited,
+                    serviceTeam = taskViewModel.serviceTeam,
+                    serviceGroup = taskViewModel.serviceGroup,
+                    platform = taskViewModel.platform,
+                    urgency = taskViewModel.urgency,
+                    businessUnit = taskViewModel.businessUnit,
+                    environment = taskViewModel.environment,
+                    category = taskViewModel.category,
+                    application = taskViewModel.application,
+                    reference = reference.referenceNo,
+                    title = taskViewModel.title,
+                    description = taskViewModel.description,
+                    highLevelEstimate = taskViewModel.highLevelEstimate,
+                    links = taskViewModel.links,
+                    taskStatusCode = taskViewModel.taskStatusCode
+                };
                 db.Tasks.Add(task);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = task.taskId });
             }
 
             ViewBag.application = new SelectList(db.Applications, "applicationId", "name", taskViewModel.application);
@@ -134,6 +143,7 @@ namespace TaskLog2ndGen.Controllers
             ViewBag.urgency = new SelectList(db.Urgencies, "urgencyCode", "urgencyCode", taskViewModel.urgency);
             ViewBag.serviceTeam = new SelectList(db.Teams, "teamId", "name", taskViewModel.serviceTeam);
             ViewBag.taskStatusCode = new SelectList(db.TaskStatus, "taskStatusCode", "taskStatusCode", taskViewModel.taskStatusCode);
+            ViewBag.dateLogged = taskViewModel.dateLogged;
             return View(taskViewModel);
         }
 
@@ -153,27 +163,29 @@ namespace TaskLog2ndGen.Controllers
             {
                 return HttpNotFound();
             }
-            TaskViewModel taskViewModel = new TaskViewModel();
-            taskViewModel.taskId = task.taskId;
-            taskViewModel.primaryContact = task.primaryContact;
-            taskViewModel.secondaryContact = task.secondaryContact;
-            taskViewModel.dateLogged = task.dateLogged;
-            taskViewModel.dateSubmmited = task.dateSubmmited;
-            taskViewModel.serviceTeam = task.serviceTeam;
-            taskViewModel.serviceGroup = task.serviceGroup;
-            taskViewModel.platform = task.platform;
-            taskViewModel.urgency = task.urgency;
-            taskViewModel.businessUnit = task.businessUnit;
-            taskViewModel.environment = task.environment;
-            taskViewModel.category = task.category;
-            taskViewModel.application = task.application;
-            taskViewModel.referenceNo = task.Reference1.referenceNo;
-            taskViewModel.referenceType = task.Reference1.referenceType;
-            taskViewModel.title = task.title;
-            taskViewModel.description = task.description;
-            taskViewModel.highLevelEstimate = task.highLevelEstimate;
-            taskViewModel.links = task.links;
-            taskViewModel.taskStatusCode = task.taskStatusCode;
+            TaskViewModel taskViewModel = new TaskViewModel
+            {
+                taskId = task.taskId,
+                primaryContact = task.primaryContact,
+                secondaryContact = task.secondaryContact,
+                dateLogged = task.dateLogged,
+                dateSubmmited = task.dateSubmmited,
+                serviceTeam = task.serviceTeam,
+                serviceGroup = task.serviceGroup,
+                platform = task.platform,
+                urgency = task.urgency,
+                businessUnit = task.businessUnit,
+                environment = task.environment,
+                category = task.category,
+                application = task.application,
+                referenceNo = task.Reference1.referenceNo,
+                referenceType = task.Reference1.referenceType,
+                title = task.title,
+                description = task.description,
+                highLevelEstimate = task.highLevelEstimate,
+                links = task.links,
+                taskStatusCode = task.taskStatusCode
+            };
 
             ViewBag.application = new SelectList(db.Applications, "applicationId", "name", task.application);
             ViewBag.businessUnit = new SelectList(db.BusinessUnits, "businessUnitId", "description", task.businessUnit);
@@ -229,7 +241,7 @@ namespace TaskLog2ndGen.Controllers
                 task.taskStatusCode = taskViewModel.taskStatusCode;
                 db.Entry(task).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = task.taskId });
             }
             ViewBag.application = new SelectList(db.Applications, "applicationId", "name", taskViewModel.application);
             ViewBag.businessUnit = new SelectList(db.BusinessUnits, "businessUnitId", "description", taskViewModel.businessUnit);
@@ -276,7 +288,9 @@ namespace TaskLog2ndGen.Controllers
                 return RedirectToAction("", "Login");
             }
             Models.Task task = await db.Tasks.FindAsync(id);
+            Reference reference = await db.References.FindAsync(task.Reference1.referenceNo);
             db.Tasks.Remove(task);
+            db.References.Remove(reference);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

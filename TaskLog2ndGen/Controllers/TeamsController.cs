@@ -66,7 +66,7 @@ namespace TaskLog2ndGen.Controllers
             {
                 db.Teams.Add(team);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = team.teamId });
             }
 
             return View(team);
@@ -106,7 +106,7 @@ namespace TaskLog2ndGen.Controllers
             {
                 db.Entry(team).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = team.teamId });
             }
             return View(team);
         }

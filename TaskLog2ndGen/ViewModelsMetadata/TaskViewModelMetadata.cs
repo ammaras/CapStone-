@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TaskLog2ndGen.ViewModels
 {
@@ -64,6 +60,7 @@ namespace TaskLog2ndGen.ViewModels
 
         [Display(Name = "Reference Number")]
         [Required(ErrorMessage = "Reference number is required.")]
+        [StringLength(50, ErrorMessage = "Reference number cannot have more than 50 characters.")]
         public string referenceNo { get; set; }
 
         [Display(Name = "Reference Type")]
@@ -72,10 +69,12 @@ namespace TaskLog2ndGen.ViewModels
 
         [Display(Name = "Title")]
         [Required(ErrorMessage = "Title is required.")]
+        [StringLength(50, ErrorMessage = "Title cannot have more than 50 characters.")]
         public string title { get; set; }
 
         [Display(Name = "Description")]
         [Required(ErrorMessage = "Description is required.")]
+        [StringLength(255, ErrorMessage = "Description cannot have more than 255 characters.")]
         public string description { get; set; }
 
         [Display(Name = "High Level Estimate")]
@@ -84,6 +83,7 @@ namespace TaskLog2ndGen.ViewModels
 
         [Display(Name = "Links")]
         [Required(ErrorMessage = "Links are required.")]
+        [StringLength(255, ErrorMessage = "Links cannot have more than 255 characters.")]
         public string links { get; set; }
 
         [Display(Name = "Task Status")]
