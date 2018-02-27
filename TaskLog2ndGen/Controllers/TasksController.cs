@@ -17,7 +17,7 @@ namespace TaskLog2ndGen.Controllers
         // GET: Tasks
         public async Task<ActionResult> Index(string criterion)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -37,7 +37,7 @@ namespace TaskLog2ndGen.Controllers
         // GET: Tasks/Details/5
         public async Task<ActionResult> Details(int? id)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -56,7 +56,7 @@ namespace TaskLog2ndGen.Controllers
         // GET: Tasks/Create
         public ActionResult Create()
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -84,7 +84,7 @@ namespace TaskLog2ndGen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "taskId,primaryContact,secondaryContact,dateLogged,dateSubmmited,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,referenceNo,referenceType,title,description,highLevelEstimate,links,taskStatusCode")] TaskViewModel taskViewModel)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -140,7 +140,7 @@ namespace TaskLog2ndGen.Controllers
         // GET: Tasks/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -198,7 +198,7 @@ namespace TaskLog2ndGen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "taskId,primaryContact,secondaryContact,dateLogged,dateSubmmited,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,referenceNo,referenceType,title,description,highLevelEstimate,links,taskStatusCode")] TaskViewModel taskViewModel)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -250,7 +250,7 @@ namespace TaskLog2ndGen.Controllers
         // GET: Tasks/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -271,7 +271,7 @@ namespace TaskLog2ndGen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }

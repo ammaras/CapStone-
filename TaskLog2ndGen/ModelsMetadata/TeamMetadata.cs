@@ -12,7 +12,7 @@ namespace TaskLog2ndGen.Models
     {
         [Display(Name = "Name")]
         [Required(ErrorMessage = "Name is required.")]
-        [StringLength(20, ErrorMessage = "Name cannot have more than 50 characters.")]
+        [StringLength(50, ErrorMessage = "Name cannot have more than 50 characters.")]
         public string name { get; set; }
     }
 }

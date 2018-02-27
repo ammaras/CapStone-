@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using TaskLog2ndGen.Models;
-using System.Linq;
 
 namespace TaskLog2ndGen.Controllers
 {
@@ -15,17 +15,17 @@ namespace TaskLog2ndGen.Controllers
         // GET: Teams
         public async Task<ActionResult> Index()
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
-            return View(await db.Teams.ToListAsync());
+            return View("Index", await db.Teams.ToListAsync());
         }
 
         // GET: Teams/Details/5
         public async Task<ActionResult> Details(int? id)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -38,17 +38,17 @@ namespace TaskLog2ndGen.Controllers
             {
                 return HttpNotFound();
             }
-            return View(employees);
+            return View("Details", employees);
         }
 
         // GET: Teams/Create
         public ActionResult Create()
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
-            return View();
+            return View("Create");
         }
 
         // POST: Teams/Create
@@ -58,7 +58,7 @@ namespace TaskLog2ndGen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "teamId,name")] Team team)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -75,7 +75,7 @@ namespace TaskLog2ndGen.Controllers
         // GET: Teams/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -98,7 +98,7 @@ namespace TaskLog2ndGen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "teamId,name")] Team team)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -114,7 +114,7 @@ namespace TaskLog2ndGen.Controllers
         // GET: Teams/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
@@ -135,7 +135,7 @@ namespace TaskLog2ndGen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -13,9 +14,9 @@ namespace TaskLog2ndGen.Controllers
         private GB_Tasklogtracker_D1Context db = new GB_Tasklogtracker_D1Context();
 
         // GET: Login
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            if (Session["account"] == null)
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return View();
             }
@@ -30,11 +31,11 @@ namespace TaskLog2ndGen.Controllers
             {
                 try
                 {
-                    Account accnt = db.Accounts.Where(a => a.userName == account.userName).SingleOrDefault();
+                    Account accnt = await db.Accounts.Where(a => a.userName == account.userName).SingleOrDefaultAsync();
                     if (accnt == null)
                     {
                         ModelState.AddModelError("password", "Username or password are invalid.");
-                        return View(account);
+                        return View("Index", account);
                     }
                     if (accnt.password != account.password)
                     {
@@ -42,17 +43,20 @@ namespace TaskLog2ndGen.Controllers
                     }
                     else
                     {
-                        Session["account"] = accnt;
-                        return RedirectToAction("", "Home");
+                        if (System.Web.HttpContext.Current != null)
+                        {
+                            Session["account"] = accnt;
+                        }
+                        return RedirectToAction("Index", "Home");
                     }
-                    return View(account);
+                    return View("Index", account);
                 }
                 catch (Exception err)
                 {
                     TempData["errMsg"] = "An unexpected error has occurred. Please try again later.";
                 }
             }
-            return View(account);
+            return View("Index", account);
         }
 
     }
