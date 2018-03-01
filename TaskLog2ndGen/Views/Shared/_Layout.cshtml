@@ -14,30 +14,27 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Task Log 2nd Gen", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    @if (account != null)
-                    {
-                        <li>@Html.ActionLink("Teams", "Index", "Teams")</li>
-                        <li>@Html.ActionLink("Tasks", "Index", "Tasks")</li>
-                    }
-                </ul>
-                @if (account == null)
-                {
-                    @Html.Partial("_LoginPartial")
-                }
-            </div>
+    <div class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">Task Log 2nd Gen</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                </li>
+                @if (account != null)
+    {
+            <li>@Html.ActionLink("Teams", "Index", "Teams", null, new { @class = "nav-link" })</li>
+            <li>@Html.ActionLink("Tasks", "Index", "Tasks", null, new { @class = "nav-link" })</li>
+            <li>@Html.ActionLink("Employees", "Index", "Employees", null, new { @class = "nav-link" })</li>
+}
+            </ul>
+            @if (account == null)
+            {
+                @Html.Partial("_LoginPartial")
+            }
         </div>
     </div>
     <div class="container body-content">
