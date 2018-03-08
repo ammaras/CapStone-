@@ -12,14 +12,18 @@ namespace TaskLog2ndGen.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class WorksheetAudit
     {
-        public int employeeId { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string roleCode { get; set; }
+        public int worksheetAuditId { get; set; }
+        public int worksheet { get; set; }
+        public System.DateTime dateLogged { get; set; }
+        public int loggedBy { get; set; }
+        public string notes { get; set; }
+        public decimal timeSpent { get; set; }
+        public string worksheetStatus { get; set; }
     
-        public virtual Role Role { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual Worksheet Worksheet1 { get; set; }
+        public virtual WorksheetStatu WorksheetStatu { get; set; }
     }
 }

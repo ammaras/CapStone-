@@ -13,7 +13,7 @@ namespace TaskLog2ndGen.ViewModels
         [Display(Name = "Username")]
         [Required(ErrorMessage = "Username is required.")]
         [StringLength(10, ErrorMessage = "Username cannot have more than 10 characters.")]
-        public string userName { get; set; }
+        public string username { get; set; }
 
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Password is required.")]

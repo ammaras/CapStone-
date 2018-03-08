@@ -1,4 +1,5 @@
-﻿@model TaskLog2ndGen.ViewModels.TaskViewModel
+﻿@using TaskLog2ndGen.Models
+@model TaskLog2ndGen.ViewModels.TaskViewModel
 
 <h2>Edit Task</h2>
 
@@ -12,10 +13,10 @@
         @Html.HiddenFor(model => model.taskId)
 
         <div class="form-group">
-            <label for="taskStatusCode" class="control-label col-md-2">Task Status</label>
+            <label for="taskStatus" class="control-label col-md-2">Task Status</label>
             <div class="col-md-10">
-                @Html.DropDownList("taskStatusCode", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.taskStatusCode, "", new { @class = "text-danger" })
+                @Html.DropDownList("taskStatus", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.taskStatus, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -32,22 +33,6 @@
             <div class="col-md-10">
                 @Html.DropDownList("secondaryContact", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.secondaryContact, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.dateLogged, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dateLogged, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.dateLogged, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.dateSubmmited, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dateSubmmited, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.dateSubmmited, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -115,19 +100,44 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.referenceNo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.referenceNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.referenceNo, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <fieldset id="container">
+            <legend>References</legend>
+
+            @Html.DropDownList("refTypes")
+
+            @for (int i = 0; i < Model.references.Count; i++)
+            {
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.references[i].referenceNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.references[i].referenceNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.references[i].referenceNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.references[i].referenceType, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.references[i].referenceType, new SelectList((List<ReferenceType>)ViewBag.ReferenceTypes, "referenceTypeCode", "referenceTypeCode", Model.references[i].referenceType), new { @class = "form-control", @name = "references.referenceType" })
+                                @Html.ValidationMessageFor(model => model.references[i].referenceType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="button" class="btn btnRemove" value="Remove Reference" />
+                    </div>
+                </div>
+            }
+        </fieldset>
 
         <div class="form-group">
-            <label for="referenceType" class="control-label col-md-2">Reference Type</label>
-            <div class="col-md-10">
-                @Html.DropDownList("referenceType", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.highLevelEstimate, "", new { @class = "text-danger" })
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="btnAdd" class="btn" value="Add Reference" />
             </div>
         </div>
 

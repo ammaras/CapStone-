@@ -58,10 +58,6 @@ namespace TaskLog2ndGen.Models
         [Required(ErrorMessage = "Application is required.")]
         public int application { get; set; }
 
-        [Display(Name = "Reference Number")]
-        [Required(ErrorMessage = "Reference number is required.")]
-        public string reference { get; set; }
-
         [Display(Name = "Title")]
         [Required(ErrorMessage = "Title is required.")]
         public string title { get; set; }
@@ -80,6 +76,6 @@ namespace TaskLog2ndGen.Models
 
         [Display(Name = "Task Status")]
         [Required(ErrorMessage = "Task status is required.")]
-        public string taskStatusCode { get; set; }
+        public string taskStatus { get; set; }
     }
 }

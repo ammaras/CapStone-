@@ -17,14 +17,15 @@ namespace TaskLog2ndGen.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Reference()
         {
-            this.Tasks = new HashSet<Task>();
+            this.TaskReferences = new HashSet<TaskReference>();
         }
     
+        public int referenceId { get; set; }
         public string referenceNo { get; set; }
         public string referenceType { get; set; }
     
         public virtual ReferenceType ReferenceType1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<TaskReference> TaskReferences { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace TaskLog2ndGen.ViewModels
 
         [Display(Name = "Secondary Contact")]
         [Required(ErrorMessage = "Secondary contact is required.")]
-        public int secondaryContact { get; set; }
+        public int? secondaryContact { get; set; }
 
         [Display(Name = "Date Logged")]
         [Required(ErrorMessage = "Date logged is required.")]
@@ -58,15 +58,6 @@ namespace TaskLog2ndGen.ViewModels
         [Required(ErrorMessage = "Application is required.")]
         public int application { get; set; }
 
-        [Display(Name = "Reference Number")]
-        [Required(ErrorMessage = "Reference number is required.")]
-        [StringLength(50, ErrorMessage = "Reference number cannot have more than 50 characters.")]
-        public string referenceNo { get; set; }
-
-        [Display(Name = "Reference Type")]
-        [Required(ErrorMessage = "Reference type is required.")]
-        public string referenceType { get; set; }
-
         [Display(Name = "Title")]
         [Required(ErrorMessage = "Title is required.")]
         [StringLength(50, ErrorMessage = "Title cannot have more than 50 characters.")]
@@ -88,6 +79,6 @@ namespace TaskLog2ndGen.ViewModels
 
         [Display(Name = "Task Status")]
         [Required(ErrorMessage = "Task status is required.")]
-        public string taskStatusCode { get; set; }
+        public string taskStatus { get; set; }
     }
 }

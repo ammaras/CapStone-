@@ -12,19 +12,16 @@ namespace TaskLog2ndGen.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TaskStatu
+    public partial class TaskAuditType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TaskStatu()
+        public TaskAuditType()
         {
-            this.Tasks = new HashSet<Task>();
             this.TaskAudits = new HashSet<TaskAudit>();
         }
     
-        public string taskStatusCode { get; set; }
+        public string taskAuditTypeCode { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Task> Tasks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskAudit> TaskAudits { get; set; }
     }

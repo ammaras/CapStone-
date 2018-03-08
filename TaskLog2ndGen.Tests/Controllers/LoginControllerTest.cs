@@ -16,7 +16,7 @@ namespace TaskLog2ndGen.Tests.Controllers
             LoginController controller = new LoginController();
             AccountViewModel accountViewModel = new AccountViewModel()
             {
-                userName = "admin",
+                username = "admin",
                 password = "admin"
             };
 
@@ -36,7 +36,7 @@ namespace TaskLog2ndGen.Tests.Controllers
             LoginController controller = new LoginController();
             AccountViewModel accountViewModel = new AccountViewModel()
             {
-                userName = "administrator",
+                username = "administrator",
                 password = "administrator"
             };
 

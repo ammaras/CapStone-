@@ -6,25 +6,25 @@
     @Html.ActionLink("Create Team", "Create")
 </p>
 
-<table class="table">
+<table class="table table-bordered table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.name)
         </th>
-        <th></th>
+        @*<th></th>*@
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.name)
+                <a href="/Teams/Details/1">@Html.DisplayFor(modelItem => item.name)</a>
             </td>
-            <td>
+            @*<td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.teamId }) |
                 @Html.ActionLink("View", "Details", new { id = item.teamId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.teamId })
-            </td>
+            </td>*@
         </tr>
     }
 </table>

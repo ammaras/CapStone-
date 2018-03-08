@@ -19,6 +19,9 @@ namespace TaskLog2ndGen.Models
         {
             this.Tasks = new HashSet<Task>();
             this.Tasks1 = new HashSet<Task>();
+            this.TaskAudits = new HashSet<TaskAudit>();
+            this.Worksheets = new HashSet<Worksheet>();
+            this.WorksheetAudits = new HashSet<WorksheetAudit>();
         }
     
         public int employeeId { get; set; }
@@ -38,5 +41,11 @@ namespace TaskLog2ndGen.Models
         public virtual ICollection<Task> Tasks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Task> Tasks1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskAudit> TaskAudits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Worksheet> Worksheets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorksheetAudit> WorksheetAudits { get; set; }
     }
 }

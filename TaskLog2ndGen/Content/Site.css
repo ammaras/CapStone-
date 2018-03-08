@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+body {
+    padding-top: 70px;
+}
+
+td a:hover, td a:visited, td a:link, td a:active {
+    display: block;
+    text-decoration: none;
+    color: black;
+}

@@ -31,7 +31,7 @@ namespace TaskLog2ndGen.Controllers
             {
                 try
                 {
-                    Account accnt = await db.Accounts.Where(a => a.userName == account.userName).SingleOrDefaultAsync();
+                    Account accnt = await db.Accounts.Where(a => a.username == account.username).SingleOrDefaultAsync();
                     if (accnt == null)
                     {
                         ModelState.AddModelError("password", "Username or password are invalid.");

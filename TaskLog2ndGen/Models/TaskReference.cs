@@ -12,14 +12,13 @@ namespace TaskLog2ndGen.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class TaskReference
     {
-        public int employeeId { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string roleCode { get; set; }
+        public int taskReferenceId { get; set; }
+        public int task { get; set; }
+        public int reference { get; set; }
     
-        public virtual Role Role { get; set; }
-        public virtual Employee Employee { get; set; }
+        public virtual Reference Reference1 { get; set; }
+        public virtual Task Task1 { get; set; }
     }
 }

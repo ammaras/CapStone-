@@ -2,7 +2,7 @@
 {
     public partial class AccountViewModel
     {
-        public string userName { get; set; }
+        public string username { get; set; }
         public string password { get; set; }
     }
 }

@@ -12,20 +12,20 @@ namespace TaskLog2ndGen.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TaskStatu
+    public partial class WorksheetStatu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TaskStatu()
+        public WorksheetStatu()
         {
-            this.Tasks = new HashSet<Task>();
-            this.TaskAudits = new HashSet<TaskAudit>();
+            this.Worksheets = new HashSet<Worksheet>();
+            this.WorksheetAudits = new HashSet<WorksheetAudit>();
         }
     
-        public string taskStatusCode { get; set; }
+        public string worksheetStatusCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<Worksheet> Worksheets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaskAudit> TaskAudits { get; set; }
+        public virtual ICollection<WorksheetAudit> WorksheetAudits { get; set; }
     }
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="189aa0691cab4b71bf6394bde9526cb5" Name="Diagram1">
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Account" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Application" Width="1.5" PointX="6" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.BusinessUnit" Width="1.5" PointX="6" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Category" Width="1.5" PointX="6" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Employee" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Environment" Width="1.5" PointX="6" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Group" Width="1.5" PointX="6" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.HighLevelEstimate" Width="1.5" PointX="6" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Platform" Width="1.5" PointX="6" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Reference" Width="1.5" PointX="11.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.ReferenceType" Width="1.5" PointX="9" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Role" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Task" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.TaskAudit" Width="1.5" PointX="10.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.TaskAuditType" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.TaskReference" Width="1.5" PointX="13.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.TaskStatu" Width="1.5" PointX="6" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Team" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Urgency" Width="1.5" PointX="6" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.Worksheet" Width="1.5" PointX="13.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.WorksheetAudit" Width="1.5" PointX="15.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GB_Tasklogtracker_D1Model.WorksheetStatu" Width="1.5" PointX="11.25" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKAccount300931" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKAccount517006" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask346527" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask35102" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask414" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKEmployee559362" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask658460" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask678938" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTaskAudit29123" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKWorksheet248592" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKWorksheetA619031" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask224529" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask953350" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask277714" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask291544" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKReference146955" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTaskRefere248239" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask25533" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask326449" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTask67458" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTaskAudit479842" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTaskRefere80681" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKWorksheet92753" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTaskAudit251605" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKTaskAudit576958" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKWorksheet134116" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKWorksheetA347076" ManuallyRouted="false" />
+        <AssociationConnector Association="GB_Tasklogtracker_D1Model.FKWorksheetA325029" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

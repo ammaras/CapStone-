@@ -6,6 +6,7 @@ using TaskLog2ndGen.Controllers;
 using TaskLog2ndGen.Models;
 using System.Linq;
 using TaskLog2ndGen.ViewModels;
+using System.Collections.Generic;
 
 namespace TaskLog2ndGen.Tests.Controllers
 {
@@ -68,13 +69,12 @@ namespace TaskLog2ndGen.Tests.Controllers
                 environment = "Non-Production",
                 category = "Support",
                 application = 1,
-                referenceNo = "CH0099999",
-                referenceType = "SNOW",
+                references = new List<Reference>() { new Reference { referenceNo = "CH0099999", referenceType = "SNOW" } },
                 title = "DBA support needed",
                 description = "Apply the security",
                 highLevelEstimate = "days",
                 links = "http://localhost:58403/",
-                taskStatusCode = "Not Assigned"
+                taskStatus = "Not Assigned"
             };
 
             // Act
@@ -105,13 +105,12 @@ namespace TaskLog2ndGen.Tests.Controllers
                 environment = "Non-Production",
                 category = "Support",
                 application = 1,
-                referenceNo = "CH0088888",
-                referenceType = "SNOW",
+                references = new List<Reference>() { new Reference { referenceNo = "CH0088888", referenceType = "SNOW" } },
                 title = null,
                 description = "Apply the security",
                 highLevelEstimate = "days",
                 links = "http://localhost:58403/",
-                taskStatusCode = "Not Assigned"
+                taskStatus = "Not Assigned"
             };
 
             // Act & Assert
@@ -156,14 +155,16 @@ namespace TaskLog2ndGen.Tests.Controllers
                 environment = task.environment,
                 category = task.category,
                 application = task.application,
-                referenceNo = task.Reference1.referenceNo,
-                referenceType = task.Reference1.referenceType,
                 title = "DBA - Managed Services support needed",
                 description = task.description,
                 highLevelEstimate = task.highLevelEstimate,
                 links = task.links,
-                taskStatusCode = task.taskStatusCode
+                taskStatus = task.taskStatus
             };
+            foreach (var item in task.TaskReferences)
+            {
+                taskViewModel.references.Add(item.Reference1);
+            }
 
             // Act
             Task<ActionResult> actionResult = controller.Edit(taskViewModel);
@@ -196,14 +197,16 @@ namespace TaskLog2ndGen.Tests.Controllers
                 environment = task.environment,
                 category = task.category,
                 application = task.application,
-                referenceNo = task.Reference1.referenceNo,
-                referenceType = task.Reference1.referenceType,
                 title = null,
                 description = task.description,
                 highLevelEstimate = task.highLevelEstimate,
                 links = task.links,
-                taskStatusCode = task.taskStatusCode
+                taskStatus = task.taskStatus
             };
+            foreach (var item in task.TaskReferences)
+            {
+                taskViewModel.references.Add(item.Reference1);
+            }
 
             // Act & Assert
             Task<ActionResult> actionResult = controller.Edit(taskViewModel);

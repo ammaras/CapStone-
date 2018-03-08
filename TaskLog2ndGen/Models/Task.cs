@@ -14,9 +14,17 @@ namespace TaskLog2ndGen.Models
     
     public partial class Task
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Task()
+        {
+            this.TaskAudits = new HashSet<TaskAudit>();
+            this.TaskReferences = new HashSet<TaskReference>();
+            this.Worksheets = new HashSet<Worksheet>();
+        }
+    
         public int taskId { get; set; }
         public int primaryContact { get; set; }
-        public int secondaryContact { get; set; }
+        public Nullable<int> secondaryContact { get; set; }
         public System.DateTime dateLogged { get; set; }
         public System.DateTime dateSubmmited { get; set; }
         public int serviceTeam { get; set; }
@@ -27,12 +35,11 @@ namespace TaskLog2ndGen.Models
         public string environment { get; set; }
         public string category { get; set; }
         public int application { get; set; }
-        public string reference { get; set; }
         public string title { get; set; }
         public string description { get; set; }
         public string highLevelEstimate { get; set; }
         public string links { get; set; }
-        public string taskStatusCode { get; set; }
+        public string taskStatus { get; set; }
     
         public virtual Application Application1 { get; set; }
         public virtual BusinessUnit BusinessUnit1 { get; set; }
@@ -40,12 +47,17 @@ namespace TaskLog2ndGen.Models
         public virtual Employee Employee { get; set; }
         public virtual Employee Employee1 { get; set; }
         public virtual Environment Environment1 { get; set; }
+        public virtual Group Group { get; set; }
         public virtual HighLevelEstimate HighLevelEstimate1 { get; set; }
         public virtual Platform Platform1 { get; set; }
-        public virtual Reference Reference1 { get; set; }
-        public virtual ServiceGroup ServiceGroup1 { get; set; }
+        public virtual TaskStatu TaskStatu { get; set; }
         public virtual Urgency Urgency1 { get; set; }
         public virtual Team Team { get; set; }
-        public virtual TaskStatu TaskStatu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskAudit> TaskAudits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskReference> TaskReferences { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Worksheet> Worksheets { get; set; }
     }
 }

@@ -25,11 +25,11 @@ namespace TaskLog2ndGen.Controllers
             if (!String.IsNullOrEmpty(criterion))
             {
                 criterion = criterion.ToLower();
-                tasks = await db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.Reference1).Include(t => t.ServiceGroup1).Include(t => t.Urgency1).Include(t => t.Team).Include(t => t.TaskStatu).Where(t => t.Employee.lastName.ToLower().Contains(criterion) || t.Employee.firstName.Contains(criterion) || t.taskStatusCode.ToLower().Contains(criterion)).ToListAsync();
+                tasks = await db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.TaskReferences).Include(t => t.Group).Include(t => t.Urgency1).Include(t => t.Team).Include(t => t.TaskStatu).Where(t => t.Employee.lastName.ToLower().Contains(criterion) || t.Employee.firstName.Contains(criterion) || t.taskStatus.ToLower().Contains(criterion)).ToListAsync();
             }
             else
             {
-                tasks = await db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.Reference1).Include(t => t.ServiceGroup1).Include(t => t.Urgency1).Include(t => t.Team).Include(t => t.TaskStatu).ToListAsync();
+                tasks = await db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.TaskReferences).Include(t => t.Group).Include(t => t.Urgency1).Include(t => t.Team).Include(t => t.TaskStatu).ToListAsync();
             }
             return View("Index", tasks);
         }
@@ -68,11 +68,12 @@ namespace TaskLog2ndGen.Controllers
             ViewBag.environment = new SelectList(db.Environments, "environmentCode", "environmentCode");
             ViewBag.highLevelEstimate = new SelectList(db.HighLevelEstimates, "highLevelEstimateCode", "highLevelEstimateCode");
             ViewBag.platform = new SelectList(db.Platforms, "platformCode", "platformCode");
-            ViewBag.referenceType = new SelectList(db.ReferenceTypes, "referenceTypeCode", "referenceTypeCode");
-            ViewBag.serviceGroup = new SelectList(db.ServiceGroups, "serviceGroupId", "name");
+            ViewBag.refTypes = new SelectList(db.ReferenceTypes, "referenceTypeCode", "referenceTypeCode");
+            ViewBag.ReferenceTypes = db.ReferenceTypes.ToList();
+            ViewBag.serviceGroup = new SelectList(db.Groups, "groupId", "name");
             ViewBag.urgency = new SelectList(db.Urgencies, "urgencyCode", "urgencyCode");
             ViewBag.serviceTeam = new SelectList(db.Teams, "teamId", "name");
-            ViewBag.taskStatusCode = new SelectList(db.TaskStatus, "taskStatusCode", "taskStatusCode");
+            ViewBag.taskStatus = new SelectList(db.TaskStatus, "taskStatusCode", "taskStatusCode");
             ViewBag.dateLogged = DateTime.Now;
             return View();
         }
@@ -82,28 +83,15 @@ namespace TaskLog2ndGen.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "taskId,primaryContact,secondaryContact,dateLogged,dateSubmmited,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,referenceNo,referenceType,title,description,highLevelEstimate,links,taskStatusCode")] TaskViewModel taskViewModel)
+        public async Task<ActionResult> Create([Bind(Include = "primaryContact,secondaryContact,dateLogged,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,references,title,description,highLevelEstimate,links,taskStatus")] TaskViewModel taskViewModel)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
-
             taskViewModel.dateSubmmited = DateTime.Now;
-            Reference reference = await db.References.FindAsync(taskViewModel.referenceNo);
-            if (reference != null)
-            {
-                ModelState.AddModelError("referenceNo", "Reference number already exists.");
-            }
-
             if (ModelState.IsValid)
             {
-                reference = new Reference
-                {
-                    referenceNo = taskViewModel.referenceNo,
-                    referenceType = taskViewModel.referenceType
-                };
-                db.References.Add(reference);
                 Models.Task task = new Models.Task
                 {
                     primaryContact = taskViewModel.primaryContact,
@@ -118,18 +106,37 @@ namespace TaskLog2ndGen.Controllers
                     environment = taskViewModel.environment,
                     category = taskViewModel.category,
                     application = taskViewModel.application,
-                    reference = reference.referenceNo,
                     title = taskViewModel.title,
                     description = taskViewModel.description,
                     highLevelEstimate = taskViewModel.highLevelEstimate,
                     links = taskViewModel.links,
-                    taskStatusCode = taskViewModel.taskStatusCode
+                    taskStatus = taskViewModel.taskStatus
                 };
                 db.Tasks.Add(task);
                 await db.SaveChangesAsync();
+                foreach (var item in taskViewModel.references)
+                {
+                    Reference reference = await db.References.Where(r => r.referenceNo == item.referenceNo && r.referenceType == item.referenceType).SingleOrDefaultAsync();
+                    if (reference == null)
+                    {
+                        reference = new Reference
+                        {
+                            referenceNo = item.referenceNo,
+                            referenceType = item.referenceType
+                        };
+                        db.References.Add(reference);
+                        await db.SaveChangesAsync();
+                    }
+                    TaskReference taskReference = new TaskReference
+                    {
+                        task = task.taskId,
+                        reference = reference.referenceId
+                    };
+                    db.TaskReferences.Add(taskReference);
+                    await db.SaveChangesAsync();
+                }
                 return RedirectToAction("Details", new { id = task.taskId });
             }
-
             ViewBag.application = new SelectList(db.Applications, "applicationId", "name", taskViewModel.application);
             ViewBag.businessUnit = new SelectList(db.BusinessUnits, "businessUnitId", "description", taskViewModel.businessUnit);
             ViewBag.category = new SelectList(db.Categories, "categoryCode", "categoryCode", taskViewModel.category);
@@ -138,11 +145,12 @@ namespace TaskLog2ndGen.Controllers
             ViewBag.environment = new SelectList(db.Environments, "environmentCode", "environmentCode", taskViewModel.environment);
             ViewBag.highLevelEstimate = new SelectList(db.HighLevelEstimates, "highLevelEstimateCode", "highLevelEstimateCode", taskViewModel.highLevelEstimate);
             ViewBag.platform = new SelectList(db.Platforms, "platformCode", "platformCode", taskViewModel.platform);
-            ViewBag.referenceType = new SelectList(db.ReferenceTypes, "referenceTypeCode", "referenceTypeCode", taskViewModel.referenceType);
-            ViewBag.serviceGroup = new SelectList(db.ServiceGroups, "serviceGroupId", "name", taskViewModel.serviceGroup);
+            ViewBag.refTypes = new SelectList(db.ReferenceTypes, "referenceTypeCode", "referenceTypeCode");
+            ViewBag.ReferenceTypes = db.ReferenceTypes.ToList();
+            ViewBag.serviceGroup = new SelectList(db.Groups, "groupId", "name", taskViewModel.serviceGroup);
             ViewBag.urgency = new SelectList(db.Urgencies, "urgencyCode", "urgencyCode", taskViewModel.urgency);
             ViewBag.serviceTeam = new SelectList(db.Teams, "teamId", "name", taskViewModel.serviceTeam);
-            ViewBag.taskStatusCode = new SelectList(db.TaskStatus, "taskStatusCode", "taskStatusCode", taskViewModel.taskStatusCode);
+            ViewBag.taskStatus = new SelectList(db.TaskStatus, "taskStatusCode", "taskStatusCode", taskViewModel.taskStatus);
             ViewBag.dateLogged = taskViewModel.dateLogged;
             return View(taskViewModel);
         }
@@ -178,15 +186,16 @@ namespace TaskLog2ndGen.Controllers
                 environment = task.environment,
                 category = task.category,
                 application = task.application,
-                referenceNo = task.Reference1.referenceNo,
-                referenceType = task.Reference1.referenceType,
                 title = task.title,
                 description = task.description,
                 highLevelEstimate = task.highLevelEstimate,
                 links = task.links,
-                taskStatusCode = task.taskStatusCode
+                taskStatus = task.taskStatus
             };
-
+            foreach (var item in task.TaskReferences)
+            {
+                taskViewModel.references.Add(item.Reference1);
+            }
             ViewBag.application = new SelectList(db.Applications, "applicationId", "name", task.application);
             ViewBag.businessUnit = new SelectList(db.BusinessUnits, "businessUnitId", "description", task.businessUnit);
             ViewBag.category = new SelectList(db.Categories, "categoryCode", "categoryCode", task.category);
@@ -195,11 +204,12 @@ namespace TaskLog2ndGen.Controllers
             ViewBag.environment = new SelectList(db.Environments, "environmentCode", "environmentCode", task.environment);
             ViewBag.highLevelEstimate = new SelectList(db.HighLevelEstimates, "highLevelEstimateCode", "highLevelEstimateCode", task.highLevelEstimate);
             ViewBag.platform = new SelectList(db.Platforms, "platformCode", "platformCode", task.platform);
-            ViewBag.referenceType = new SelectList(db.ReferenceTypes, "referenceTypeCode", "referenceTypeCode", taskViewModel.referenceType);
-            ViewBag.serviceGroup = new SelectList(db.ServiceGroups, "serviceGroupId", "name", task.serviceGroup);
+            ViewBag.refTypes = new SelectList(db.ReferenceTypes, "referenceTypeCode", "referenceTypeCode");
+            ViewBag.ReferenceTypes = db.ReferenceTypes.ToList();
+            ViewBag.serviceGroup = new SelectList(db.Groups, "groupId", "name", task.serviceGroup);
             ViewBag.urgency = new SelectList(db.Urgencies, "urgencyCode", "urgencyCode", task.urgency);
             ViewBag.serviceTeam = new SelectList(db.Teams, "teamId", "name", task.serviceTeam);
-            ViewBag.taskStatusCode = new SelectList(db.TaskStatus, "taskStatusCode", "taskStatusCode", task.taskStatusCode);
+            ViewBag.taskStatus = new SelectList(db.TaskStatus, "taskStatusCode", "taskStatusCode", task.taskStatus);
             return View(taskViewModel);
         }
 
@@ -208,7 +218,7 @@ namespace TaskLog2ndGen.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "taskId,primaryContact,secondaryContact,dateLogged,dateSubmmited,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,referenceNo,referenceType,title,description,highLevelEstimate,links,taskStatusCode")] TaskViewModel taskViewModel)
+        public async Task<ActionResult> Edit([Bind(Include = "taskId,primaryContact,secondaryContact,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,references,title,description,highLevelEstimate,links,taskStatus")] TaskViewModel taskViewModel)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
@@ -216,15 +226,9 @@ namespace TaskLog2ndGen.Controllers
             }
             if (ModelState.IsValid)
             {
-                Reference reference = await db.References.FindAsync(taskViewModel.referenceNo);
-                reference.referenceType = taskViewModel.referenceType;
-                db.Entry(reference).State = EntityState.Modified;
-                await db.SaveChangesAsync();
                 Models.Task task = await db.Tasks.FindAsync(taskViewModel.taskId);
                 task.primaryContact = taskViewModel.primaryContact;
                 task.secondaryContact = taskViewModel.secondaryContact;
-                task.dateLogged = taskViewModel.dateLogged;
-                task.dateSubmmited = taskViewModel.dateSubmmited;
                 task.serviceTeam = taskViewModel.serviceTeam;
                 task.serviceGroup = taskViewModel.serviceGroup;
                 task.platform = taskViewModel.platform;
@@ -233,14 +237,40 @@ namespace TaskLog2ndGen.Controllers
                 task.environment = taskViewModel.environment;
                 task.category = taskViewModel.category;
                 task.application = taskViewModel.application;
-                task.reference = reference.referenceNo;
                 task.title = taskViewModel.title;
                 task.description = taskViewModel.description;
                 task.highLevelEstimate = taskViewModel.highLevelEstimate;
                 task.links = taskViewModel.links;
-                task.taskStatusCode = taskViewModel.taskStatusCode;
+                task.taskStatus = taskViewModel.taskStatus;
                 db.Entry(task).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                List<TaskReference> taskReferences = await db.TaskReferences.Where(tr => tr.task == task.taskId).ToListAsync();
+                foreach (var item in taskReferences)
+                {
+                    db.TaskReferences.Remove(item);
+                }
+                await db.SaveChangesAsync();
+                foreach (var item in taskViewModel.references)
+                {
+                    Reference reference = await db.References.Where(r => r.referenceNo == item.referenceNo && r.referenceType == item.referenceType).SingleOrDefaultAsync();
+                    if (reference == null)
+                    {
+                        reference = new Reference
+                        {
+                            referenceNo = item.referenceNo,
+                            referenceType = item.referenceType
+                        };
+                        db.References.Add(reference);
+                        await db.SaveChangesAsync();
+                    }
+                    TaskReference taskReference = new TaskReference
+                    {
+                        task = task.taskId,
+                        reference = reference.referenceId
+                    };
+                    db.TaskReferences.Add(taskReference);
+                    await db.SaveChangesAsync();
+                }
                 return RedirectToAction("Details", new { id = task.taskId });
             }
             ViewBag.application = new SelectList(db.Applications, "applicationId", "name", taskViewModel.application);
@@ -251,11 +281,12 @@ namespace TaskLog2ndGen.Controllers
             ViewBag.environment = new SelectList(db.Environments, "environmentCode", "environmentCode", taskViewModel.environment);
             ViewBag.highLevelEstimate = new SelectList(db.HighLevelEstimates, "highLevelEstimateCode", "highLevelEstimateCode", taskViewModel.highLevelEstimate);
             ViewBag.platform = new SelectList(db.Platforms, "platformCode", "platformCode", taskViewModel.platform);
-            ViewBag.reference = new SelectList(db.References, "referenceNo", "referenceType", taskViewModel.referenceType);
-            ViewBag.serviceGroup = new SelectList(db.ServiceGroups, "serviceGroupId", "name", taskViewModel.serviceGroup);
+            ViewBag.refTypes = new SelectList(db.ReferenceTypes, "referenceTypeCode", "referenceTypeCode");
+            ViewBag.ReferenceTypes = db.ReferenceTypes.ToList();
+            ViewBag.serviceGroup = new SelectList(db.Groups, "groupId", "name", taskViewModel.serviceGroup);
             ViewBag.urgency = new SelectList(db.Urgencies, "urgencyCode", "urgencyCode", taskViewModel.urgency);
             ViewBag.serviceTeam = new SelectList(db.Teams, "teamId", "name", taskViewModel.serviceTeam);
-            ViewBag.taskStatusCode = new SelectList(db.TaskStatus, "taskStatusCode", "taskStatusCode", taskViewModel.taskStatusCode);
+            ViewBag.taskStatus = new SelectList(db.TaskStatus, "taskStatusCode", "taskStatusCode", taskViewModel.taskStatus);
             return View(taskViewModel);
         }
 
@@ -288,9 +319,12 @@ namespace TaskLog2ndGen.Controllers
                 return RedirectToAction("", "Login");
             }
             Models.Task task = await db.Tasks.FindAsync(id);
-            Reference reference = await db.References.FindAsync(task.Reference1.referenceNo);
+            List<TaskReference> taskReferences = await db.TaskReferences.Where(tr => tr.task == task.taskId).ToListAsync();
+            foreach (var item in taskReferences)
+            {
+                db.TaskReferences.Remove(item);
+            }
             db.Tasks.Remove(task);
-            db.References.Remove(reference);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
