@@ -2,7 +2,7 @@
 
 <h2>View Team</h2>
 
-<table class="table">
+<table class="table table-bordered table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.firstName)
@@ -25,20 +25,24 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.firstName)
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.firstName)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.lastName)
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.lastName)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.email)
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.email)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.phone)
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.phone)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.extension)
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.extension)</a>
             </td>
         </tr>
     }
 </table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.First().Team1.teamId }, new { @class = "btn btn-secondary" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.First().Team1.teamId }, new { @class = "btn btn-secondary" })
+</p>

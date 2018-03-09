@@ -14,7 +14,7 @@
             + "<div class='col-md-5'><div class='form-group'><label for='references_" + index + "__referenceType' class='control-label col-md-2'>referenceType</label><div class='col-md-10'>"
             + "<select class='form-control' id='references_" + index + "__referenceType' name='references[" + index + "].referenceType'>" + options + "</select>"
             + "<span class='field-validation-valid text-danger' data-valmsg-for='references[" + index + "].referenceType' data-valmsg-replace='true'></span></div></div></div>"
-            + "<div class='col-md-2'><input type='button' class='btn btnRemove' value='Remove Reference'/></div></div>");
+            + "<div class='col-md-2'><input type='button' class='btn btn-secondary btnRemove' value='Remove Reference'/></div></div>");
         $("#container").append(newItem);
         $("#container input:button:last").on("click", removeReference);
     }

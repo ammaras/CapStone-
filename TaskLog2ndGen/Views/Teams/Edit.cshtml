@@ -20,14 +20,10 @@
         </div>
 
         <div class="form-group">
-            <div class="row">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Submit" class="btn btn-default" />
-                </div>
-                <div class="col-md-offset-2 col-md-10">
-                    @Html.ActionLink("Cancel", "", null, new { @class = "btn btn-default" })
-                </div>
-            </div>
+            <p>
+                <input type="submit" value="Submit" class="btn btn-secondary" />
+                @Html.ActionLink("Cancel", "Details", new { id = Model.teamId }, new { @class = "btn btn-secondary" })
+            </p>
         </div>
     </div>
 }

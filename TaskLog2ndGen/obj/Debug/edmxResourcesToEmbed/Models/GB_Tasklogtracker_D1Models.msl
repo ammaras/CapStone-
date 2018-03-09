@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GB_Tasklogtracker_D1ModelStoreContainer" CdmEntityContainer="GB_Tasklogtracker_D1Context">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="roleCode" ColumnName="roleCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Applications">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Application">
+        <MappingFragment StoreEntitySet="Application">
+          <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BusinessUnits">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.BusinessUnit">
+        <MappingFragment StoreEntitySet="BusinessUnit">
+          <ScalarProperty Name="businessUnitId" ColumnName="businessUnitId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="categoryCode" ColumnName="categoryCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="team" ColumnName="team" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="lastChanged" ColumnName="lastChanged" />
+          <ScalarProperty Name="middleName" ColumnName="middleName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="extension" ColumnName="extension" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Environments">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Environment">
+        <MappingFragment StoreEntitySet="Environment">
+          <ScalarProperty Name="environmentCode" ColumnName="environmentCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Group">
+        <MappingFragment StoreEntitySet="Group">
+          <ScalarProperty Name="groupId" ColumnName="groupId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HighLevelEstimates">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.HighLevelEstimate">
+        <MappingFragment StoreEntitySet="HighLevelEstimate">
+          <ScalarProperty Name="highLevelEstimateCode" ColumnName="highLevelEstimateCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Platforms">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Platform">
+        <MappingFragment StoreEntitySet="Platform">
+          <ScalarProperty Name="platformCode" ColumnName="platformCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="References">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Reference">
+        <MappingFragment StoreEntitySet="Reference">
+          <ScalarProperty Name="referenceId" ColumnName="referenceId" />
+          <ScalarProperty Name="referenceNo" ColumnName="referenceNo" />
+          <ScalarProperty Name="referenceType" ColumnName="referenceType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferenceTypes">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.ReferenceType">
+        <MappingFragment StoreEntitySet="ReferenceType">
+          <ScalarProperty Name="referenceTypeCode" ColumnName="referenceTypeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="roleCode" ColumnName="roleCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Task">
+        <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="taskId" ColumnName="taskId" />
+          <ScalarProperty Name="primaryContact" ColumnName="primaryContact" />
+          <ScalarProperty Name="secondaryContact" ColumnName="secondaryContact" />
+          <ScalarProperty Name="dateLogged" ColumnName="dateLogged" />
+          <ScalarProperty Name="dateSubmmited" ColumnName="dateSubmmited" />
+          <ScalarProperty Name="serviceTeam" ColumnName="serviceTeam" />
+          <ScalarProperty Name="serviceGroup" ColumnName="serviceGroup" />
+          <ScalarProperty Name="platform" ColumnName="platform" />
+          <ScalarProperty Name="urgency" ColumnName="urgency" />
+          <ScalarProperty Name="businessUnit" ColumnName="businessUnit" />
+          <ScalarProperty Name="environment" ColumnName="environment" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="application" ColumnName="application" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="highLevelEstimate" ColumnName="highLevelEstimate" />
+          <ScalarProperty Name="links" ColumnName="links" />
+          <ScalarProperty Name="taskStatus" ColumnName="taskStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskAudits">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.TaskAudit">
+        <MappingFragment StoreEntitySet="TaskAudit">
+          <ScalarProperty Name="taskAuditId" ColumnName="taskAuditId" />
+          <ScalarProperty Name="task" ColumnName="task" />
+          <ScalarProperty Name="taskAuditType" ColumnName="taskAuditType" />
+          <ScalarProperty Name="dateLogged" ColumnName="dateLogged" />
+          <ScalarProperty Name="loggedBy" ColumnName="loggedBy" />
+          <ScalarProperty Name="notes" ColumnName="notes" />
+          <ScalarProperty Name="taskStatus" ColumnName="taskStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskAuditTypes">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.TaskAuditType">
+        <MappingFragment StoreEntitySet="TaskAuditType">
+          <ScalarProperty Name="taskAuditTypeCode" ColumnName="taskAuditTypeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskReferences">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.TaskReference">
+        <MappingFragment StoreEntitySet="TaskReference">
+          <ScalarProperty Name="taskReferenceId" ColumnName="taskReferenceId" />
+          <ScalarProperty Name="task" ColumnName="task" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskStatus">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.TaskStatu">
+        <MappingFragment StoreEntitySet="TaskStatus">
+          <ScalarProperty Name="taskStatusCode" ColumnName="taskStatusCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Team">
+        <MappingFragment StoreEntitySet="Team">
+          <ScalarProperty Name="teamId" ColumnName="teamId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Urgencies">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Urgency">
+        <MappingFragment StoreEntitySet="Urgency">
+          <ScalarProperty Name="urgencyCode" ColumnName="urgencyCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Worksheets">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.Worksheet">
+        <MappingFragment StoreEntitySet="Worksheet">
+          <ScalarProperty Name="worksheetId" ColumnName="worksheetId" />
+          <ScalarProperty Name="employee" ColumnName="employee" />
+          <ScalarProperty Name="task" ColumnName="task" />
+          <ScalarProperty Name="worksheetStatus" ColumnName="worksheetStatus" />
+          <ScalarProperty Name="dateAssigned" ColumnName="dateAssigned" />
+          <ScalarProperty Name="notes" ColumnName="notes" />
+          <ScalarProperty Name="timeSpent" ColumnName="timeSpent" />
+          <ScalarProperty Name="overtime" ColumnName="overtime" />
+          <ScalarProperty Name="onCall" ColumnName="onCall" />
+          <ScalarProperty Name="links" ColumnName="links" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorksheetAudits">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.WorksheetAudit">
+        <MappingFragment StoreEntitySet="WorksheetAudit">
+          <ScalarProperty Name="worksheetAuditId" ColumnName="worksheetAuditId" />
+          <ScalarProperty Name="worksheet" ColumnName="worksheet" />
+          <ScalarProperty Name="dateLogged" ColumnName="dateLogged" />
+          <ScalarProperty Name="loggedBy" ColumnName="loggedBy" />
+          <ScalarProperty Name="notes" ColumnName="notes" />
+          <ScalarProperty Name="timeSpent" ColumnName="timeSpent" />
+          <ScalarProperty Name="worksheetStatus" ColumnName="worksheetStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorksheetStatus">
+      <EntityTypeMapping TypeName="GB_Tasklogtracker_D1Model.WorksheetStatu">
+        <MappingFragment StoreEntitySet="WorksheetStatus">
+          <ScalarProperty Name="worksheetStatusCode" ColumnName="worksheetStatusCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

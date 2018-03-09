@@ -1,21 +1,19 @@
 ﻿@model IEnumerable<TaskLog2ndGen.Models.Employee>
 
-@{
-    ViewBag.Title = "Index";
-}
+<h2>List of Employees</h2>
 
-<h2>Index</h2>
+<p></p>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table table-bordered table-hover">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firstName)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.lastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.firstName)
+            Service Team
         </th>
         <th>
             @Html.DisplayNameFor(model => model.email)
@@ -27,56 +25,42 @@
             @Html.DisplayNameFor(model => model.lastChanged)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.middleName)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.phone)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.extension)
         </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Team1.name)
-        </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastChanged)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.middleName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.extension)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Team1.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.employeeId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.employeeId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.employeeId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.firstName)</a>
+            </td>
+            <td>
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.lastName)</a>
+            </td>
+
+            <td>
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.Team1.name)</a>
+            </td>
+            <td>
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.email)</a>
+            </td>
+            <td>
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.description)</a>
+            </td>
+            <td>
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.lastChanged)</a>
+            </td>
+            <td>
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.phone)</a>
+            </td>
+            <td>
+                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.extension)</a>
+            </td>
+        </tr>
+    }
 
 </table>

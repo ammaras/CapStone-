@@ -1,27 +1,21 @@
 ﻿@model TaskLog2ndGen.Models.Employee
 
-@{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
-
+<h2>Edit Employee</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Employee</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.employeeId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.team, "team", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("team", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.team, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -34,10 +28,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.team, "team", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+                @Html.DropDownList("team", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.team, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -82,16 +76,13 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            <p>
+                <input type="submit" value="Submit" class="btn btn-secondary" />
+                @Html.ActionLink("Cancel", "Details", new { id = Model.employeeId }, new { @class = "btn btn-secondary" })
+            </p>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -214,6 +214,22 @@ namespace TaskLog2ndGen.Tests.Controllers
         }
 
         [TestMethod]
+        public void CancelTaskSucceed()
+        {
+            // Arrange
+            TasksController controller = new TasksController();
+            Models.Task task = db.Tasks.AsNoTracking().ToList().Last();
+
+            // Act
+            Task<ActionResult> actionResult = controller.CancelConfirmed(task.taskId);
+            actionResult.Wait();
+            RedirectToRouteResult redirectToRouteResult = actionResult.Result as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Details", redirectToRouteResult.RouteValues["action"]);
+        }
+
+        [TestMethod]
         public void DeleteTaskSucceed()
         {
             // Arrange

@@ -25,11 +25,11 @@
                     @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
                 @if (account != null)
-    {
-            <li>@Html.ActionLink("Teams", "Index", "Teams", null, new { @class = "nav-link" })</li>
-            <li>@Html.ActionLink("Tasks", "Index", "Tasks", null, new { @class = "nav-link" })</li>
-            <li>@Html.ActionLink("Employees", "Index", "Employees", null, new { @class = "nav-link" })</li>
-}
+                {
+                    <li>@Html.ActionLink("Teams", "Index", "Teams", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Tasks", "Index", "Tasks", null, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Employees", "Index", "Employees", null, new { @class = "nav-link" })</li>
+                }
             </ul>
             @if (account == null)
             {
@@ -40,21 +40,12 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <table style="width: 100%;">
-                <tr>
-                    <td>&copy; @DateTime.Now.Year</td>
-                    <td>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
-        </footer>
     </div>
-
+    <footer class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
+        <div class="container">
+            <span class="navbar-brand">&copy; @DateTime.Now.Year</span>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

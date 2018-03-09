@@ -137,7 +137,7 @@
                         </div>
 
                         <div class="col-md-2">
-                            <input type="button" class="btn btnRemove" value="Remove Reference" />
+                            <input type="button" class="btn btn-secondary btnRemove" value="Remove Reference" />
                         </div>
                     </div>
                 }
@@ -146,7 +146,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="button" id="btnAdd" class="btn" value="Add Reference" />
+                <input type="button" id="btnAdd" class="btn btn-secondary" value="Add Reference" />
             </div>
         </div>
 
@@ -183,12 +183,10 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Submit" class="btn btn-default" />
-            </div>
-            <div class="col-md-offset-2 col-md-10">
-                @Html.ActionLink("Cancel", "", null, new { @class = "btn btn-default" })
-            </div>
+            <p>
+                <input type="submit" value="Submit" class="btn btn-secondary" />
+                @Html.ActionLink("Cancel", "", null, new { @class = "btn btn-secondary" })
+            </p>
         </div>
     </div>
 }

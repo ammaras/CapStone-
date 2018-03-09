@@ -109,22 +109,6 @@
             @Html.DisplayFor(model => model.Application1.name)
         </dd>
 
-        @*<dt> FIX ME!!!!
-            Reference Number
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Reference1.referenceNo)
-        </dd>
-
-        <dt>
-            Reference Type
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Reference1.referenceType)
-        </dd> FIX ME!!!!*@
-
         <dt>
             @Html.DisplayNameFor(model => model.title)
         </dt>
@@ -164,8 +148,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Confirm" class="btn btn-default" />
-            @Html.ActionLink("Cancel", "", null, new { @class = "btn btn-default" })
+            <input type="submit" value="Confirm" class="btn btn-secondary" />
+            @Html.ActionLink("Cancel", "Details", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
         </div>
     }
 </div>

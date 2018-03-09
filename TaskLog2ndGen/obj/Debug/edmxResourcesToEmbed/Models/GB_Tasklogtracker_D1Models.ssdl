@@ -1,0 +1,665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GB_Tasklogtracker_D1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="employeeId" />
+    </Key>
+    <Property Name="employeeId" Type="int" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="roleCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Application">
+    <Key>
+      <PropertyRef Name="applicationId" />
+    </Key>
+    <Property Name="applicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BusinessUnit">
+    <Key>
+      <PropertyRef Name="businessUnitId" />
+    </Key>
+    <Property Name="businessUnitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="categoryCode" />
+    </Key>
+    <Property Name="categoryCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="employeeId" />
+    </Key>
+    <Property Name="employeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="team" Type="int" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="255" />
+    <Property Name="lastChanged" Type="datetime" Nullable="false" />
+    <Property Name="middleName" Type="varchar" MaxLength="50" />
+    <Property Name="phone" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="extension" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Environment">
+    <Key>
+      <PropertyRef Name="environmentCode" />
+    </Key>
+    <Property Name="environmentCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="groupId" />
+    </Key>
+    <Property Name="groupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HighLevelEstimate">
+    <Key>
+      <PropertyRef Name="highLevelEstimateCode" />
+    </Key>
+    <Property Name="highLevelEstimateCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Platform">
+    <Key>
+      <PropertyRef Name="platformCode" />
+    </Key>
+    <Property Name="platformCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reference">
+    <Key>
+      <PropertyRef Name="referenceId" />
+    </Key>
+    <Property Name="referenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="referenceNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="referenceType" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReferenceType">
+    <Key>
+      <PropertyRef Name="referenceTypeCode" />
+    </Key>
+    <Property Name="referenceTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="roleCode" />
+    </Key>
+    <Property Name="roleCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="taskId" />
+    </Key>
+    <Property Name="taskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="primaryContact" Type="int" Nullable="false" />
+    <Property Name="secondaryContact" Type="int" />
+    <Property Name="dateLogged" Type="datetime" Nullable="false" />
+    <Property Name="dateSubmmited" Type="datetime" Nullable="false" />
+    <Property Name="serviceTeam" Type="int" Nullable="false" />
+    <Property Name="serviceGroup" Type="int" Nullable="false" />
+    <Property Name="platform" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="urgency" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="businessUnit" Type="int" Nullable="false" />
+    <Property Name="environment" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="category" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="application" Type="int" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="highLevelEstimate" Type="varchar" MaxLength="50" />
+    <Property Name="links" Type="varchar" MaxLength="255" />
+    <Property Name="taskStatus" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskAudit">
+    <Key>
+      <PropertyRef Name="taskAuditId" />
+    </Key>
+    <Property Name="taskAuditId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="task" Type="int" Nullable="false" />
+    <Property Name="taskAuditType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dateLogged" Type="datetime" Nullable="false" />
+    <Property Name="loggedBy" Type="int" Nullable="false" />
+    <Property Name="notes" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="taskStatus" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskAuditType">
+    <Key>
+      <PropertyRef Name="taskAuditTypeCode" />
+    </Key>
+    <Property Name="taskAuditTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskReference">
+    <Key>
+      <PropertyRef Name="taskReferenceId" />
+    </Key>
+    <Property Name="taskReferenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="task" Type="int" Nullable="false" />
+    <Property Name="reference" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskStatus">
+    <Key>
+      <PropertyRef Name="taskStatusCode" />
+    </Key>
+    <Property Name="taskStatusCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="teamId" />
+    </Key>
+    <Property Name="teamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Urgency">
+    <Key>
+      <PropertyRef Name="urgencyCode" />
+    </Key>
+    <Property Name="urgencyCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Worksheet">
+    <Key>
+      <PropertyRef Name="worksheetId" />
+    </Key>
+    <Property Name="worksheetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employee" Type="int" Nullable="false" />
+    <Property Name="task" Type="int" Nullable="false" />
+    <Property Name="worksheetStatus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dateAssigned" Type="datetime" Nullable="false" />
+    <Property Name="notes" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="timeSpent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="overtime" Type="bit" />
+    <Property Name="onCall" Type="bit" />
+    <Property Name="links" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="WorksheetAudit">
+    <Key>
+      <PropertyRef Name="worksheetAuditId" />
+    </Key>
+    <Property Name="worksheetAuditId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="worksheet" Type="int" Nullable="false" />
+    <Property Name="dateLogged" Type="datetime" Nullable="false" />
+    <Property Name="loggedBy" Type="int" Nullable="false" />
+    <Property Name="notes" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="timeSpent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="worksheetStatus" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorksheetStatus">
+    <Key>
+      <PropertyRef Name="worksheetStatusCode" />
+    </Key>
+    <Property Name="worksheetStatusCode" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FKAccount300931">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleCode" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="roleCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKAccount517006">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="employeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKEmployee559362">
+    <End Role="Team" Type="Self.Team" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="teamId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="team" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKReference146955">
+    <End Role="ReferenceType" Type="Self.ReferenceType" Multiplicity="1" />
+    <End Role="Reference" Type="Self.Reference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReferenceType">
+        <PropertyRef Name="referenceTypeCode" />
+      </Principal>
+      <Dependent Role="Reference">
+        <PropertyRef Name="referenceType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask224529">
+    <End Role="Environment" Type="Self.Environment" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Environment">
+        <PropertyRef Name="environmentCode" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="environment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask25533">
+    <End Role="TaskStatus" Type="Self.TaskStatus" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskStatus">
+        <PropertyRef Name="taskStatusCode" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="taskStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask277714">
+    <End Role="HighLevelEstimate" Type="Self.HighLevelEstimate" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HighLevelEstimate">
+        <PropertyRef Name="highLevelEstimateCode" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="highLevelEstimate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask291544">
+    <End Role="Platform" Type="Self.Platform" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Platform">
+        <PropertyRef Name="platformCode" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="platform" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask326449">
+    <End Role="Urgency" Type="Self.Urgency" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urgency">
+        <PropertyRef Name="urgencyCode" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="urgency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask346527">
+    <End Role="Application" Type="Self.Application" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="applicationId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="application" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask35102">
+    <End Role="BusinessUnit" Type="Self.BusinessUnit" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BusinessUnit">
+        <PropertyRef Name="businessUnitId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="businessUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask414">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="categoryCode" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="category" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask658460">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="secondaryContact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask67458">
+    <End Role="Team" Type="Self.Team" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="teamId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="serviceTeam" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask678938">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="primaryContact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTask953350">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="groupId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="serviceGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTaskAudit251605">
+    <End Role="TaskAuditType" Type="Self.TaskAuditType" Multiplicity="1" />
+    <End Role="TaskAudit" Type="Self.TaskAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskAuditType">
+        <PropertyRef Name="taskAuditTypeCode" />
+      </Principal>
+      <Dependent Role="TaskAudit">
+        <PropertyRef Name="taskAuditType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTaskAudit29123">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="TaskAudit" Type="Self.TaskAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="TaskAudit">
+        <PropertyRef Name="loggedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTaskAudit479842">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="TaskAudit" Type="Self.TaskAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="taskId" />
+      </Principal>
+      <Dependent Role="TaskAudit">
+        <PropertyRef Name="task" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTaskAudit576958">
+    <End Role="TaskStatus" Type="Self.TaskStatus" Multiplicity="1" />
+    <End Role="TaskAudit" Type="Self.TaskAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskStatus">
+        <PropertyRef Name="taskStatusCode" />
+      </Principal>
+      <Dependent Role="TaskAudit">
+        <PropertyRef Name="taskStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTaskRefere248239">
+    <End Role="Reference" Type="Self.Reference" Multiplicity="1" />
+    <End Role="TaskReference" Type="Self.TaskReference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reference">
+        <PropertyRef Name="referenceId" />
+      </Principal>
+      <Dependent Role="TaskReference">
+        <PropertyRef Name="reference" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTaskRefere80681">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="TaskReference" Type="Self.TaskReference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="taskId" />
+      </Principal>
+      <Dependent Role="TaskReference">
+        <PropertyRef Name="task" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKWorksheet134116">
+    <End Role="WorksheetStatus" Type="Self.WorksheetStatus" Multiplicity="1" />
+    <End Role="Worksheet" Type="Self.Worksheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorksheetStatus">
+        <PropertyRef Name="worksheetStatusCode" />
+      </Principal>
+      <Dependent Role="Worksheet">
+        <PropertyRef Name="worksheetStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKWorksheet248592">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Worksheet" Type="Self.Worksheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="Worksheet">
+        <PropertyRef Name="employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKWorksheet92753">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="Worksheet" Type="Self.Worksheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="taskId" />
+      </Principal>
+      <Dependent Role="Worksheet">
+        <PropertyRef Name="task" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKWorksheetA325029">
+    <End Role="WorksheetStatus" Type="Self.WorksheetStatus" Multiplicity="1" />
+    <End Role="WorksheetAudit" Type="Self.WorksheetAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorksheetStatus">
+        <PropertyRef Name="worksheetStatusCode" />
+      </Principal>
+      <Dependent Role="WorksheetAudit">
+        <PropertyRef Name="worksheetStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKWorksheetA347076">
+    <End Role="Worksheet" Type="Self.Worksheet" Multiplicity="1" />
+    <End Role="WorksheetAudit" Type="Self.WorksheetAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worksheet">
+        <PropertyRef Name="worksheetId" />
+      </Principal>
+      <Dependent Role="WorksheetAudit">
+        <PropertyRef Name="worksheet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKWorksheetA619031">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="WorksheetAudit" Type="Self.WorksheetAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="WorksheetAudit">
+        <PropertyRef Name="loggedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GB_Tasklogtracker_D1ModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BusinessUnit" EntityType="Self.BusinessUnit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Environment" EntityType="Self.Environment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HighLevelEstimate" EntityType="Self.HighLevelEstimate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Platform" EntityType="Self.Platform" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReferenceType" EntityType="Self.ReferenceType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaskAudit" EntityType="Self.TaskAudit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaskAuditType" EntityType="Self.TaskAuditType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaskReference" EntityType="Self.TaskReference" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaskStatus" EntityType="Self.TaskStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urgency" EntityType="Self.Urgency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Worksheet" EntityType="Self.Worksheet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorksheetAudit" EntityType="Self.WorksheetAudit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorksheetStatus" EntityType="Self.WorksheetStatus" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FKAccount300931" Association="Self.FKAccount300931">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FKAccount517006" Association="Self.FKAccount517006">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FKEmployee559362" Association="Self.FKEmployee559362">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FKReference146955" Association="Self.FKReference146955">
+      <End Role="ReferenceType" EntitySet="ReferenceType" />
+      <End Role="Reference" EntitySet="Reference" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask224529" Association="Self.FKTask224529">
+      <End Role="Environment" EntitySet="Environment" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask25533" Association="Self.FKTask25533">
+      <End Role="TaskStatus" EntitySet="TaskStatus" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask277714" Association="Self.FKTask277714">
+      <End Role="HighLevelEstimate" EntitySet="HighLevelEstimate" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask291544" Association="Self.FKTask291544">
+      <End Role="Platform" EntitySet="Platform" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask326449" Association="Self.FKTask326449">
+      <End Role="Urgency" EntitySet="Urgency" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask346527" Association="Self.FKTask346527">
+      <End Role="Application" EntitySet="Application" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask35102" Association="Self.FKTask35102">
+      <End Role="BusinessUnit" EntitySet="BusinessUnit" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask414" Association="Self.FKTask414">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask658460" Association="Self.FKTask658460">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask67458" Association="Self.FKTask67458">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask678938" Association="Self.FKTask678938">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTask953350" Association="Self.FKTask953350">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="FKTaskAudit251605" Association="Self.FKTaskAudit251605">
+      <End Role="TaskAuditType" EntitySet="TaskAuditType" />
+      <End Role="TaskAudit" EntitySet="TaskAudit" />
+    </AssociationSet>
+    <AssociationSet Name="FKTaskAudit29123" Association="Self.FKTaskAudit29123">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="TaskAudit" EntitySet="TaskAudit" />
+    </AssociationSet>
+    <AssociationSet Name="FKTaskAudit479842" Association="Self.FKTaskAudit479842">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="TaskAudit" EntitySet="TaskAudit" />
+    </AssociationSet>
+    <AssociationSet Name="FKTaskAudit576958" Association="Self.FKTaskAudit576958">
+      <End Role="TaskStatus" EntitySet="TaskStatus" />
+      <End Role="TaskAudit" EntitySet="TaskAudit" />
+    </AssociationSet>
+    <AssociationSet Name="FKTaskRefere248239" Association="Self.FKTaskRefere248239">
+      <End Role="Reference" EntitySet="Reference" />
+      <End Role="TaskReference" EntitySet="TaskReference" />
+    </AssociationSet>
+    <AssociationSet Name="FKTaskRefere80681" Association="Self.FKTaskRefere80681">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="TaskReference" EntitySet="TaskReference" />
+    </AssociationSet>
+    <AssociationSet Name="FKWorksheet134116" Association="Self.FKWorksheet134116">
+      <End Role="WorksheetStatus" EntitySet="WorksheetStatus" />
+      <End Role="Worksheet" EntitySet="Worksheet" />
+    </AssociationSet>
+    <AssociationSet Name="FKWorksheet248592" Association="Self.FKWorksheet248592">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Worksheet" EntitySet="Worksheet" />
+    </AssociationSet>
+    <AssociationSet Name="FKWorksheet92753" Association="Self.FKWorksheet92753">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="Worksheet" EntitySet="Worksheet" />
+    </AssociationSet>
+    <AssociationSet Name="FKWorksheetA325029" Association="Self.FKWorksheetA325029">
+      <End Role="WorksheetStatus" EntitySet="WorksheetStatus" />
+      <End Role="WorksheetAudit" EntitySet="WorksheetAudit" />
+    </AssociationSet>
+    <AssociationSet Name="FKWorksheetA347076" Association="Self.FKWorksheetA347076">
+      <End Role="Worksheet" EntitySet="Worksheet" />
+      <End Role="WorksheetAudit" EntitySet="WorksheetAudit" />
+    </AssociationSet>
+    <AssociationSet Name="FKWorksheetA619031" Association="Self.FKWorksheetA619031">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="WorksheetAudit" EntitySet="WorksheetAudit" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

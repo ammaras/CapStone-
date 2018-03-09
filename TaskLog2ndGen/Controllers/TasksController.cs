@@ -329,6 +329,43 @@ namespace TaskLog2ndGen.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Tasks/Cancel/5
+        public async Task<ActionResult> Cancel(int? id)
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Models.Task task = await db.Tasks.FindAsync(id);
+            if (task == null)
+            {
+                return HttpNotFound();
+            }
+            return View(task);
+        }
+
+        // POST: Tasks/Delete/5
+        [HttpPost, ActionName("Cancel")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CancelConfirmed(int id)
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            Models.Task task = await db.Tasks.FindAsync(id);
+            /////////////////////////// HARD-CODED //////////////////////////////
+            task.taskStatus = "Cancelled"; //////////////HARD-CODED//////////////
+            /////////////////////////// HARD-CODED //////////////////////////////
+            db.Entry(task).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return RedirectToAction("Details", new { id = task.taskId });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

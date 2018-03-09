@@ -3,7 +3,7 @@
 <h2>List of Teams</h2>
 
 <p>
-    @Html.ActionLink("Create Team", "Create")
+    @Html.ActionLink("Create Team", "Create", null, new { @class = "btn btn-secondary" })
 </p>
 
 <table class="table table-bordered table-hover">
@@ -11,20 +11,14 @@
         <th>
             @Html.DisplayNameFor(model => model.name)
         </th>
-        @*<th></th>*@
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                <a href="/Teams/Details/1">@Html.DisplayFor(modelItem => item.name)</a>
+                <a href=@("/Teams/Details/" + item.teamId)>@Html.DisplayFor(modelItem => item.name)</a>
             </td>
-            @*<td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.teamId }) |
-                @Html.ActionLink("View", "Details", new { id = item.teamId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.teamId })
-            </td>*@
         </tr>
     }
 </table>

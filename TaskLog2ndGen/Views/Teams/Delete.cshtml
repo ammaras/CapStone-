@@ -20,8 +20,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Confirm" class="btn btn-default" />
-            @Html.ActionLink("Cancel", "", null, new { @class = "btn btn-default" })
+            <input type="submit" value="Confirm" class="btn btn-secondary" />
+            @Html.ActionLink("Cancel", "Details", new { id = Model.teamId }, new { @class = "btn btn-secondary" })
         </div>
     }
 </div>
