@@ -38,6 +38,7 @@ namespace TaskLog2ndGen.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.teamId = id;
             return View("Details", employees);
         }
 

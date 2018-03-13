@@ -3,46 +3,49 @@
 <h2>View Team</h2>
 
 <table class="table table-bordered table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.firstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.extension)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.firstName)</a>
-            </td>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.lastName)</a>
-            </td>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.email)</a>
-            </td>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.phone)</a>
-            </td>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.extension)</a>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.firstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.extension)
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.firstName)</a>
+                </td>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.lastName)</a>
+                </td>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.email)</a>
+                </td>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.phone)</a>
+                </td>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.extension)</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.First().Team1.teamId }, new { @class = "btn btn-secondary" })
-    @Html.ActionLink("Delete", "Delete", new { id = Model.First().Team1.teamId }, new { @class = "btn btn-secondary" })
+    @Html.ActionLink("Edit", "Edit", new { id = ViewBag.teamId }, new { @class = "btn btn-secondary" })
+    @Html.ActionLink("Delete", "Delete", new { id = ViewBag.teamId }, new { @class = "btn btn-secondary" })
 </p>

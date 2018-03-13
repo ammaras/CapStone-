@@ -168,8 +168,8 @@
     <Property Name="dateAssigned" Type="datetime" Nullable="false" />
     <Property Name="notes" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="timeSpent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
-    <Property Name="overtime" Type="bit" />
-    <Property Name="onCall" Type="bit" />
+    <Property Name="overtime" Type="bit" Nullable="false" />
+    <Property Name="onCall" Type="bit" Nullable="false" />
     <Property Name="links" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="WorksheetAudit">

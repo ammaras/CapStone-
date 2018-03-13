@@ -13,14 +13,6 @@
         @Html.HiddenFor(model => model.taskId)
 
         <div class="form-group">
-            <label for="taskStatus" class="control-label col-md-2">Task Status</label>
-            <div class="col-md-10">
-                @Html.DropDownList("taskStatus", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.taskStatus, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             <label for="primaryContact" class="control-label col-md-2">Primary Contact</label>
             <div class="col-md-10">
                 @Html.DropDownList("primaryContact", null, htmlAttributes: new { @class = "form-control" })
@@ -152,7 +144,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.description, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -160,7 +152,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.links, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.links, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.links, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.links, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -232,12 +232,6 @@ E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.csproj.CoreCompi
 E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.dll
 E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.pdb
 E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.csprojResolveAssemblyReference.cache
-I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.dll
-I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
-I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\System.IO.Compression.dll
-I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\VBCSCompiler.exe
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\ApplicationInsights.config
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\TaskLog2ndGen.dll.config
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\TaskLog2ndGen.dll
@@ -249,9 +243,13 @@ I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\csi.exe
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\csi.exe.config
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\csi.rsp
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.CSharp.Core.targets
+I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.VisualBasic.Core.targets
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\Microsoft.Win32.Primitives.dll
@@ -261,6 +259,7 @@ I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\System.Console.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\System.Diagnostics.Process.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\System.Diagnostics.StackTrace.dll
+I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\System.IO.Compression.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\System.IO.FileSystem.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\System.IO.FileSystem.Primitives.dll
@@ -283,6 +282,7 @@ I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\System.Xml.XPath.XDocument.dl
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\vbc.exe
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\vbc.exe.config
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\vbc.rsp
+I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\VBCSCompiler.exe
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\roslyn\VBCSCompiler.exe.config
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\Antlr3.Runtime.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\EntityFramework.dll

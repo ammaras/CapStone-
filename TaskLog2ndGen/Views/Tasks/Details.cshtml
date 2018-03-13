@@ -142,7 +142,49 @@
         </dd>
     </dl>
 </div>
+
+<h2>Task History</h2>
+
+<fieldset>
+    <legend>Communication</legend>
+    <dl class="dl-horizontal">
+        @foreach (var item in Model.TaskAudits.OrderByDescending(m => m.dateLogged))
+        {
+            if (item.taskAuditType.Contains("Communication"))
+            {
+                <dt>
+                    @item.dateLogged - @item.Employee.firstName @item.Employee.lastName
+                </dt>
+
+                <dd>
+                    @item.notes
+                </dd>
+            }
+        }
+    </dl>
+</fieldset>
+
+<fieldset>
+    <legend>Field Changes</legend>
+    <dl class="dl-horizontal">
+        @foreach (var item in Model.TaskAudits.OrderByDescending(m => m.dateLogged))
+        {
+            if (item.taskAuditType.Contains("Field Changes"))
+            {
+                <dt>
+                    @item.dateLogged - @item.Employee.firstName @item.Employee.lastName
+                </dt>
+
+                <dd>
+                    @item.notes
+                </dd>
+            }
+        }
+    </dl>
+</fieldset>
+
 <p>
+    @Html.ActionLink("Worksheets", "", "Worksheets", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
     @Html.ActionLink("Cancel", "Cancel", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
     @Html.ActionLink("Edit", "Edit", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
     @Html.ActionLink("Delete", "Delete", new { id = Model.taskId }, new { @class = "btn btn-secondary" })

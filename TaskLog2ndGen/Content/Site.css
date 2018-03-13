@@ -28,8 +28,24 @@ body {
     margin-bottom: 60px;
 }
 
+div.container.body-content table tbody tr td {
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+
 td a:hover, td a:visited, td a:link, td a:active {
     display: block;
+    text-decoration: none;
+    color: black;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 12px;
+}
+
+th a:hover, th a:visited, th a:link, th a:active {
     text-decoration: none;
     color: black;
 }

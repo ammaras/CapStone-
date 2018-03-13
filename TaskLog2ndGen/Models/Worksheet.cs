@@ -27,8 +27,8 @@ namespace TaskLog2ndGen.Models
         public System.DateTime dateAssigned { get; set; }
         public string notes { get; set; }
         public decimal timeSpent { get; set; }
-        public Nullable<bool> overtime { get; set; }
-        public Nullable<bool> onCall { get; set; }
+        public bool overtime { get; set; }
+        public bool onCall { get; set; }
         public string links { get; set; }
     
         public virtual Employee Employee1 { get; set; }

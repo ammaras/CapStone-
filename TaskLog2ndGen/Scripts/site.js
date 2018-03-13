@@ -1,5 +1,4 @@
 ﻿$(function () {
-
     $("#container select:first").hide();
     $("#btnAdd").on("click", addReference);
     $(".btnRemove").on("click", removeReference);
@@ -8,10 +7,10 @@
         e.preventDefault();
         var index = $("#container input:text").length;
         var options = $("#container select:first").html();
-        var newItem = $("<div class='row'><div class='col-md-5'><div class='form-group'><label class='control-label col-md-2' for='references_" + index + "__referenceNo'>referenceNo</label><div class='col-md-10'>"
-            + "<input class='form-control text-box single-line' id='references_" + index + "__referenceNo' name='references[" + index + "].referenceNo' type='text' value=''/>"
+        var newItem = $("<div class='row'><div class='col-md-5'><div class='form-group'><label class='control-label col-md-2' for='references_" + index + "__referenceNo'>Reference Number</label><div class='col-md-10'>"
+            + "<input class='form-control text-box single-line' data-val='true' data-val-length='Reference number cannot have more than 50 characters.' data-val-length-max='50' data-val-required='Reference number is required.' id='references_" + index + "__referenceNo' name='references[" + index + "].referenceNo' type='text' value=''/>"
             + "<span class='field-validation-valid text-danger' data-valmsg-for='references[" + index + "].referenceNo' data-valmsg-replace='true'></span></div></div></div>"
-            + "<div class='col-md-5'><div class='form-group'><label for='references_" + index + "__referenceType' class='control-label col-md-2'>referenceType</label><div class='col-md-10'>"
+            + "<div class='col-md-5'><div class='form-group'><label for='references_" + index + "__referenceType' class='control-label col-md-2'>Reference Type</label><div class='col-md-10'>"
             + "<select class='form-control' id='references_" + index + "__referenceType' name='references[" + index + "].referenceType'>" + options + "</select>"
             + "<span class='field-validation-valid text-danger' data-valmsg-for='references[" + index + "].referenceType' data-valmsg-replace='true'></span></div></div></div>"
             + "<div class='col-md-2'><input type='button' class='btn btn-secondary btnRemove' value='Remove Reference'/></div></div>");
@@ -61,5 +60,4 @@
             index++;
         });
     }
-
 });

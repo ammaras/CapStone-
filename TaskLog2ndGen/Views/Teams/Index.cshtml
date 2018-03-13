@@ -7,18 +7,21 @@
 </p>
 
 <table class="table table-bordered table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                <a href=@("/Teams/Details/" + item.teamId)>@Html.DisplayFor(modelItem => item.name)</a>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href=@("/Teams/Details/" + item.teamId)>@Html.DisplayFor(modelItem => item.name)</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

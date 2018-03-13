@@ -5,62 +5,64 @@
 <p></p>
 
 <table class="table table-bordered table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.firstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lastName)
-        </th>
-        <th>
-            Service Team
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lastChanged)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.extension)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.firstName)</a>
-            </td>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.lastName)</a>
-            </td>
-
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.Team1.name)</a>
-            </td>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.email)</a>
-            </td>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.description)</a>
-            </td>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.lastChanged)</a>
-            </td>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.phone)</a>
-            </td>
-            <td>
-                <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.extension)</a>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.firstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastName)
+            </th>
+            <th>
+                Service Team
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastChanged)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.extension)
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.firstName)</a>
+                </td>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.lastName)</a>
+                </td>
 
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.Team1.name)</a>
+                </td>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.email)</a>
+                </td>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.description)</a>
+                </td>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.lastChanged)</a>
+                </td>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.phone)</a>
+                </td>
+                <td>
+                    <a href=@("/Employees/Details/" + item.employeeId)>@Html.DisplayFor(modelItem => item.extension)</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

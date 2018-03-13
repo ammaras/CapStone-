@@ -1,0 +1,90 @@
+﻿@model TaskLog2ndGen.Models.Worksheet
+
+<h2>Delete Worksheet</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.task)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Task1.title)
+        </dd>
+
+        <dt>
+            Employee Assigned
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee1.firstName) @Html.DisplayFor(model => model.Employee1.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateAssigned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateAssigned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.worksheetStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.worksheetStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.timeSpent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timeSpent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.onCall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.onCall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.overtime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.overtime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.links)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.links)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirm" class="btn btn-secondary" />
+            @Html.ActionLink("Cancel", "Details", new { id = Model.worksheetId }, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

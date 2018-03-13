@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TaskLog2ndGen.Models.Worksheet>
+
+<h2>List of Worksheets</h2>
+
+<p>
+    @Html.ActionLink("Create Worksheet", "Create", new { id = ViewBag.task }, new { @class = "btn btn-secondary" })
+</p>
+<table class="table table-bordered table-hover ">
+    <thead>
+        <tr>
+            <th>
+                Task
+            </th>
+            <th>
+                Employee Assigned
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.worksheetStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.timeSpent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.notes)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href=@("/Worksheets/Details/" + item.worksheetId)>@Html.DisplayFor(modelItem => item.Task1.title)</a>
+                </td>
+                <td>
+                    <a href=@("/Worksheets/Details/" + item.worksheetId)>@Html.DisplayFor(modelItem => item.Employee1.firstName) @Html.DisplayFor(modelItem => item.Employee1.lastName)</a>
+
+                </td>
+                <td>
+                    <a href=@("/Worksheets/Details/" + item.worksheetId)>@Html.DisplayFor(modelItem => item.worksheetStatus)</a>
+                </td>
+                <td>
+                    <a href=@("/Worksheets/Details/" + item.worksheetId)>@Html.DisplayFor(modelItem => item.timeSpent)</a>
+                </td>
+                <td>
+                    <a href=@("/Worksheets/Details/" + item.worksheetId)>@Html.DisplayFor(modelItem => item.notes)</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

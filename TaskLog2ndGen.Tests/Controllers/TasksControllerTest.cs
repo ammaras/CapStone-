@@ -27,7 +27,7 @@ namespace TaskLog2ndGen.Tests.Controllers
             TasksController controller = new TasksController();
 
             // Act
-            Task<ActionResult> actionResult = controller.Index(String.Empty);
+            Task<ActionResult> actionResult = controller.Index(String.Empty, String.Empty);
             actionResult.Wait();
             ViewResult viewResult = actionResult.Result as ViewResult;
 
@@ -42,7 +42,7 @@ namespace TaskLog2ndGen.Tests.Controllers
             TasksController controller = new TasksController();
 
             // Act
-            Task<ActionResult> actionResult = controller.Index("Not Assigned");
+            Task<ActionResult> actionResult = controller.Index("Not Assigned", String.Empty);
             actionResult.Wait();
             ViewResult viewResult = actionResult.Result as ViewResult;
 

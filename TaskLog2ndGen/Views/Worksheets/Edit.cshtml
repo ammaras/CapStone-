@@ -1,0 +1,83 @@
+﻿@model TaskLog2ndGen.Models.Worksheet
+
+<h2>Edit Worksheet</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.worksheetId)
+    @Html.HiddenFor(model => model.task)
+    @Html.HiddenFor(model => model.dateAssigned)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.employee, "Employee Assigned", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("employee", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.employee, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.worksheetStatus, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("worksheetStatus", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.worksheetStatus, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.timeSpent, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.timeSpent, new { htmlAttributes = new { @class = "form-control", type = "number", min = 0.00, max = 999.99, step = 0.25 } })
+            @Html.ValidationMessageFor(model => model.timeSpent, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.onCall, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.onCall)
+                @Html.ValidationMessageFor(model => model.onCall, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.overtime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.overtime)
+                @Html.ValidationMessageFor(model => model.overtime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.notes, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.notes, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.links, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.links, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.links, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <p>
+            <input type="submit" value="Save" class="btn btn-secondary" />
+            @Html.ActionLink("Cancel", "Details", new { id = Model.worksheetId }, new { @class = "btn btn-secondary" })
+        </p>
+    </div>
+</div>
+}

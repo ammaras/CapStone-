@@ -13,25 +13,72 @@ namespace TaskLog2ndGen.Controllers
     public class TasksController : Controller
     {
         private GB_Tasklogtracker_D1Context db = new GB_Tasklogtracker_D1Context();
+        private const string CANCELLED_TASK_STATUS = "Cancelled";
+        private const string NOT_ASSIGNED_TASK_STATUS = "Not Assigned";
+        private const string COMM_TASK_AUDIT_TYPE = "Communication";
+        private const string FIELD_CHANGE_TASK_AUDIT_TYPE = "Field Changes";
+        private const string DOC_CREATED_NOTE = "Document Created";
+        private const string DOC_UPDATED_NOTE = "Document Updated";
+        private const string STATUS_UPDATED_NOTE = "Status changed from {0} to {1}";
 
         // GET: Tasks
-        public async Task<ActionResult> Index(string criterion)
+        public async Task<ActionResult> Index(string searchCriterion, string sortCriterion)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
-            List<Models.Task> tasks;
-            if (!String.IsNullOrEmpty(criterion))
+            if (String.IsNullOrEmpty(sortCriterion))
             {
-                criterion = criterion.ToLower();
-                tasks = await db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.TaskReferences).Include(t => t.Group).Include(t => t.Urgency1).Include(t => t.Team).Include(t => t.TaskStatu).Where(t => t.Employee.lastName.ToLower().Contains(criterion) || t.Employee.firstName.Contains(criterion) || t.taskStatus.ToLower().Contains(criterion)).ToListAsync();
+                ViewBag.statusSortCriterion = "status";
+                ViewBag.teamSortCriterion = "team";
             }
             else
             {
-                tasks = await db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.TaskReferences).Include(t => t.Group).Include(t => t.Urgency1).Include(t => t.Team).Include(t => t.TaskStatu).ToListAsync();
+                ViewBag.statusSortCriterion = sortCriterion == "status" ? "status_desc" : "status";
+                ViewBag.teamSortCriterion = sortCriterion == "team" ? "team_desc" : "team";
             }
-            return View("Index", tasks);
+            var tasks = db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.Group).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.TaskStatu).Include(t => t.Urgency1).Include(t => t.Team);
+            if (!String.IsNullOrEmpty(searchCriterion))
+            {
+                searchCriterion = searchCriterion.ToLower();
+                tasks = tasks.Where(t => t.Employee.firstName.Contains(searchCriterion)
+                                    || t.Employee.lastName.Contains(searchCriterion)
+                                    || t.Employee1.firstName.Contains(searchCriterion)
+                                    || t.Employee.lastName.Contains(searchCriterion)
+                                    || t.Team.name.Contains(searchCriterion)
+                                    || t.Group.name.Contains(searchCriterion)
+                                    || t.platform.Contains(searchCriterion)
+                                    || t.urgency.Contains(searchCriterion)
+                                    || t.BusinessUnit1.description.Contains(searchCriterion)
+                                    || t.environment.Contains(searchCriterion)
+                                    || t.category.Contains(searchCriterion)
+                                    || t.Application1.name.Contains(searchCriterion)
+                                    || t.title.Contains(searchCriterion)
+                                    || t.description.Contains(searchCriterion)
+                                    || t.highLevelEstimate.Contains(searchCriterion)
+                                    || t.links.Contains(searchCriterion)
+                                    || t.taskStatus.Contains(searchCriterion));
+            }
+            switch (sortCriterion)
+            {
+                case "status":
+                    tasks = tasks.OrderBy(t => t.taskStatus).ThenByDescending(t => t.dateSubmmited);
+                    break;
+                case "status_desc":
+                    tasks = tasks.OrderByDescending(t => t.taskStatus).ThenByDescending(t => t.dateSubmmited); ;
+                    break;
+                case "team":
+                    tasks = tasks.OrderBy(t => t.serviceTeam).ThenByDescending(t => t.dateSubmmited);
+                    break;
+                case "team_desc":
+                    tasks = tasks.OrderByDescending(t => t.serviceTeam).ThenByDescending(t => t.dateSubmmited); ;
+                    break;
+                default:
+                    tasks = tasks.OrderByDescending(t => t.dateSubmmited);
+                    break;
+            }
+            return View("Index", await tasks.ToListAsync());
         }
 
         // GET: Tasks/Details/5
@@ -63,8 +110,8 @@ namespace TaskLog2ndGen.Controllers
             ViewBag.application = new SelectList(db.Applications, "applicationId", "name");
             ViewBag.businessUnit = new SelectList(db.BusinessUnits, "businessUnitId", "description");
             ViewBag.category = new SelectList(db.Categories, "categoryCode", "categoryCode");
-            ViewBag.secondaryContact = new SelectList(db.Employees, "employeeId", "lastName");
-            ViewBag.primaryContact = new SelectList(db.Employees, "employeeId", "lastName");
+            ViewBag.secondaryContact = new SelectList(db.Employees, "employeeId", "fullName");
+            ViewBag.primaryContact = new SelectList(db.Employees, "employeeId", "fullName");
             ViewBag.environment = new SelectList(db.Environments, "environmentCode", "environmentCode");
             ViewBag.highLevelEstimate = new SelectList(db.HighLevelEstimates, "highLevelEstimateCode", "highLevelEstimateCode");
             ViewBag.platform = new SelectList(db.Platforms, "platformCode", "platformCode");
@@ -83,13 +130,20 @@ namespace TaskLog2ndGen.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "primaryContact,secondaryContact,dateLogged,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,references,title,description,highLevelEstimate,links,taskStatus")] TaskViewModel taskViewModel)
+        public async Task<ActionResult> Create([Bind(Include = "primaryContact,secondaryContact,dateLogged,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,references,title,description,highLevelEstimate,links")] TaskViewModel taskViewModel)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
             }
             taskViewModel.dateSubmmited = DateTime.Now;
+            foreach (var item in taskViewModel.references)
+            {
+                if (String.IsNullOrEmpty(item.referenceNo))
+                {
+                    ModelState.AddModelError("references[" + taskViewModel.references.IndexOf(item) + "].referenceNo", "Reference number is required.");
+                }
+            }
             if (ModelState.IsValid)
             {
                 Models.Task task = new Models.Task
@@ -110,7 +164,7 @@ namespace TaskLog2ndGen.Controllers
                     description = taskViewModel.description,
                     highLevelEstimate = taskViewModel.highLevelEstimate,
                     links = taskViewModel.links,
-                    taskStatus = taskViewModel.taskStatus
+                    taskStatus = NOT_ASSIGNED_TASK_STATUS
                 };
                 db.Tasks.Add(task);
                 await db.SaveChangesAsync();
@@ -135,13 +189,24 @@ namespace TaskLog2ndGen.Controllers
                     db.TaskReferences.Add(taskReference);
                     await db.SaveChangesAsync();
                 }
+                TaskAudit taskAudit = new TaskAudit
+                {
+                    task = task.taskId,
+                    taskAuditType = COMM_TASK_AUDIT_TYPE,
+                    dateLogged = task.dateLogged,
+                    loggedBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1,
+                    notes = DOC_CREATED_NOTE,
+                    taskStatus = task.taskStatus
+                };
+                db.TaskAudits.Add(taskAudit);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Details", new { id = task.taskId });
             }
             ViewBag.application = new SelectList(db.Applications, "applicationId", "name", taskViewModel.application);
             ViewBag.businessUnit = new SelectList(db.BusinessUnits, "businessUnitId", "description", taskViewModel.businessUnit);
             ViewBag.category = new SelectList(db.Categories, "categoryCode", "categoryCode", taskViewModel.category);
-            ViewBag.secondaryContact = new SelectList(db.Employees, "employeeId", "lastName", taskViewModel.secondaryContact);
-            ViewBag.primaryContact = new SelectList(db.Employees, "employeeId", "lastName", taskViewModel.primaryContact);
+            ViewBag.secondaryContact = new SelectList(db.Employees, "employeeId", "fullName", taskViewModel.secondaryContact);
+            ViewBag.primaryContact = new SelectList(db.Employees, "employeeId", "fullName", taskViewModel.primaryContact);
             ViewBag.environment = new SelectList(db.Environments, "environmentCode", "environmentCode", taskViewModel.environment);
             ViewBag.highLevelEstimate = new SelectList(db.HighLevelEstimates, "highLevelEstimateCode", "highLevelEstimateCode", taskViewModel.highLevelEstimate);
             ViewBag.platform = new SelectList(db.Platforms, "platformCode", "platformCode", taskViewModel.platform);
@@ -199,8 +264,8 @@ namespace TaskLog2ndGen.Controllers
             ViewBag.application = new SelectList(db.Applications, "applicationId", "name", task.application);
             ViewBag.businessUnit = new SelectList(db.BusinessUnits, "businessUnitId", "description", task.businessUnit);
             ViewBag.category = new SelectList(db.Categories, "categoryCode", "categoryCode", task.category);
-            ViewBag.secondaryContact = new SelectList(db.Employees, "employeeId", "lastName", task.secondaryContact);
-            ViewBag.primaryContact = new SelectList(db.Employees, "employeeId", "lastName", task.primaryContact);
+            ViewBag.secondaryContact = new SelectList(db.Employees, "employeeId", "fullName", task.secondaryContact);
+            ViewBag.primaryContact = new SelectList(db.Employees, "employeeId", "fullName", task.primaryContact);
             ViewBag.environment = new SelectList(db.Environments, "environmentCode", "environmentCode", task.environment);
             ViewBag.highLevelEstimate = new SelectList(db.HighLevelEstimates, "highLevelEstimateCode", "highLevelEstimateCode", task.highLevelEstimate);
             ViewBag.platform = new SelectList(db.Platforms, "platformCode", "platformCode", task.platform);
@@ -218,11 +283,22 @@ namespace TaskLog2ndGen.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "taskId,primaryContact,secondaryContact,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,references,title,description,highLevelEstimate,links,taskStatus")] TaskViewModel taskViewModel)
+        public async Task<ActionResult> Edit([Bind(Include = "taskId,primaryContact,secondaryContact,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,references,title,description,highLevelEstimate,links")] TaskViewModel taskViewModel)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
+            }
+            foreach (var item in taskViewModel.references)
+            {
+                if (String.IsNullOrEmpty(item.referenceNo))
+                {
+                    ModelState.AddModelError("references[" + taskViewModel.references.IndexOf(item) + "].referenceNo", "Reference number is required.");
+                }
+                else if (item.referenceNo.Length > 50)
+                {
+                    ModelState.AddModelError("references[" + taskViewModel.references.IndexOf(item) + "].referenceNo", "Reference number cannot have more than 50 characters..");
+                }
             }
             if (ModelState.IsValid)
             {
@@ -241,7 +317,6 @@ namespace TaskLog2ndGen.Controllers
                 task.description = taskViewModel.description;
                 task.highLevelEstimate = taskViewModel.highLevelEstimate;
                 task.links = taskViewModel.links;
-                task.taskStatus = taskViewModel.taskStatus;
                 db.Entry(task).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 List<TaskReference> taskReferences = await db.TaskReferences.Where(tr => tr.task == task.taskId).ToListAsync();
@@ -271,13 +346,24 @@ namespace TaskLog2ndGen.Controllers
                     db.TaskReferences.Add(taskReference);
                     await db.SaveChangesAsync();
                 }
+                TaskAudit taskAudit = new TaskAudit
+                {
+                    task = task.taskId,
+                    taskAuditType = FIELD_CHANGE_TASK_AUDIT_TYPE,
+                    dateLogged = DateTime.Now,
+                    loggedBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1,
+                    notes = DOC_UPDATED_NOTE,
+                    taskStatus = task.taskStatus
+                };
+                db.TaskAudits.Add(taskAudit);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Details", new { id = task.taskId });
             }
             ViewBag.application = new SelectList(db.Applications, "applicationId", "name", taskViewModel.application);
             ViewBag.businessUnit = new SelectList(db.BusinessUnits, "businessUnitId", "description", taskViewModel.businessUnit);
             ViewBag.category = new SelectList(db.Categories, "categoryCode", "categoryCode", taskViewModel.category);
-            ViewBag.secondaryContact = new SelectList(db.Employees, "employeeId", "lastName", taskViewModel.secondaryContact);
-            ViewBag.primaryContact = new SelectList(db.Employees, "employeeId", "lastName", taskViewModel.primaryContact);
+            ViewBag.secondaryContact = new SelectList(db.Employees, "employeeId", "fullName", taskViewModel.secondaryContact);
+            ViewBag.primaryContact = new SelectList(db.Employees, "employeeId", "fullName", taskViewModel.primaryContact);
             ViewBag.environment = new SelectList(db.Environments, "environmentCode", "environmentCode", taskViewModel.environment);
             ViewBag.highLevelEstimate = new SelectList(db.HighLevelEstimates, "highLevelEstimateCode", "highLevelEstimateCode", taskViewModel.highLevelEstimate);
             ViewBag.platform = new SelectList(db.Platforms, "platformCode", "platformCode", taskViewModel.platform);
@@ -324,6 +410,11 @@ namespace TaskLog2ndGen.Controllers
             {
                 db.TaskReferences.Remove(item);
             }
+            List<TaskAudit> taskAudits = await db.TaskAudits.Where(ta => ta.task == id).ToListAsync();
+            foreach (var item in taskAudits)
+            {
+                db.TaskAudits.Remove(item);
+            }
             db.Tasks.Remove(task);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -348,7 +439,7 @@ namespace TaskLog2ndGen.Controllers
             return View(task);
         }
 
-        // POST: Tasks/Delete/5
+        // POST: Tasks/Cancel/5
         [HttpPost, ActionName("Cancel")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CancelConfirmed(int id)
@@ -358,10 +449,18 @@ namespace TaskLog2ndGen.Controllers
                 return RedirectToAction("", "Login");
             }
             Models.Task task = await db.Tasks.FindAsync(id);
-            /////////////////////////// HARD-CODED //////////////////////////////
-            task.taskStatus = "Cancelled"; //////////////HARD-CODED//////////////
-            /////////////////////////// HARD-CODED //////////////////////////////
+            TaskAudit taskAudit = new TaskAudit
+            {
+                task = task.taskId,
+                taskAuditType = COMM_TASK_AUDIT_TYPE,
+                dateLogged = DateTime.Now,
+                loggedBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1,
+                notes = String.Format(STATUS_UPDATED_NOTE, task.taskStatus, CANCELLED_TASK_STATUS),
+                taskStatus = task.taskStatus
+            };
+            task.taskStatus = CANCELLED_TASK_STATUS;
             db.Entry(task).State = EntityState.Modified;
+            db.TaskAudits.Add(taskAudit);
             await db.SaveChangesAsync();
             return RedirectToAction("Details", new { id = task.taskId });
         }

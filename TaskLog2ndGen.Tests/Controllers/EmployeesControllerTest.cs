@@ -16,20 +16,6 @@ namespace TaskLog2ndGen.Tests.Controllers
         public EmployeesControllerTest()
         {
             db = new GB_Tasklogtracker_D1Context();
-            Employee employee = new Employee()
-            {
-                team = 1,
-                lastName = "Jackson",
-                firstName = "Peter",
-                email = "pjackson@gmail.com",
-                description = "Developer",
-                lastChanged = DateTime.Now,
-                middleName = "Daniel",
-                phone = "1231231234",
-                extension = "123456"
-            };
-            db.Employees.Add(employee);
-            db.SaveChangesAsync();
         }
 
         [TestMethod]
@@ -52,7 +38,20 @@ namespace TaskLog2ndGen.Tests.Controllers
         {
             // Arrange
             EmployeesController controller = new EmployeesController();
-            Employee employee = db.Employees.AsNoTracking().ToList().Last();
+            Employee employee = new Employee()
+            {
+                team = 1,
+                lastName = "Jackson",
+                firstName = "Peter",
+                email = "pjackson@gmail.com",
+                description = "Developer",
+                lastChanged = DateTime.Now,
+                middleName = "Daniel",
+                phone = "2267923774",
+                extension = "123456"
+            };
+            db.Employees.Add(employee);
+            db.SaveChanges();
 
             // Act
             Task<ActionResult> actionResult = controller.Details(employee.employeeId);

@@ -5,7 +5,13 @@ namespace TaskLog2ndGen.Models
     [MetadataType(typeof(EmployeeMetadata))]
     public partial class Employee
     {
-
+        public string fullName
+        {
+            get
+            {
+                return lastName + ", " + firstName;
+            }
+        }
     }
 
     public class EmployeeMetadata
@@ -30,8 +36,7 @@ namespace TaskLog2ndGen.Models
         public string email { get; set; }
 
         [Display(Name = "Description")]
-        [Required(ErrorMessage = "Description is required.")]
-        [StringLength(255, ErrorMessage = "Password cannot have more than 255 characters.")]
+        [StringLength(255, ErrorMessage = "Description cannot have more than 255 characters.")]
         public string description { get; set; }
 
         [Display(Name = "Last Changed")]

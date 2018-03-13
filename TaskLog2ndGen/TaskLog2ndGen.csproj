@@ -173,12 +173,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
+    <Compile Include="Controllers\WorksheetsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ModelsMetadata\EmployeeMetadata.cs" />
+    <Compile Include="ModelsMetadata\ReferenceMetadata.cs" />
     <Compile Include="ModelsMetadata\TaskMetadata.cs" />
     <Compile Include="ModelsMetadata\TeamMetadata.cs" />
+    <Compile Include="ModelsMetadata\WorksheetMetadata.cs" />
     <Compile Include="Models\Account.cs">
       <DependentUpon>GB_Tasklogtracker_D1Models.tt</DependentUpon>
     </Compile>
@@ -386,6 +389,11 @@
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Tasks\Cancel.cshtml" />
+    <Content Include="Views\Worksheets\Create.cshtml" />
+    <Content Include="Views\Worksheets\Delete.cshtml" />
+    <Content Include="Views\Worksheets\Details.cshtml" />
+    <Content Include="Views\Worksheets\Edit.cshtml" />
+    <Content Include="Views\Worksheets\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

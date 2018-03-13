@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GB_Tasklogtracker_D1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GB_Tasklogtracker_D1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="employeeId" />
@@ -173,8 +173,8 @@
           <Property Name="dateAssigned" Type="datetime" Nullable="false" />
           <Property Name="notes" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="timeSpent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="overtime" Type="bit" />
-          <Property Name="onCall" Type="bit" />
+          <Property Name="overtime" Type="bit" Nullable="false" />
+          <Property Name="onCall" Type="bit" Nullable="false" />
           <Property Name="links" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="WorksheetAudit">
@@ -667,8 +667,7 @@
             <End Role="WorksheetAudit" EntitySet="WorksheetAudit" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GB_Tasklogtracker_D1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -887,8 +886,8 @@
           <Property Name="dateAssigned" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="notes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="timeSpent" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="overtime" Type="Boolean" />
-          <Property Name="onCall" Type="Boolean" />
+          <Property Name="overtime" Type="Boolean" Nullable="false" />
+          <Property Name="onCall" Type="Boolean" Nullable="false" />
           <Property Name="links" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Employee1" Relationship="Self.FKWorksheet248592" FromRole="Worksheet" ToRole="Employee" />
           <NavigationProperty Name="Task1" Relationship="Self.FKWorksheet92753" FromRole="Worksheet" ToRole="Task" />

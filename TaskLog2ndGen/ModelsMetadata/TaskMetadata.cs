@@ -15,7 +15,6 @@ namespace TaskLog2ndGen.Models
         public int primaryContact { get; set; }
 
         [Display(Name = "Secondary Contact")]
-        [Required(ErrorMessage = "Secondary contact is required.")]
         public int secondaryContact { get; set; }
 
         [Display(Name = "Date Logged")]
@@ -23,7 +22,7 @@ namespace TaskLog2ndGen.Models
         public System.DateTime dateLogged { get; set; }
 
         [Display(Name = "Date Submitted")]
-        [Required(ErrorMessage = "Date Submitted is required.")]
+        [Required(ErrorMessage = "Date submitted is required.")]
         public System.DateTime dateSubmmited { get; set; }
 
         [Display(Name = "Service Team")]
@@ -67,15 +66,12 @@ namespace TaskLog2ndGen.Models
         public string description { get; set; }
 
         [Display(Name = "High Level Estimate")]
-        [Required(ErrorMessage = "High level estimate is required.")]
         public string highLevelEstimate { get; set; }
 
         [Display(Name = "Links")]
-        [Required(ErrorMessage = "Links are required.")]
         public string links { get; set; }
 
         [Display(Name = "Task Status")]
-        [Required(ErrorMessage = "Task status is required.")]
         public string taskStatus { get; set; }
     }
 }
