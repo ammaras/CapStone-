@@ -49,6 +49,10 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             return View("Create");
         }
 
@@ -63,13 +67,16 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             if (ModelState.IsValid)
             {
                 db.Teams.Add(team);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Details", new { id = team.teamId });
             }
-
             return View(team);
         }
 
@@ -79,6 +86,10 @@ namespace TaskLog2ndGen.Controllers
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
+            }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             if (id == null)
             {
@@ -103,6 +114,10 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(team).State = EntityState.Modified;
@@ -118,6 +133,10 @@ namespace TaskLog2ndGen.Controllers
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
+            }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             if (id == null)
             {
@@ -139,6 +158,10 @@ namespace TaskLog2ndGen.Controllers
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
+            }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             Team team = await db.Teams.FindAsync(id);
             db.Teams.Remove(team);

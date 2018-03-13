@@ -336,5 +336,6 @@ I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\System.Web.WebPages.Razor.xml
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\System.Web.Optimization.xml
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\Microsoft.AspNet.Identity.Core.xml
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.csproj.CoreCompileInputs.cache
+I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.csproj.CopyComplete
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.pdb

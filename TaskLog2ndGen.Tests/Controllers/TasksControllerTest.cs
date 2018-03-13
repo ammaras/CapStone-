@@ -51,6 +51,49 @@ namespace TaskLog2ndGen.Tests.Controllers
         }
 
         [TestMethod]
+        public void ViewTasksByTeamSucceed()
+        {
+            // Arrange
+            TasksController controller = new TasksController();
+
+            // Act
+            Task<ActionResult> actionResult = controller.Index(String.Empty, "team");
+            actionResult.Wait();
+            ViewResult viewResult = actionResult.Result as ViewResult;
+
+            // Assert
+            Assert.AreEqual("Index", viewResult.ViewName);
+        }
+        [TestMethod]
+        public void ViewTasksByStatusSucceed()
+        {
+            // Arrange
+            TasksController controller = new TasksController();
+
+            // Act
+            Task<ActionResult> actionResult = controller.Index(String.Empty, "status");
+            actionResult.Wait();
+            ViewResult viewResult = actionResult.Result as ViewResult;
+
+            // Assert
+            Assert.AreEqual("Index", viewResult.ViewName);
+        }
+        [TestMethod]
+        public void ViewTasksByAssignmentSucceed()
+        {
+            // Arrange
+            TasksController controller = new TasksController();
+
+            // Act
+            Task<ActionResult> actionResult = controller.Index(String.Empty, "assignment");
+            actionResult.Wait();
+            ViewResult viewResult = actionResult.Result as ViewResult;
+
+            // Assert
+            Assert.AreEqual("Index", viewResult.ViewName);
+        }
+
+        [TestMethod]
         public void CreateTaskSucceed()
         {
             // Arrange

@@ -32,11 +32,13 @@ namespace TaskLog2ndGen.Controllers
             {
                 ViewBag.statusSortCriterion = "status";
                 ViewBag.teamSortCriterion = "team";
+                ViewBag.assignmentSortCriterion = "assignment";
             }
             else
             {
                 ViewBag.statusSortCriterion = sortCriterion == "status" ? "status_desc" : "status";
                 ViewBag.teamSortCriterion = sortCriterion == "team" ? "team_desc" : "team";
+                ViewBag.assignmentSortCriterion = sortCriterion == "assignment" ? "assignment_desc" : "assignment";
             }
             var tasks = db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.Group).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.TaskStatu).Include(t => t.Urgency1).Include(t => t.Team);
             if (!String.IsNullOrEmpty(searchCriterion))
@@ -66,13 +68,23 @@ namespace TaskLog2ndGen.Controllers
                     tasks = tasks.OrderBy(t => t.taskStatus).ThenByDescending(t => t.dateSubmmited);
                     break;
                 case "status_desc":
-                    tasks = tasks.OrderByDescending(t => t.taskStatus).ThenByDescending(t => t.dateSubmmited); ;
+                    tasks = tasks.OrderByDescending(t => t.taskStatus).ThenByDescending(t => t.dateSubmmited);
                     break;
                 case "team":
                     tasks = tasks.OrderBy(t => t.serviceTeam).ThenByDescending(t => t.dateSubmmited);
                     break;
                 case "team_desc":
-                    tasks = tasks.OrderByDescending(t => t.serviceTeam).ThenByDescending(t => t.dateSubmmited); ;
+                    tasks = tasks.OrderByDescending(t => t.serviceTeam).ThenByDescending(t => t.dateSubmmited);
+                    break;
+                case "assignment":
+                    ////////////////////////// FIX ME //////////////////////////
+                    tasks = tasks.OrderByDescending(t => t.dateSubmmited);
+                    ////////////////////////// FIX ME //////////////////////////
+                    break;
+                case "assignment_desc":
+                    ////////////////////////// FIX ME //////////////////////////
+                    tasks = tasks.OrderByDescending(t => t.dateSubmmited);
+                    ////////////////////////// FIX ME //////////////////////////
                     break;
                 default:
                     tasks = tasks.OrderByDescending(t => t.dateSubmmited);
@@ -383,6 +395,10 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -403,6 +419,10 @@ namespace TaskLog2ndGen.Controllers
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
+            }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             Models.Task task = await db.Tasks.FindAsync(id);
             List<TaskReference> taskReferences = await db.TaskReferences.Where(tr => tr.task == task.taskId).ToListAsync();

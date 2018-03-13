@@ -165,5 +165,6 @@ I:\Capstone\TaskLog2ndGen\TaskLog2ndGen.Tests\bin\Debug\System.Web.WebPages.Razo
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen.Tests\bin\Debug\System.Web.Optimization.xml
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen.Tests\obj\Debug\TaskLog2ndGen.Tests.csprojResolveAssemblyReference.cache
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen.Tests\obj\Debug\TaskLog2ndGen.Tests.csproj.CoreCompileInputs.cache
+I:\Capstone\TaskLog2ndGen\TaskLog2ndGen.Tests\obj\Debug\TaskLog2ndGen.Tests.csproj.CopyComplete
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen.Tests\obj\Debug\TaskLog2ndGen.Tests.dll
 I:\Capstone\TaskLog2ndGen\TaskLog2ndGen.Tests\obj\Debug\TaskLog2ndGen.Tests.pdb

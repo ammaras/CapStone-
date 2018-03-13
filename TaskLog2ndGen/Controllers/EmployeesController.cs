@@ -18,6 +18,10 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode == "Employee")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             var employees = db.Employees.Include(e => e.Account).Include(e => e.Team1);
             return View("Index", await employees.ToListAsync());
         }
@@ -84,6 +88,10 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +117,10 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             employee.lastChanged = DateTime.Now;
             if (ModelState.IsValid)
             {
@@ -127,6 +139,10 @@ namespace TaskLog2ndGen.Controllers
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
+            }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             if (id == null)
             {
@@ -148,6 +164,10 @@ namespace TaskLog2ndGen.Controllers
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
                 return RedirectToAction("", "Login");
+            }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             Employee employee = await db.Employees.FindAsync(id);
             db.Employees.Remove(employee);

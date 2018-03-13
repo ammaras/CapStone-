@@ -1,9 +1,16 @@
-﻿@model IEnumerable<TaskLog2ndGen.Models.Team>
+﻿@using TaskLog2ndGen.Models
+@model IEnumerable<TaskLog2ndGen.Models.Team>
+@{
+    Account account = Session["account"] as Account;
+}
 
 <h2>List of Teams</h2>
 
 <p>
-    @Html.ActionLink("Create Team", "Create", null, new { @class = "btn btn-secondary" })
+    @if (account.roleCode == "Admin")
+    {
+        @Html.ActionLink("Create Team", "Create", null, new { @class = "btn btn-secondary" })
+    }
 </p>
 
 <table class="table table-bordered table-hover">

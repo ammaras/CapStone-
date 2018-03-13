@@ -1,4 +1,8 @@
-﻿@model TaskLog2ndGen.Models.Employee
+﻿@using TaskLog2ndGen.Models
+@model TaskLog2ndGen.Models.Employee
+@{
+    Account account = Session["account"] as Account;
+}
 
 <h2>View Employee</h2>
 
@@ -78,7 +82,10 @@
         </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.employeeId }, new { @class = "btn btn-secondary" })
-    @Html.ActionLink("Delete", "Delete", new { id = Model.employeeId }, new { @class = "btn btn-secondary" })
-</p>
+@if (account.roleCode == "Admin")
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.employeeId }, new { @class = "btn btn-secondary" })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.employeeId }, new { @class = "btn btn-secondary" })
+    </p>
+}

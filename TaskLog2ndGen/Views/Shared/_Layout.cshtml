@@ -1,6 +1,6 @@
 ﻿@using TaskLog2ndGen.Models
 @{
-    var account = Session["account"] as Account;
+    Account account = Session["account"] as Account;
 }
 
 <!DOCTYPE html>
@@ -11,7 +11,6 @@
     <title>Task Log 2nd Gen</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -28,7 +27,10 @@
                 {
                     <li>@Html.ActionLink("Teams", "Index", "Teams", null, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Tasks", "Index", "Tasks", null, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Employees", "Index", "Employees", null, new { @class = "nav-link" })</li>
+                    if (account.roleCode != "Employee")
+                    {
+                        <li>@Html.ActionLink("Employees", "Index", "Employees", null, new { @class = "nav-link" })</li>
+                    }
                 }
             </ul>
             @if (account == null)

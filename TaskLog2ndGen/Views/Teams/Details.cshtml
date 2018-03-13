@@ -1,4 +1,8 @@
-﻿@model IEnumerable<TaskLog2ndGen.Models.Employee>
+﻿@using TaskLog2ndGen.Models
+@model IEnumerable<TaskLog2ndGen.Models.Employee>
+@{
+    Account account = Session["account"] as Account;
+}
 
 <h2>View Team</h2>
 
@@ -45,7 +49,10 @@
         }
     </tbody>
 </table>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = ViewBag.teamId }, new { @class = "btn btn-secondary" })
-    @Html.ActionLink("Delete", "Delete", new { id = ViewBag.teamId }, new { @class = "btn btn-secondary" })
-</p>
+@if (account.roleCode == "Admin")
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = ViewBag.teamId }, new { @class = "btn btn-secondary" })
+        @Html.ActionLink("Delete", "Delete", new { id = ViewBag.teamId }, new { @class = "btn btn-secondary" })
+    </p>
+}
