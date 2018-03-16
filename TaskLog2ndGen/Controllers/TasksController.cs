@@ -77,14 +77,10 @@ namespace TaskLog2ndGen.Controllers
                     tasks = tasks.OrderByDescending(t => t.serviceTeam).ThenByDescending(t => t.dateSubmmited);
                     break;
                 case "assignment":
-                    ////////////////////////// FIX ME //////////////////////////
-                    tasks = tasks.OrderByDescending(t => t.dateSubmmited);
-                    ////////////////////////// FIX ME //////////////////////////
+                    tasks = tasks.OrderBy(t => t.Employee.lastName).ThenByDescending(t => t.dateSubmmited); ;
                     break;
                 case "assignment_desc":
-                    ////////////////////////// FIX ME //////////////////////////
-                    tasks = tasks.OrderByDescending(t => t.dateSubmmited);
-                    ////////////////////////// FIX ME //////////////////////////
+                    tasks = tasks.OrderByDescending(t => t.Employee.lastName).ThenByDescending(t => t.dateSubmmited); ;
                     break;
                 default:
                     tasks = tasks.OrderByDescending(t => t.dateSubmmited);

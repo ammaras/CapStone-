@@ -64,6 +64,7 @@ namespace TaskLog2ndGen.Tests.Controllers
             // Assert
             Assert.AreEqual("Index", viewResult.ViewName);
         }
+
         [TestMethod]
         public void ViewTasksByStatusSucceed()
         {
@@ -78,6 +79,7 @@ namespace TaskLog2ndGen.Tests.Controllers
             // Assert
             Assert.AreEqual("Index", viewResult.ViewName);
         }
+
         [TestMethod]
         public void ViewTasksByAssignmentSucceed()
         {

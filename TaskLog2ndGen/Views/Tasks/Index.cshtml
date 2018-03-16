@@ -28,7 +28,7 @@
                 @Html.ActionLink("Task Status", "Index", new { sortCriterion = ViewBag.statusSortCriterion })
             </th>
             <th>
-                Primary Contact
+                @Html.ActionLink("Primary Contact", "Index", new { sortCriterion = ViewBag.assignmentSortCriterion })
             </th>
             <th>
                 Secondary Contact
@@ -85,10 +85,10 @@
                     <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.TaskStatu.taskStatusCode)</a>
                 </td>
                 <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Employee.firstName) @Html.DisplayFor(modelItem => item.Employee.lastName)</a>
+                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Employee.fullName)</a>
                 </td>
                 <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Employee1.firstName) @Html.DisplayFor(modelItem => item.Employee1.lastName)</a>
+                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Employee1.fullName)</a>
                 </td>
                 <td>
                     <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.dateLogged)</a>
