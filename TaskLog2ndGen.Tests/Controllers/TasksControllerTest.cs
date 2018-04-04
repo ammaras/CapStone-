@@ -100,7 +100,7 @@ namespace TaskLog2ndGen.Tests.Controllers
         {
             // Arrange
             TasksController controller = new TasksController();
-            TaskViewModel taskViewModel = new TaskViewModel()
+            TaskReferenceViewModel taskReferenceViewModel = new TaskReferenceViewModel()
             {
                 primaryContact = 1,
                 secondaryContact = 1,
@@ -123,7 +123,7 @@ namespace TaskLog2ndGen.Tests.Controllers
             };
 
             // Act
-            Task<ActionResult> actionResult = controller.Create(taskViewModel);
+            Task<ActionResult> actionResult = controller.Create(taskReferenceViewModel);
             actionResult.Wait();
             RedirectToRouteResult redirectToRouteResult = actionResult.Result as RedirectToRouteResult;
 
@@ -136,7 +136,7 @@ namespace TaskLog2ndGen.Tests.Controllers
         {
             // Arrange
             TasksController controller = new TasksController();
-            TaskViewModel taskViewModel = new TaskViewModel()
+            TaskReferenceViewModel taskReferenceViewModel = new TaskReferenceViewModel()
             {
                 primaryContact = 1,
                 secondaryContact = 1,
@@ -159,7 +159,7 @@ namespace TaskLog2ndGen.Tests.Controllers
             };
 
             // Act & Assert
-            Task<ActionResult> actionResult = controller.Create(taskViewModel);
+            Task<ActionResult> actionResult = controller.Create(taskReferenceViewModel);
             Assert.ThrowsException<AggregateException>(() => actionResult.Wait());
         }
 
@@ -185,7 +185,7 @@ namespace TaskLog2ndGen.Tests.Controllers
             // Arrange
             TasksController controller = new TasksController();
             Models.Task task = db.Tasks.AsNoTracking().ToList().Last();
-            TaskViewModel taskViewModel = new TaskViewModel()
+            TaskReferenceViewModel taskReferenceViewModel = new TaskReferenceViewModel()
             {
                 taskId = task.taskId,
                 primaryContact = task.primaryContact,
@@ -208,11 +208,11 @@ namespace TaskLog2ndGen.Tests.Controllers
             };
             foreach (var item in task.TaskReferences)
             {
-                taskViewModel.references.Add(item.Reference1);
+                taskReferenceViewModel.references.Add(item.Reference1);
             }
 
             // Act
-            Task<ActionResult> actionResult = controller.Edit(taskViewModel);
+            Task<ActionResult> actionResult = controller.Edit(taskReferenceViewModel);
 
             actionResult.Wait();
             RedirectToRouteResult redirectToRouteResult = actionResult.Result as RedirectToRouteResult;
@@ -227,7 +227,7 @@ namespace TaskLog2ndGen.Tests.Controllers
             // Arrange
             TasksController controller = new TasksController();
             Models.Task task = db.Tasks.AsNoTracking().ToList().Last();
-            TaskViewModel taskViewModel = new TaskViewModel()
+            TaskReferenceViewModel taskReferenceViewModel = new TaskReferenceViewModel()
             {
                 taskId = task.taskId,
                 primaryContact = task.primaryContact,
@@ -250,11 +250,11 @@ namespace TaskLog2ndGen.Tests.Controllers
             };
             foreach (var item in task.TaskReferences)
             {
-                taskViewModel.references.Add(item.Reference1);
+                taskReferenceViewModel.references.Add(item.Reference1);
             }
 
             // Act & Assert
-            Task<ActionResult> actionResult = controller.Edit(taskViewModel);
+            Task<ActionResult> actionResult = controller.Edit(taskReferenceViewModel);
             Assert.ThrowsException<AggregateException>(() => actionResult.Wait());
         }
 

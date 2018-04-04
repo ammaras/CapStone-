@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TaskLog2ndGen.Models.Task>
+﻿@model IEnumerable<TaskLog2ndGen.ViewModels.TaskViewModel>
 
 <h2>List of Tasks</h2>
 
@@ -28,16 +28,19 @@
                 @Html.ActionLink("Task Status", "Index", new { sortCriterion = ViewBag.statusSortCriterion })
             </th>
             <th>
-                @Html.ActionLink("Primary Contact", "Index", new { sortCriterion = ViewBag.assignmentSortCriterion })
+                Primary Contact
             </th>
             <th>
                 Secondary Contact
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dateLogged)
+                @Html.ActionLink("Assigned Employees", "Index", new { sortCriterion = ViewBag.assignmentSortCriterion })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dateSubmmited)
+                @Html.DisplayNameFor(model => model.task.dateLogged)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.task.dateSubmmited)
             </th>
             <th>
                 @Html.ActionLink("Service Team", "Index", new { sortCriterion = ViewBag.teamSortCriterion })
@@ -64,75 +67,84 @@
                 Application
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.title)
+                @Html.DisplayNameFor(model => model.task.title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.description)
+                @Html.DisplayNameFor(model => model.task.description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.links)
+                @Html.DisplayNameFor(model => model.task.links)
             </th>
             <th>
                 High Level Estimate
+            </th>
+            <th>
+                Total Time Spent
             </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.TaskStatu.taskStatusCode)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Employee.fullName)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Employee1.fullName)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.dateLogged)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.dateSubmmited)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Team.name)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Group.name)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.BusinessUnit1.description)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Platform1.platformCode)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Environment1.environmentCode)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Category1.categoryCode)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Urgency1.urgencyCode)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.Application1.name)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.title)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.description)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.links)</a>
-                </td>
-                <td>
-                    <a href=@("/Tasks/Details/" + item.taskId)>@Html.DisplayFor(modelItem => item.HighLevelEstimate1.highLevelEstimateCode)</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.TaskStatu.taskStatusCode)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.Employee.fullName)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.Employee1.fullName)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.assignedEmployees)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.dateLogged)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.dateSubmmited)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.Team.name)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.Group.name)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.BusinessUnit1.description)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.Platform1.platformCode)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.Environment1.environmentCode)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.Category1.categoryCode)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.Urgency1.urgencyCode)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.Application1.name)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.title)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.description)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.links)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.task.HighLevelEstimate1.highLevelEstimateCode)</a>
+            </td>
+            <td>
+                <a href=@("/Tasks/Details/" + item.task.taskId)>@Html.DisplayFor(modelItem => item.totalTimeSpent)</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

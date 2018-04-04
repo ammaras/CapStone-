@@ -3,7 +3,7 @@
 namespace TaskLog2ndGen.ViewModels
 {
     [MetadataType(typeof(TaskViewModelMetadata))]
-    public partial class TaskViewModel
+    public partial class TaskReferenceViewModel
     {
 
     }

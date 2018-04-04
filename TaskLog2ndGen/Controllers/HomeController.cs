@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using TaskLog2ndGen.Models;
 using System.Linq;
+using System.Collections.Generic;
+using TaskLog2ndGen.ViewModels;
 
 namespace TaskLog2ndGen.Controllers
 {
@@ -30,52 +32,84 @@ namespace TaskLog2ndGen.Controllers
                 ViewBag.assignmentSortCriterion = sortCriterion == "assignment" ? "assignment_desc" : "assignment";
             }
             var tasks = db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.Group).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.TaskStatu).Include(t => t.Urgency1).Include(t => t.Team);
+            var taskViewModels = new List<TaskViewModel>();
+            foreach (var task in tasks)
+            {
+                var taskViewModel = new TaskViewModel
+                {
+                    task = task,
+                    totalTimeSpent = 0,
+                    assignedEmployees = ""
+                };
+                var workSheets = await db.Worksheets.Where(ws => ws.task == task.taskId).ToListAsync();
+                decimal totalTimeSpent = 0;
+                foreach (var workSheet in workSheets)
+                {
+                    totalTimeSpent += workSheet.timeSpent;
+                }
+                taskViewModel.totalTimeSpent = totalTimeSpent;
+                workSheets = workSheets.GroupBy(ws => ws.Employee1).Select(grp => grp.FirstOrDefault()).ToList();
+                foreach (var workSheet in workSheets)
+                {
+                    if (String.IsNullOrEmpty(taskViewModel.assignedEmployees))
+                    {
+                        taskViewModel.assignedEmployees += workSheet.Employee1.fullName;
+                    }
+                    else
+                    {
+                        taskViewModel.assignedEmployees += "\n" + workSheet.Employee1.fullName;
+                    }
+                }
+                taskViewModels.Add(taskViewModel);
+            }
             if (!String.IsNullOrEmpty(searchCriterion))
             {
                 searchCriterion = searchCriterion.ToLower();
-                tasks = tasks.Where(t => t.Employee.firstName.Contains(searchCriterion)
-                                    || t.Employee.lastName.Contains(searchCriterion)
-                                    || t.Employee1.firstName.Contains(searchCriterion)
-                                    || t.Employee.lastName.Contains(searchCriterion)
-                                    || t.Team.name.Contains(searchCriterion)
-                                    || t.Group.name.Contains(searchCriterion)
-                                    || t.platform.Contains(searchCriterion)
-                                    || t.urgency.Contains(searchCriterion)
-                                    || t.BusinessUnit1.description.Contains(searchCriterion)
-                                    || t.environment.Contains(searchCriterion)
-                                    || t.category.Contains(searchCriterion)
-                                    || t.Application1.name.Contains(searchCriterion)
-                                    || t.title.Contains(searchCriterion)
-                                    || t.description.Contains(searchCriterion)
-                                    || t.highLevelEstimate.Contains(searchCriterion)
-                                    || t.links.Contains(searchCriterion)
-                                    || t.taskStatus.Contains(searchCriterion));
+                taskViewModels = taskViewModels.Where(t => t.task.Employee.firstName.ToLower().Contains(searchCriterion)
+                                    || t.task.Employee.lastName.ToLower().Contains(searchCriterion)
+                                    || t.task.Employee1.firstName.ToLower().Contains(searchCriterion)
+                                    || t.task.Employee.lastName.ToLower().Contains(searchCriterion)
+                                    || t.task.Team.name.ToLower().Contains(searchCriterion)
+                                    || t.task.Group.name.ToLower().Contains(searchCriterion)
+                                    || t.task.platform.ToLower().Contains(searchCriterion)
+                                    || t.task.urgency.ToLower().Contains(searchCriterion)
+                                    || t.task.BusinessUnit1.description.ToLower().Contains(searchCriterion)
+                                    || t.task.environment.ToLower().Contains(searchCriterion)
+                                    || t.task.category.ToLower().Contains(searchCriterion)
+                                    || t.task.Application1.name.ToLower().Contains(searchCriterion)
+                                    || t.task.title.ToLower().Contains(searchCriterion)
+                                    || t.task.description.ToLower().Contains(searchCriterion)
+                                    || t.task.highLevelEstimate.ToLower().Contains(searchCriterion)
+                                    || t.task.links.ToLower().Contains(searchCriterion)
+                                    || t.task.taskStatus.ToLower().Contains(searchCriterion)
+                                    || t.totalTimeSpent.ToString().ToLower().Contains(searchCriterion)
+                                    || t.assignedEmployees.ToLower().Contains(searchCriterion)).ToList();
             }
             switch (sortCriterion)
             {
                 case "status":
-                    tasks = tasks.OrderBy(t => t.taskStatus).ThenByDescending(t => t.dateSubmmited);
+                    taskViewModels = taskViewModels.OrderBy(t => t.task.taskStatus).ThenByDescending(t => t.task.dateSubmmited).ToList();
                     break;
                 case "status_desc":
-                    tasks = tasks.OrderByDescending(t => t.taskStatus).ThenByDescending(t => t.dateSubmmited);
+                    taskViewModels = taskViewModels.OrderByDescending(t => t.task.taskStatus).ThenByDescending(t => t.task.dateSubmmited).ToList();
                     break;
                 case "team":
-                    tasks = tasks.OrderBy(t => t.serviceTeam).ThenByDescending(t => t.dateSubmmited);
+                    taskViewModels = taskViewModels.OrderBy(t => t.task.serviceTeam).ThenByDescending(t => t.task.dateSubmmited).ToList();
                     break;
                 case "team_desc":
-                    tasks = tasks.OrderByDescending(t => t.serviceTeam).ThenByDescending(t => t.dateSubmmited);
+                    taskViewModels = taskViewModels.OrderByDescending(t => t.task.serviceTeam).ThenByDescending(t => t.task.dateSubmmited).ToList();
                     break;
                 case "assignment":
-                    tasks = tasks.OrderBy(t => t.Employee.lastName).ThenByDescending(t => t.dateSubmmited); ;
+                    taskViewModels = taskViewModels.OrderBy(t => t.task.Employee.lastName).ThenByDescending(t => t.task.dateSubmmited).ToList();
                     break;
                 case "assignment_desc":
-                    tasks = tasks.OrderByDescending(t => t.Employee.lastName).ThenByDescending(t => t.dateSubmmited); ;
+                    taskViewModels = taskViewModels.OrderByDescending(t => t.task.Employee.lastName).ThenByDescending(t => t.task.dateSubmmited).ToList();
                     break;
                 default:
-                    tasks = tasks.OrderByDescending(t => t.dateSubmmited);
+                    taskViewModels = taskViewModels.OrderByDescending(t => t.task.dateSubmmited).ToList();
                     break;
             }
-            return View("Index", await tasks.ToListAsync());
+            return View("Index", taskViewModels);
         }
     }
 }
