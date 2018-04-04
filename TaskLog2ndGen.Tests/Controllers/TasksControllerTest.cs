@@ -24,7 +24,7 @@ namespace TaskLog2ndGen.Tests.Controllers
         public void ViewTasksSucceed()
         {
             // Arrange
-            TasksController controller = new TasksController();
+            HomeController controller = new HomeController();
 
             // Act
             Task<ActionResult> actionResult = controller.Index(String.Empty, String.Empty);
@@ -51,18 +51,33 @@ namespace TaskLog2ndGen.Tests.Controllers
         }
 
         [TestMethod]
+        public void ViewTasksByAssignmentSucceed()
+        {
+            // Arrange
+            TasksController controller = new TasksController();
+
+            // Act
+            Task<ActionResult> actionResult = controller.TasksByAssignment();
+            actionResult.Wait();
+            ViewResult viewResult = actionResult.Result as ViewResult;
+
+            // Assert
+            Assert.AreEqual("TasksByAssignment", viewResult.ViewName);
+        }
+
+        [TestMethod]
         public void ViewTasksByTeamSucceed()
         {
             // Arrange
             TasksController controller = new TasksController();
 
             // Act
-            Task<ActionResult> actionResult = controller.Index(String.Empty, "team");
+            Task<ActionResult> actionResult = controller.TasksByTeam();
             actionResult.Wait();
             ViewResult viewResult = actionResult.Result as ViewResult;
 
             // Assert
-            Assert.AreEqual("Index", viewResult.ViewName);
+            Assert.AreEqual("TasksByTeam", viewResult.ViewName);
         }
 
         [TestMethod]
@@ -72,27 +87,12 @@ namespace TaskLog2ndGen.Tests.Controllers
             TasksController controller = new TasksController();
 
             // Act
-            Task<ActionResult> actionResult = controller.Index(String.Empty, "status");
+            Task<ActionResult> actionResult = controller.TasksByStatus();
             actionResult.Wait();
             ViewResult viewResult = actionResult.Result as ViewResult;
 
             // Assert
-            Assert.AreEqual("Index", viewResult.ViewName);
-        }
-
-        [TestMethod]
-        public void ViewTasksByAssignmentSucceed()
-        {
-            // Arrange
-            TasksController controller = new TasksController();
-
-            // Act
-            Task<ActionResult> actionResult = controller.Index(String.Empty, "assignment");
-            actionResult.Wait();
-            ViewResult viewResult = actionResult.Result as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Index", viewResult.ViewName);
+            Assert.AreEqual("TasksByStatus", viewResult.ViewName);
         }
 
         [TestMethod]

@@ -26,7 +26,16 @@
                 @if (account != null)
                 {
                     <li>@Html.ActionLink("Teams", "Index", "Teams", null, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Tasks", "Index", "Tasks", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            Tasks
+                        </a>
+                        <div class="dropdown-menu">
+                            @Html.ActionLink("By Assignment", "TasksByAssignment", "Tasks", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("By Team", "TasksByTeam", "Tasks", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("By Status", "TasksByStatus", "Tasks", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
                     if (account.roleCode != "Employee")
                     {
                         <li>@Html.ActionLink("Employees", "Index", "Employees", null, new { @class = "nav-link" })</li>

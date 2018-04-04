@@ -16,6 +16,9 @@ namespace TaskLog2ndGen.Controllers
         private const string ASSIGNED_WORKSHEET_STATUS = "Assigned";
         private const string DOC_CREATED_NOTE = "Document Created";
         private const string DOC_UPDATED_NOTE = "Document Updated";
+        private const string ASSIGNED_TASK_STATUS = "Assigned";
+        private const string COMM_TASK_AUDIT_TYPE = "Communication";
+        private const string STATUS_UPDATED_NOTE = "Status changed from {0} to {1}";
 
         // GET: Worksheets
         public async Task<ActionResult> Index(int? id)
@@ -100,6 +103,20 @@ namespace TaskLog2ndGen.Controllers
                     worksheetStatus = worksheet.worksheetStatus
                 };
                 db.WorksheetAudits.Add(worksheetAudit);
+                await db.SaveChangesAsync();
+                Models.Task task = await db.Tasks.Where(t => t.taskId == worksheet.task).SingleOrDefaultAsync();
+                TaskAudit taskAudit = new TaskAudit
+                {
+                    task = task.taskId,
+                    taskAuditType = COMM_TASK_AUDIT_TYPE,
+                    dateLogged = DateTime.Now,
+                    loggedBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1,
+                    notes = String.Format(STATUS_UPDATED_NOTE, task.taskStatus, ASSIGNED_TASK_STATUS),
+                    taskStatus = task.taskStatus
+                };
+                task.taskStatus = ASSIGNED_TASK_STATUS;
+                db.Entry(task).State = EntityState.Modified;
+                db.TaskAudits.Add(taskAudit);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Details", new { id = worksheet.worksheetId });
             }

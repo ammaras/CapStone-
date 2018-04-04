@@ -50,6 +50,23 @@ th a:hover, th a:visited, th a:link, th a:active {
     color: black;
 }
 
+.card-header {
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+
+.card-link:hover, .card-link:visited, .card-link:link, .card-link:active {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding-bottom: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 12px;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
