@@ -96,15 +96,15 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
-            var employees = await db.Employees.ToListAsync();
+            var employees = await db.Employees.OrderBy(e => e.lastName).ToListAsync();
             List<TaskByAssignmentViewModel> tasksByAssignment = new List<TaskByAssignmentViewModel>();
             foreach (var employee in employees)
             {
-                TaskByAssignmentViewModel taskByTeam = new TaskByAssignmentViewModel
+                var taskByTeam = new TaskByAssignmentViewModel
                 {
                     employee = employee
                 };
-                var workSheets = await db.Worksheets.Where(ws => ws.employee == employee.employeeId).GroupBy(ws => ws.Task1).Select(grp => grp.FirstOrDefault()).ToListAsync();
+                var workSheets = await db.Worksheets.Where(ws => ws.employee == employee.employeeId).GroupBy(ws => ws.Task1).Select(grp => grp.FirstOrDefault()).OrderByDescending(ws => ws.Task1.dateSubmmited).ToListAsync();
                 foreach (var workSheet in workSheets)
                 {
                     taskByTeam.tasks.Add(workSheet.Task1);
@@ -121,7 +121,7 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
-            var teams = await db.Teams.ToListAsync();
+            var teams = await db.Teams.OrderBy(t => t.name).ToListAsync();
             List<TaskByTeamViewModel> tasksByTeam = new List<TaskByTeamViewModel>();
             foreach (var team in teams)
             {
@@ -129,7 +129,7 @@ namespace TaskLog2ndGen.Controllers
                 {
                     team = team
                 };
-                var Tasks = await db.Tasks.Where(t => t.serviceTeam == team.teamId).ToListAsync();
+                var Tasks = await db.Tasks.Where(t => t.serviceTeam == team.teamId).OrderByDescending(t => t.dateSubmmited).ToListAsync();
                 foreach (var task in Tasks)
                 {
                     taskByTeam.tasks.Add(task);
@@ -146,13 +146,15 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
-            var taskStati = await db.TaskStatus.ToListAsync();
+            var taskStati = await db.TaskStatus.OrderBy(ts => ts.taskStatusCode).ToListAsync();
             List<TaskByStatusViewModel> tasksByStatus = new List<TaskByStatusViewModel>();
             foreach (var taskStatus in taskStati)
             {
-                TaskByStatusViewModel taskByStatus = new TaskByStatusViewModel();
-                taskByStatus.taskStatus = taskStatus;
-                var Tasks = await db.Tasks.Where(t => t.taskStatus == taskStatus.taskStatusCode).ToListAsync();
+                TaskByStatusViewModel taskByStatus = new TaskByStatusViewModel
+                {
+                    taskStatus = taskStatus
+                };
+                var Tasks = await db.Tasks.Where(t => t.taskStatus == taskStatus.taskStatusCode).OrderByDescending(t => t.dateSubmmited).ToListAsync();
                 foreach (var task in Tasks)
                 {
                     taskByStatus.tasks.Add(task);
@@ -160,6 +162,61 @@ namespace TaskLog2ndGen.Controllers
                 tasksByStatus.Add(taskByStatus);
             }
             return View("TasksByStatus", tasksByStatus);
+        }
+
+        // GET: Tasks
+        public async Task<ActionResult> TasksByTimeSpent()
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            var tasks = await db.Tasks.ToListAsync();
+            var taskViewModels = new List<TaskViewModel>();
+            foreach (var task in tasks)
+            {
+                var taskViewModel = new TaskViewModel
+                {
+                    task = task,
+                    totalTimeSpent = 0,
+                    assignedEmployees = ""
+                };
+                var workSheets = await db.Worksheets.Where(ws => ws.task == task.taskId).ToListAsync();
+                decimal totalTimeSpent = 0;
+                foreach (var workSheet in workSheets)
+                {
+                    totalTimeSpent += workSheet.timeSpent;
+                }
+                taskViewModel.totalTimeSpent = totalTimeSpent;
+                workSheets = workSheets.GroupBy(ws => ws.Employee1).Select(grp => grp.FirstOrDefault()).ToList();
+                foreach (var workSheet in workSheets)
+                {
+                    if (String.IsNullOrEmpty(taskViewModel.assignedEmployees))
+                    {
+                        taskViewModel.assignedEmployees += workSheet.Employee1.fullName;
+                    }
+                    else
+                    {
+                        taskViewModel.assignedEmployees += "\n" + workSheet.Employee1.fullName;
+                    }
+                }
+                taskViewModels.Add(taskViewModel);
+            }
+            var tasksByTimeSpent = new List<TaskByTimeSpentViewModel>();
+            var totalTimesSpent = taskViewModels.Select(t => t.totalTimeSpent).Distinct();
+            foreach (var totalTimeSpent in totalTimesSpent.OrderByDescending(tts => tts))
+            {
+                var taskByTimeSpent = new TaskByTimeSpentViewModel
+                {
+                    totalTimeSpent = totalTimeSpent
+                };
+                foreach (var tempTaskViewModel in taskViewModels.Where(t => t.totalTimeSpent == totalTimeSpent).OrderByDescending(t => t.task.dateSubmmited))
+                {
+                    taskByTimeSpent.tasks.Add(tempTaskViewModel);
+                }
+                tasksByTimeSpent.Add(taskByTimeSpent);
+            }
+            return View("TasksByTimeSpent", tasksByTimeSpent);
         }
 
         // GET: Tasks/Details/5

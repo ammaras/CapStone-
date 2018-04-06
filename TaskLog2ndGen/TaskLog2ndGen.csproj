@@ -270,6 +270,7 @@
     <Compile Include="ViewModels\TaskByAssignmentViewModel.cs" />
     <Compile Include="ViewModels\TaskByStatusViewModel.cs" />
     <Compile Include="ViewModels\TaskByTeamViewModel.cs" />
+    <Compile Include="ViewModels\TaskByTimeSpentViewModel.cs" />
     <Compile Include="ViewModels\TaskReferenceViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
   </ItemGroup>
@@ -399,6 +400,7 @@
     <Content Include="Views\Tasks\TasksByStatus.cshtml" />
     <Content Include="Views\Tasks\TasksByTeam.cshtml" />
     <Content Include="Views\Tasks\TasksByAssignment.cshtml" />
+    <Content Include="Views\Tasks\TasksByTimeSpent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
