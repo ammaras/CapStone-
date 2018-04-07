@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using TaskLog2ndGen.Models;
 using TaskLog2ndGen.ViewModels;
 using System.Linq;
+using System.Net.Mail;
 
 namespace TaskLog2ndGen.Controllers
 {
@@ -15,11 +16,18 @@ namespace TaskLog2ndGen.Controllers
         private GB_Tasklogtracker_D1Context db = new GB_Tasklogtracker_D1Context();
         private const string CANCELLED_TASK_STATUS = "Cancelled";
         private const string NOT_ASSIGNED_TASK_STATUS = "Not Assigned";
+        private const string ACKNOWLEDGED_TASK_STATUS = "Acknowledged";
         private const string COMM_TASK_AUDIT_TYPE = "Communication";
         private const string FIELD_CHANGE_TASK_AUDIT_TYPE = "Field Changes";
         private const string DOC_CREATED_NOTE = "Document Created";
         private const string DOC_UPDATED_NOTE = "Document Updated";
         private const string STATUS_UPDATED_NOTE = "Status changed from {0} to {1}";
+        private const string MAIL_SERVER = "server.address.com";
+        private const string MAIL_SERVER_USERNAME = "username";
+        private const string MAIL_SERVER_PASSWORD = "password";
+        private const string SYSTEM_NOTIFICATION_MAIL = "tasklog2ndgen@manulife.com";
+        private const string SYSTEM_NOTIFICATION_SUBJECT = "Task Id: {0} acknowledgement notification. Do not reply.";
+        private const string SYSTEM_NOTIFICATION_BODY = "Task Id: {0} has been acknowledge by {1}.";
 
         // GET: Tasks
         public async Task<ActionResult> Index(string searchCriterion, string sortCriterion)
@@ -609,6 +617,123 @@ namespace TaskLog2ndGen.Controllers
             db.TaskAudits.Add(taskAudit);
             await db.SaveChangesAsync();
             return RedirectToAction("Details", new { id = task.taskId });
+        }
+
+        // GET: Tasks/Acknowledge/5
+        public async Task<ActionResult> Acknowledge(int? id)
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Models.Task task = await db.Tasks.FindAsync(id);
+            if (task == null)
+            {
+                return HttpNotFound();
+            }
+            return View(task);
+        }
+
+        // POST: Tasks/Acknowledge/5
+        [HttpPost, ActionName("Acknowledge")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AcknowledgeConfirmed(int id)
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            Models.Task task = await db.Tasks.FindAsync(id);
+            TaskAudit taskAudit = new TaskAudit
+            {
+                task = task.taskId,
+                taskAuditType = COMM_TASK_AUDIT_TYPE,
+                dateLogged = DateTime.Now,
+                loggedBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1,
+                notes = String.Format(STATUS_UPDATED_NOTE, task.taskStatus, ACKNOWLEDGED_TASK_STATUS),
+                taskStatus = task.taskStatus
+            };
+            task.taskStatus = ACKNOWLEDGED_TASK_STATUS;
+            db.Entry(task).State = EntityState.Modified;
+            db.TaskAudits.Add(taskAudit);
+            await db.SaveChangesAsync();
+            SmtpClient client = new SmtpClient(MAIL_SERVER)
+            {
+                Credentials = new NetworkCredential(MAIL_SERVER_USERNAME, MAIL_SERVER_PASSWORD)
+            };
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.To.Add(new MailAddress(task.Employee.email));
+            if (!String.IsNullOrEmpty(task.Employee1.email))
+            {
+                mailMessage.To.Add(new MailAddress(task.Employee1.email));
+            }
+            mailMessage.Sender = new MailAddress(SYSTEM_NOTIFICATION_MAIL);
+            mailMessage.Subject = String.Format(SYSTEM_NOTIFICATION_SUBJECT, task.taskId);
+            mailMessage.Body = String.Format(SYSTEM_NOTIFICATION_BODY, task.taskId, System.Web.HttpContext.Current != null ? (Session["account"] as Account).Employee.fullName : null);
+            //client.Send(mailMessage); /////////////////////////// WILL FAIL, AS NO MAIL SERVER /////////////////////////// 
+            return RedirectToAction("Details", new { id = task.taskId });
+        }
+
+        // GET: Tasks/RequestClarification/5
+        public async Task<ActionResult> RequestClarification(int? id)
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Models.Task task = await db.Tasks.FindAsync(id);
+            if (task == null)
+            {
+                return HttpNotFound();
+            }
+            ClarificationViewModel clarificationViewModel = new ClarificationViewModel()
+            {
+                taskId = task.taskId,
+                to = task.Employee.email,
+                cc = task.Employee1.email,
+                from = System.Web.HttpContext.Current != null ? (Session["account"] as Account).Employee.email : null,
+            };
+            return View(clarificationViewModel);
+        }
+
+        // POST: Tasks/RequestClarification/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RequestClarification([Bind(Include = "taskId,to,cc,from,subject,body")] ClarificationViewModel clarificationViewModel)
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            if (ModelState.IsValid)
+            {
+                SmtpClient client = new SmtpClient(MAIL_SERVER)
+                {
+                    Credentials = new NetworkCredential(MAIL_SERVER_USERNAME, MAIL_SERVER_PASSWORD)
+                };
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.To.Add(new MailAddress(clarificationViewModel.to));
+                if (!String.IsNullOrEmpty(clarificationViewModel.cc))
+                {
+                    mailMessage.To.Add(new MailAddress(clarificationViewModel.cc));
+                }
+                mailMessage.Sender = new MailAddress(clarificationViewModel.from);
+                mailMessage.Subject = clarificationViewModel.subject;
+                mailMessage.Body = clarificationViewModel.body;
+                //client.Send(mailMessage); /////////////////////////// WILL FAIL, AS NO MAIL SERVER /////////////////////////// 
+                return RedirectToAction("Details", new { id = clarificationViewModel.taskId });
+            }
+            return View(clarificationViewModel);
         }
 
         protected override void Dispose(bool disposing)

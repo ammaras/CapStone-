@@ -81,6 +81,21 @@ namespace TaskLog2ndGen.Tests.Controllers
         }
 
         [TestMethod]
+        public void ViewTasksByTimeSpentSucceed()
+        {
+            // Arrange
+            TasksController controller = new TasksController();
+
+            // Act
+            Task<ActionResult> actionResult = controller.TasksByTimeSpent();
+            actionResult.Wait();
+            ViewResult viewResult = actionResult.Result as ViewResult;
+
+            // Assert
+            Assert.AreEqual("TasksByTimeSpent", viewResult.ViewName);
+        }
+
+        [TestMethod]
         public void ViewTasksByStatusSucceed()
         {
             // Arrange
@@ -288,6 +303,47 @@ namespace TaskLog2ndGen.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Index", redirectToRouteResult.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void AcknowledgeTaskSucceed()
+        {
+            // Arrange
+            TasksController controller = new TasksController();
+            Models.Task task = db.Tasks.AsNoTracking().ToList().Last();
+
+            // Act
+            Task<ActionResult> actionResult = controller.AcknowledgeConfirmed(task.taskId);
+            actionResult.Wait();
+            RedirectToRouteResult redirectToRouteResult = actionResult.Result as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Details", redirectToRouteResult.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void RequestClarificationSucceed()
+        {
+            // Arrange
+            TasksController controller = new TasksController();
+            Models.Task task = db.Tasks.AsNoTracking().ToList().Last();
+            ClarificationViewModel clarificationViewModel = new ClarificationViewModel()
+            {
+                taskId = task.taskId,
+                to = task.Employee.email,
+                cc = task.Employee1.email,
+                from = "pjackson@gmail.com",
+                subject = "Need Clarification",
+                body = "For Task Id: 1"
+            };
+
+            // Act
+            ActionResult actionResult = controller.RequestClarification(clarificationViewModel);
+
+            RedirectToRouteResult redirectToRouteResult = actionResult as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Details", redirectToRouteResult.RouteValues["action"]);
         }
     }
 }
