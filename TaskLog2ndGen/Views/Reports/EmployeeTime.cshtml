@@ -1,0 +1,86 @@
+﻿@model IEnumerable<TaskLog2ndGen.ViewModels.EmployeeTimeViewModel>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th colspan="3">Employee Time Report</th>
+            <th colspan="3"></th>
+            <th colspan="3" class="text-right">Created By: @ViewBag.createdBy</th>
+        </tr>
+        <tr>
+            <th colspan="9">From @string.Format("{0:MM/dd/yyyy}", ViewBag.startDate) - @string.Format("{0:MM/dd/yyyy}", ViewBag.endDate)</th>
+        </tr>
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+                Task ID
+            </th>
+            <th>
+                Task
+            </th>
+            <th>
+                Primary Contact
+            </th>
+            <th>
+                Project/Application
+            </th>
+            <th>
+                Business Unit
+            </th>
+            <th>
+                Task Summary
+            </th>
+            <th>
+                Regular Time
+            </th>
+            <th>
+                Overtime
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="text-center">@string.Format("{0:MM/dd/yyyy}", DateTime.Now)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td></td>
+                <td class="text-center">
+                    @item.task.taskId
+                </td>
+                <td class="text-center">
+                    @item.task.title
+                </td>
+                <td class="text-center">
+                    @item.task.Employee.fullName
+                </td>
+                <td class="text-center">
+                    @item.task.Application1.name
+                </td>
+                <td class="text-center">
+                    @item.task.BusinessUnit1.description
+                </td>
+                <td class="text-center">
+                    @item.task.description
+                </td>
+                <td class="text-center">
+                    @item.regularTime
+                </td>
+                <td class="text-center">
+                    @item.overTime
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,120 @@
+﻿@using TaskLog2ndGen.Models
+@{
+    Account account = Session["account"] as Account;
+}
+
+<h2>Reports</h2>
+
+@if (account.roleCode == "Admin")
+{
+    <fieldset>
+        <legend>Admin Report</legend>
+        @using (Html.BeginForm("Admin", "Reports"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <label for="startDate1" class="control-label col-md-2">Start Date</label>
+                    <div class="col-md-10">
+                        <input type="text" name="startDate1" value="@(ViewBag.Today)" id="startDate1" class="form-control date" />
+                        <span class="text-danger">@TempData["date1Error"]</span>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="endDate1" class="control-label col-md-2">End Date</label>
+                    <div class="col-md-10">
+                        <input type="text" name="endDate1" value="@(ViewBag.Today)" id="endDate1" class="form-control date" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p>
+                        <input type="submit" value="Submit" class="btn btn-secondary" />
+                    </p>
+                </div>
+            </div>
+        }
+    </fieldset>
+}
+
+@if (account.roleCode != "Employee")
+{
+    <fieldset>
+        <legend>Employees Time Report</legend>
+        @using (Html.BeginForm("EmployeesTime", "Reports"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <label for="startDate2" class="control-label col-md-2">Start Date</label>
+                    <div class="col-md-10">
+                        <input type="text" name="startDate2" value="@(ViewBag.Today)" id="startDate2" class="form-control date" />
+                        <span class="text-danger">@TempData["date2Error"]</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="endDate2" class="control-label col-md-2">End Date</label>
+                    <div class="col-md-10">
+                        <input type="text" name="endDate2" value="@(ViewBag.Today)" id="endDate2" class="form-control date" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p>
+                        <input type="submit" value="Submit" class="btn btn-secondary" />
+                    </p>
+                </div>
+            </div>
+        }
+    </fieldset>
+}
+
+<fieldset>
+    <legend>Employee Time Report</legend>
+    @using (Html.BeginForm("EmployeeTime", "Reports"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label for="startDate3" class="control-label col-md-2">Start Date</label>
+                <div class="col-md-10">
+                    <input type="text" name="startDate3" value="@(ViewBag.Today)" id="startDate3" class="form-control date" />
+                    <span class="text-danger">@TempData["date3Error"]</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="endDate3" class="control-label col-md-2">End Date</label>
+                <div class="col-md-10">
+                    <input type="text" name="endDate3" value="@(ViewBag.Today)" id="endDate3" class="form-control date" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <p>
+                    <input type="submit" value="Submit" class="btn btn-secondary" />
+                    @Html.ActionLink("Cancel", "", "Home", null, new { @class = "btn btn-secondary" })
+                </p>
+            </div>
+        </div>
+    }
+</fieldset>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,4 +1,7 @@
 ﻿$(function () {
+    $(".date").datetimepicker({
+        format: 'MM/DD/YYYY'
+    });
     $("#container select:first").hide();
     $("#btnAdd").on("click", addReference);
     $(".btnRemove").on("click", removeReference);

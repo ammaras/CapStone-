@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TaskLog2ndGen.Models;
+﻿using TaskLog2ndGen.Models;
 
 namespace TaskLog2ndGen.ViewModels
 {

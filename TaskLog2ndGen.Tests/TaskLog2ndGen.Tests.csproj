@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="Controllers\EmployeesControllerTest.cs" />
     <Compile Include="Controllers\LoginControllerTest.cs" />
+    <Compile Include="Controllers\ReportsControllerTest.cs" />
     <Compile Include="Controllers\TasksControllerTest.cs" />
     <Compile Include="Controllers\TeamsControllerTest.cs" />
     <Compile Include="Controllers\WorksheetsControllerTest.cs" />
