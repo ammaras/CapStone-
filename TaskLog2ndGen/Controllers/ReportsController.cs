@@ -27,7 +27,7 @@ namespace TaskLog2ndGen.Controllers
         }
 
         // POST: Reports/Admin
-        public ActionResult Admin(DateTime? startDate1, DateTime? endDate1)
+        public async Task<ActionResult> Admin(DateTime? startDate1, DateTime? endDate1)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
             {
@@ -37,12 +37,26 @@ namespace TaskLog2ndGen.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            if (startDate1 > endDate1)
+            if (startDate1 == null)
             {
-                TempData["date1Error"] = "Start date cannot be more recent than end date.";
+                TempData["startDate1Error"] = "Start date is required.";
                 return RedirectToAction("");
             }
-            return View();
+            if (endDate1 == null)
+            {
+                TempData["endDate1Error"] = "End date is required.";
+                return RedirectToAction("");
+            }
+            if (startDate1 > endDate1)
+            {
+                TempData["startDate1Error"] = "Start date cannot be more recent than end date.";
+                return RedirectToAction("");
+            }
+            ViewBag.startDate = startDate1;
+            ViewBag.endDate = endDate1;
+            ViewBag.createdBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).Employee.fullName : "Jackson, Peter";
+            var employees = await db.Employees.Where(e => e.lastChanged >= startDate1 && e.lastChanged <= endDate1).ToListAsync();
+            return View("Admin", employees);
         }
 
         // POST: Reports/EmployeesTime
@@ -56,9 +70,19 @@ namespace TaskLog2ndGen.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
+            if (startDate2 == null)
+            {
+                TempData["startDate2Error"] = "Start date is required.";
+                return RedirectToAction("");
+            }
+            if (endDate2 == null)
+            {
+                TempData["endDate2Error"] = "End date is required.";
+                return RedirectToAction("");
+            }
             if (startDate2 > endDate2)
             {
-                TempData["date2Error"] = "Start date cannot be more recent than end date.";
+                TempData["startDate2Error"] = "Start date cannot be more recent than end date.";
                 return RedirectToAction("");
             }
             ViewBag.startDate = startDate2;
@@ -79,8 +103,7 @@ namespace TaskLog2ndGen.Controllers
                     decimal regularTime = 0;
                     decimal overTime = 0;
                     var employeeTime = new EmployeeTimeViewModel();
-                    //task.Worksheets.Where(ws => ws.employee == (System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1) && ws.dateAssigned > startDate3 && ws.dateAssigned < endDate3))
-                    var worksheets = task.Worksheets.Where(ws => ws.employee == employee.employeeId);
+                    var worksheets = task.Worksheets.Where(ws => ws.employee == (System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1) && ws.dateAssigned >= startDate2 && ws.dateAssigned <= endDate2);
                     for (int i = 0; i < worksheets.Count(); i++)
                     {
                         if (i == 0)
@@ -116,9 +139,19 @@ namespace TaskLog2ndGen.Controllers
             {
                 return RedirectToAction("", "Login");
             }
+            if (startDate3 == null)
+            {
+                TempData["startDate3Error"] = "Start date is required.";
+                return RedirectToAction("");
+            }
+            if (endDate3 == null)
+            {
+                TempData["endDate3Error"] = "End date is required.";
+                return RedirectToAction("");
+            }
             if (startDate3 > endDate3)
             {
-                TempData["date3Error"] = "Start date cannot be more recent than end date.";
+                TempData["startDate3Error"] = "Start date cannot be more recent than end date.";
                 return RedirectToAction("");
             }
             ViewBag.startDate = startDate3;
@@ -131,8 +164,7 @@ namespace TaskLog2ndGen.Controllers
                 decimal regularTime = 0;
                 decimal overTime = 0;
                 var employeeTime = new EmployeeTimeViewModel();
-                //task.Worksheets.Where(ws => ws.employee == (System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1) && ws.dateAssigned > startDate3 && ws.dateAssigned < endDate3))
-                var worksheets = task.Worksheets.Where(ws => ws.employee == (System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1));
+                var worksheets = task.Worksheets.Where(ws => ws.employee == (System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1) && ws.dateAssigned >= startDate3 && ws.dateAssigned <= endDate3);
                 for (int i = 0; i < worksheets.Count(); i++)
                 {
                     if (i == 0)

@@ -105,18 +105,21 @@ namespace TaskLog2ndGen.Controllers
                 db.WorksheetAudits.Add(worksheetAudit);
                 await db.SaveChangesAsync();
                 Models.Task task = await db.Tasks.Where(t => t.taskId == worksheet.task).SingleOrDefaultAsync();
-                TaskAudit taskAudit = new TaskAudit
+                if (task.taskStatus != ASSIGNED_TASK_STATUS)
                 {
-                    task = task.taskId,
-                    taskAuditType = COMM_TASK_AUDIT_TYPE,
-                    dateLogged = DateTime.Now,
-                    loggedBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1,
-                    notes = String.Format(STATUS_UPDATED_NOTE, task.taskStatus, ASSIGNED_TASK_STATUS),
-                    taskStatus = task.taskStatus
-                };
-                task.taskStatus = ASSIGNED_TASK_STATUS;
-                db.Entry(task).State = EntityState.Modified;
-                db.TaskAudits.Add(taskAudit);
+                    TaskAudit taskAudit = new TaskAudit
+                    {
+                        task = task.taskId,
+                        taskAuditType = COMM_TASK_AUDIT_TYPE,
+                        dateLogged = DateTime.Now,
+                        loggedBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1,
+                        notes = String.Format(STATUS_UPDATED_NOTE, task.taskStatus, ASSIGNED_TASK_STATUS),
+                        taskStatus = task.taskStatus
+                    };
+                    task.taskStatus = ASSIGNED_TASK_STATUS;
+                    db.Entry(task).State = EntityState.Modified;
+                    db.TaskAudits.Add(taskAudit);
+                }
                 await db.SaveChangesAsync();
                 return RedirectToAction("Details", new { id = worksheet.worksheetId });
             }

@@ -188,14 +188,26 @@
 </fieldset>
 
 <p>
-    @Html.ActionLink("Worksheets", "", "Worksheets", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
+    @if (Model.taskStatus != "Cancelled")
+    {
+        @Html.ActionLink("Worksheets", "", "Worksheets", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
+    }
     @if (Model.taskStatus != "Acknowledged")
     {
         @Html.ActionLink("Acknowledge", "Acknowledge", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
     }
-    @Html.ActionLink("Cancel", "Cancel", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
-    @Html.ActionLink("Request Clarification", "RequestClarification", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
-    @Html.ActionLink("Edit", "Edit", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
+    @if (Model.taskStatus != "Cancelled")
+    {
+        @Html.ActionLink("Cancel", "Cancel", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
+    }
+    @if (Model.taskStatus != "Cancelled")
+    {
+        @Html.ActionLink("Request Clarification", "RequestClarification", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
+    }
+    @if (Model.taskStatus != "Cancelled")
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
+    }
     @if (account.roleCode == "Admin")
     {
         @Html.ActionLink("Delete", "Delete", new { id = Model.taskId }, new { @class = "btn btn-secondary" })

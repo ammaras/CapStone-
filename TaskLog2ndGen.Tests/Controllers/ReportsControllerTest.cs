@@ -10,6 +10,21 @@ namespace TaskLog2ndGen.Tests.Controllers
     public class ReportsControllerTest
     {
         [TestMethod]
+        public void GenerateAdminReportSucced()
+        {
+            // Arrange
+            ReportsController controller = new ReportsController();
+
+            // Act
+            Task<ActionResult> actionResult = controller.Admin(DateTime.Today, DateTime.Today);
+            actionResult.Wait();
+            ViewResult viewResult = actionResult.Result as ViewResult;
+
+            // Assert
+            Assert.AreEqual("Admin", viewResult.ViewName);
+        }
+
+        [TestMethod]
         public void GenerateEmployeeTimeReportSucced()
         {
             // Arrange

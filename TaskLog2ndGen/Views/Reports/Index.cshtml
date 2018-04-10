@@ -21,7 +21,7 @@
                     <label for="startDate1" class="control-label col-md-2">Start Date</label>
                     <div class="col-md-10">
                         <input type="text" name="startDate1" value="@(ViewBag.Today)" id="startDate1" class="form-control date" />
-                        <span class="text-danger">@TempData["date1Error"]</span>
+                        <span class="text-danger">@TempData["startDate1Error"]</span>
                     </div>
                 </div>
 
@@ -30,6 +30,7 @@
                     <label for="endDate1" class="control-label col-md-2">End Date</label>
                     <div class="col-md-10">
                         <input type="text" name="endDate1" value="@(ViewBag.Today)" id="endDate1" class="form-control date" />
+                        <span class="text-danger">@TempData["endDate1Error"]</span>
                     </div>
                 </div>
 
@@ -59,7 +60,7 @@
                     <label for="startDate2" class="control-label col-md-2">Start Date</label>
                     <div class="col-md-10">
                         <input type="text" name="startDate2" value="@(ViewBag.Today)" id="startDate2" class="form-control date" />
-                        <span class="text-danger">@TempData["date2Error"]</span>
+                        <span class="text-danger">@TempData["startDate2Error"]</span>
                     </div>
                 </div>
 
@@ -67,6 +68,7 @@
                     <label for="endDate2" class="control-label col-md-2">End Date</label>
                     <div class="col-md-10">
                         <input type="text" name="endDate2" value="@(ViewBag.Today)" id="endDate2" class="form-control date" />
+                        <span class="text-danger">@TempData["endDate2Error"]</span>
                     </div>
                 </div>
 
@@ -94,7 +96,7 @@
                 <label for="startDate3" class="control-label col-md-2">Start Date</label>
                 <div class="col-md-10">
                     <input type="text" name="startDate3" value="@(ViewBag.Today)" id="startDate3" class="form-control date" />
-                    <span class="text-danger">@TempData["date3Error"]</span>
+                    <span class="text-danger">@TempData["startDate3Error"]</span>
                 </div>
             </div>
 
@@ -102,6 +104,7 @@
                 <label for="endDate3" class="control-label col-md-2">End Date</label>
                 <div class="col-md-10">
                     <input type="text" name="endDate3" value="@(ViewBag.Today)" id="endDate3" class="form-control date" />
+                    <span class="text-danger">@TempData["endDate3Error"]</span>
                 </div>
             </div>
 

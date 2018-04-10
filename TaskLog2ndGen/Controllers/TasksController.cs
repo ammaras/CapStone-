@@ -382,6 +382,10 @@ namespace TaskLog2ndGen.Controllers
             {
                 return HttpNotFound();
             }
+            else if (task.taskStatus == ACKNOWLEDGED_TASK_STATUS)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             TaskReferenceViewModel taskReferenceViewModel = new TaskReferenceViewModel
             {
                 taskId = task.taskId,
@@ -590,6 +594,10 @@ namespace TaskLog2ndGen.Controllers
             {
                 return HttpNotFound();
             }
+            else if (task.taskStatus == CANCELLED_TASK_STATUS)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             return View(task);
         }
 
@@ -635,6 +643,10 @@ namespace TaskLog2ndGen.Controllers
             {
                 return HttpNotFound();
             }
+            else if (task.taskStatus == ACKNOWLEDGED_TASK_STATUS)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             return View(task);
         }
 
@@ -648,6 +660,10 @@ namespace TaskLog2ndGen.Controllers
                 return RedirectToAction("", "Login");
             }
             Models.Task task = await db.Tasks.FindAsync(id);
+            if (task.taskStatus == ACKNOWLEDGED_TASK_STATUS)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             TaskAudit taskAudit = new TaskAudit
             {
                 task = task.taskId,
@@ -699,6 +715,7 @@ namespace TaskLog2ndGen.Controllers
                 taskId = task.taskId,
                 to = task.Employee.email,
                 cc = task.Employee1.email,
+                subject = "Task Id: " + task.taskId + " - " + task.title,
                 from = System.Web.HttpContext.Current != null ? (Session["account"] as Account).Employee.email : null,
             };
             return View(clarificationViewModel);
