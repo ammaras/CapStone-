@@ -345,5 +345,21 @@ namespace TaskLog2ndGen.Tests.Controllers
             // Assert
             Assert.AreEqual("Details", redirectToRouteResult.RouteValues["action"]);
         }
+
+        [TestMethod]
+        public void ViewTaskSummarySucceed()
+        {
+            // Arrange
+            TasksController controller = new TasksController();
+            Models.Task task = db.Tasks.AsNoTracking().ToList().Last();
+
+            // Act
+            Task<ActionResult> actionResult = controller.TaskSummary(task.taskId);
+            actionResult.Wait();
+            ViewResult viewResult = actionResult.Result as ViewResult;
+
+            // Assert
+            Assert.AreEqual("TaskSummary", viewResult.ViewName);
+        }
     }
 }

@@ -422,6 +422,7 @@
     <Content Include="Views\Reports\EmployeeTime.cshtml" />
     <Content Include="Views\Reports\EmployeesTime.cshtml" />
     <Content Include="Views\Reports\Admin.cshtml" />
+    <Content Include="Views\Tasks\TaskSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,70 @@
+﻿@model TaskLog2ndGen.Models.Task
+
+<h2>Task Summary</h2>
+
+<h3>Task History</h3>
+
+<fieldset>
+    <legend>Communication</legend>
+    <dl class="dl-horizontal">
+        @foreach (var item in Model.TaskAudits.OrderByDescending(m => m.dateLogged))
+        {
+            if (item.taskAuditType.Contains("Communication"))
+            {
+                <dt>
+                    @item.dateLogged - @item.Employee.firstName @item.Employee.lastName
+                </dt>
+
+                <dd>
+                    @item.notes
+                </dd>
+            }
+        }
+    </dl>
+</fieldset>
+
+<fieldset>
+    <legend>Field Changes</legend>
+    <dl class="dl-horizontal">
+        @foreach (var item in Model.TaskAudits.OrderByDescending(m => m.dateLogged))
+        {
+            if (item.taskAuditType.Contains("Field Changes"))
+            {
+                <dt>
+                    @item.dateLogged - @item.Employee.firstName @item.Employee.lastName
+                </dt>
+
+                <dd>
+                    @item.notes
+                </dd>
+            }
+        }
+    </dl>
+</fieldset>
+
+<h3>Worksheet History</h3>
+
+@foreach (var item in Model.Worksheets)
+{
+    <fieldset>
+        <legend>Status: @item.worksheetStatus Task: @item.Task1.category Assigned To: @item.Employee1.fullName</legend>
+        <dl class="dl-horizontal">
+            @foreach (var item2 in item.WorksheetAudits.OrderByDescending(m => m.dateLogged))
+            {
+
+                <dt>
+                    @item2.dateLogged - @item2.Employee.firstName @item2.Employee.lastName
+                </dt>
+
+                <dd>
+                    @item2.notes
+                </dd>
+            }
+        </dl>
+
+    </fieldset>
+}
+
+<p>
+    @Html.ActionLink("Cancel", "Details", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
+</p>

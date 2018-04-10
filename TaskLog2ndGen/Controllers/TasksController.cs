@@ -753,6 +753,25 @@ namespace TaskLog2ndGen.Controllers
             return View(clarificationViewModel);
         }
 
+        // GET: Tasks/TaskSummary/5
+        public async Task<ActionResult> TaskSummary(int? id)
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Models.Task task = await db.Tasks.FindAsync(id);
+            if (task == null)
+            {
+                return HttpNotFound();
+            }
+            return View("TaskSummary", task);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

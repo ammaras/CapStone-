@@ -446,4 +446,3 @@ E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\bin\Microsoft.AspNet.Identity.Core.xml
 E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.csproj.CoreCompileInputs.cache
 E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.dll
 E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.pdb
-E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.csprojResolveAssemblyReference.cache

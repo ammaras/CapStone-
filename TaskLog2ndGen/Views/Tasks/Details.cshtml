@@ -6,6 +6,8 @@
 
 <h2>View Task</h2>
 
+<p></p>
+
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -147,7 +149,7 @@
     </dl>
 </div>
 
-<h2>Task History</h2>
+<h3>Task History</h3>
 
 <fieldset>
     <legend>Communication</legend>
@@ -196,13 +198,14 @@
     {
         @Html.ActionLink("Acknowledge", "Acknowledge", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
     }
-    @if (Model.taskStatus != "Cancelled")
-    {
-        @Html.ActionLink("Cancel", "Cancel", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
-    }
+    @Html.ActionLink("Summary", "TaskSummary", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
     @if (Model.taskStatus != "Cancelled")
     {
         @Html.ActionLink("Request Clarification", "RequestClarification", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
+    }
+    @if (Model.taskStatus != "Cancelled")
+    {
+        @Html.ActionLink("Cancel", "Cancel", new { id = Model.taskId }, new { @class = "btn btn-secondary" })
     }
     @if (Model.taskStatus != "Cancelled")
     {
