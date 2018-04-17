@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -167,6 +168,68 @@ namespace TaskLog2ndGen.Controllers
             db.Teams.Remove(team);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        // GET: Teams/AddEmployee/5
+        public async Task<ActionResult> AddEmployee(int? id)
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Team team = await db.Teams.FindAsync(id);
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+            List<Employee> employees = await db.Employees.ToListAsync();
+            employees.RemoveAll(e => team.Employees.Contains(e));
+            ViewBag.employees = new SelectList(employees.OrderBy(e => e.lastName), "employeeId", "fullName");
+            return View(team);
+        }
+
+        // POST: Teams/AddEmployee/5
+        [HttpPost, ActionName("AddEmployee")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddEmployeeConfirmed(int? teamId, int? employees)
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            if (teamId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (employees == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employee employee = await db.Employees.FindAsync(employees);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            employee.team = (int)teamId;
+            employee.lastChanged = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                db.Entry(employee).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction("Details", new { id = teamId });
         }
 
         protected override void Dispose(bool disposing)

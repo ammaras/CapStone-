@@ -54,7 +54,7 @@ namespace TaskLog2ndGen.Models
 
         [Display(Name = "Extension")]
         [Required(ErrorMessage = "Extension is required.")]
-        [StringLength(25, ErrorMessage = "Extension cannot have more than 25 characters.")]
+        [RegularExpression("^[0-9]{5}$", ErrorMessage = "Extension must be five digits.")]
         public string extension { get; set; }
     }
 }

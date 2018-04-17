@@ -46,40 +46,48 @@ namespace TaskLog2ndGen.Controllers
         }
 
         // GET: Employees/Create
-        //public ActionResult Create()
-        //{
-        //    if (System.Web.HttpContext.Current != null && Session["account"] == null)
-        //    {
-        //        return RedirectToAction("", "Login");
-        //    }
-        //    ViewBag.employeeId = new SelectList(db.Accounts, "employeeId", "userName");
-        //    ViewBag.team = new SelectList(db.Teams, "teamId", "name");
-        //    return View();
-        //}
+        public ActionResult Create()
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            ViewBag.employeeId = new SelectList(db.Accounts, "employeeId", "userName");
+            ViewBag.team = new SelectList(db.Teams, "teamId", "name");
+            return View();
+        }
 
         // POST: Employees/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Create([Bind(Include = "employeeId,team,lastName,firstName,email,description,middleName,phone,extension")] Employee employee)
-        //{
-        //    if (System.Web.HttpContext.Current != null && Session["account"] == null)
-        //    {
-        //        return RedirectToAction("", "Login");
-        //    }
-        //    employee.lastChanged = DateTime.Now;
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Employees.Add(employee);
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create([Bind(Include = "employeeId,team,lastName,firstName,email,description,middleName,phone,extension")] Employee employee)
+        {
+            if (System.Web.HttpContext.Current != null && Session["account"] == null)
+            {
+                return RedirectToAction("", "Login");
+            }
+            if (System.Web.HttpContext.Current != null && (Session["account"] as Account).roleCode != "Admin")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            employee.lastChanged = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                db.Employees.Add(employee);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
 
-        //    ViewBag.employeeId = new SelectList(db.Accounts, "employeeId", "userName", employee.employeeId);
-        //    ViewBag.team = new SelectList(db.Teams, "teamId", "name", employee.team);
-        //    return View(employee);
-        //}
+            ViewBag.employeeId = new SelectList(db.Accounts, "employeeId", "userName", employee.employeeId);
+            ViewBag.team = new SelectList(db.Teams, "teamId", "name", employee.team);
+            return View(employee);
+        }
 
         // GET: Employees/Edit/5
         public async Task<ActionResult> Edit(int? id)

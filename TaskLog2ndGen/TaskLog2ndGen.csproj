@@ -423,6 +423,8 @@
     <Content Include="Views\Reports\EmployeesTime.cshtml" />
     <Content Include="Views\Reports\Admin.cshtml" />
     <Content Include="Views\Tasks\TaskSummary.cshtml" />
+    <Content Include="Views\Teams\AddEmployee.cshtml" />
+    <Content Include="Views\Teams\RemoveEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
