@@ -165,6 +165,50 @@ namespace TaskLog2ndGen.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             Team team = await db.Teams.FindAsync(id);
+            List<Employee> employees = await db.Employees.Where(e => e.team == team.teamId).ToListAsync();
+            foreach (var employee in employees)
+            {
+                List<Models.Task> tasks = await db.Tasks.Where(t => t.primaryContact == employee.employeeId || t.secondaryContact == employee.employeeId).ToListAsync();
+                foreach (var task in tasks)
+                {
+                    List<TaskReference> taskReferences = await db.TaskReferences.Where(tr => tr.task == task.taskId).ToListAsync();
+                    foreach (var taskReference in taskReferences)
+                    {
+                        db.TaskReferences.Remove(taskReference);
+                    }
+                    List<TaskAudit> taskAudits = await db.TaskAudits.Where(ta => ta.task == task.taskId).ToListAsync();
+                    foreach (var taskAudit in taskAudits)
+                    {
+                        db.TaskAudits.Remove(taskAudit);
+                    }
+                    List<Worksheet> worksheets = await db.Worksheets.Where(ws => ws.task == task.taskId).ToListAsync();
+                    foreach (var worksheet in worksheets)
+                    {
+                        List<WorksheetAudit> worksheetAudits = await db.WorksheetAudits.Where(wa => wa.worksheet == worksheet.worksheetId).ToListAsync();
+                        foreach (var worksheetAudit in worksheetAudits)
+                        {
+                            db.WorksheetAudits.Remove(worksheetAudit);
+                        }
+                        db.Worksheets.Remove(worksheet);
+                    }
+                    db.Tasks.Remove(task);
+                }
+                List<Worksheet> worksheets2 = await db.Worksheets.Where(ws => ws.employee == employee.employeeId).ToListAsync();
+                foreach (var worksheet in worksheets2)
+                {
+                    List<WorksheetAudit> worksheetAudits = await db.WorksheetAudits.Where(wa => wa.worksheet == worksheet.worksheetId).ToListAsync();
+                    foreach (var worksheetAudit in worksheetAudits)
+                    {
+                        db.WorksheetAudits.Remove(worksheetAudit);
+                    }
+                    db.Worksheets.Remove(worksheet);
+                }
+                if (employee.Account != null)
+                {
+                    db.Accounts.Remove(employee.Account);
+                }
+                db.Employees.Remove(employee);
+            }
             db.Teams.Remove(team);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

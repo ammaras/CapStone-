@@ -103,7 +103,7 @@ namespace TaskLog2ndGen.Controllers
                     decimal regularTime = 0;
                     decimal overTime = 0;
                     var employeeTime = new EmployeeTimeViewModel();
-                    var worksheets = task.Worksheets.Where(ws => ws.employee == (System.Web.HttpContext.Current != null ? (Session["account"] as Account).employeeId : 1) && ws.dateAssigned >= startDate2 && ws.dateAssigned <= endDate2);
+                    var worksheets = task.Worksheets.Where(ws => ws.task == task.taskId && ws.employee == (System.Web.HttpContext.Current != null ? employee.employeeId : 1) && ws.dateAssigned >= startDate2 && ws.dateAssigned <= endDate2);
                     for (int i = 0; i < worksheets.Count(); i++)
                     {
                         if (i == 0)
@@ -132,7 +132,7 @@ namespace TaskLog2ndGen.Controllers
             return View("EmployeesTime", employeesTimes);
         }
 
-        // POST: Reports/EmployeeTime"
+        // POST: Reports/EmployeeTime
         public async Task<ActionResult> EmployeeTime(DateTime? startDate3, DateTime? endDate3)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)

@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<TaskLog2ndGen.Models.Worksheet>
-
 <h2>List of Worksheets</h2>
-
 <p>
-    @Html.ActionLink("Create Worksheet", "Create", new { id = ViewBag.task }, new { @class = "btn btn-secondary" })
+    @if (Model.FirstOrDefault().Task1.taskStatus != "Cancelled")
+    {
+        @Html.ActionLink("Create Worksheet", "Create", new { id = ViewBag.task }, new { @class = "btn btn-secondary" })
+    }
 </p>
 <table class="table table-bordered table-hover ">
     <thead>
@@ -34,7 +35,6 @@
                 </td>
                 <td>
                     <a href=@("/Worksheets/Details/" + item.worksheetId)>@Html.DisplayFor(modelItem => item.Employee1.firstName) @Html.DisplayFor(modelItem => item.Employee1.lastName)</a>
-
                 </td>
                 <td>
                     <a href=@("/Worksheets/Details/" + item.worksheetId)>@Html.DisplayFor(modelItem => item.worksheetStatus)</a>

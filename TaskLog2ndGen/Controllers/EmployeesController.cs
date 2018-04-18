@@ -83,6 +83,15 @@ namespace TaskLog2ndGen.Controllers
             {
                 db.Employees.Add(employee);
                 await db.SaveChangesAsync();
+                Account account = new Account()
+                {
+                    employeeId = employee.employeeId,
+                    username = (employee.firstName.ElementAt(0) + employee.lastName).ToLower(),
+                    password = (employee.firstName.ElementAt(0) + employee.lastName).ToLower(),
+                    roleCode = "Employee"
+                };
+                db.Accounts.Add(account);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -215,7 +224,10 @@ namespace TaskLog2ndGen.Controllers
                 }
                 db.Worksheets.Remove(worksheet);
             }
-            db.Accounts.Remove(employee.Account);
+            if (employee.Account != null)
+            {
+                db.Accounts.Remove(employee.Account);
+            }
             db.Employees.Remove(employee);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
