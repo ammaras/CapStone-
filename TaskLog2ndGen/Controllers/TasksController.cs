@@ -382,7 +382,7 @@ namespace TaskLog2ndGen.Controllers
             {
                 return HttpNotFound();
             }
-            else if (task.taskStatus == ACKNOWLEDGED_TASK_STATUS)
+            else if (task.taskStatus == CANCELLED_TASK_STATUS)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
