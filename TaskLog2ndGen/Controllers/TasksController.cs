@@ -563,15 +563,25 @@ namespace TaskLog2ndGen.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             Models.Task task = await db.Tasks.FindAsync(id);
-            List<TaskReference> taskReferences = await db.TaskReferences.Where(tr => tr.task == task.taskId).ToListAsync();
-            foreach (var item in taskReferences)
+            List<TaskReference> taskReferences = await db.TaskReferences.Where(tr => tr.task == id).ToListAsync();
+            foreach (var taskReference in taskReferences)
             {
-                db.TaskReferences.Remove(item);
+                db.TaskReferences.Remove(taskReference);
             }
             List<TaskAudit> taskAudits = await db.TaskAudits.Where(ta => ta.task == id).ToListAsync();
-            foreach (var item in taskAudits)
+            foreach (var taskAudit in taskAudits)
             {
-                db.TaskAudits.Remove(item);
+                db.TaskAudits.Remove(taskAudit);
+            }
+            List<Worksheet> worksheets = await db.Worksheets.Where(ws => ws.task == id).ToListAsync();
+            foreach (var worksheet in worksheets)
+            {
+                List<WorksheetAudit> worksheetAudits = await db.WorksheetAudits.Where(wa => wa.worksheet == worksheet.worksheetId).ToListAsync();
+                foreach (var worksheetAudit in worksheetAudits)
+                {
+                    db.WorksheetAudits.Remove(worksheetAudit);
+                }
+                db.Worksheets.Remove(worksheet);
             }
             db.Tasks.Remove(task);
             await db.SaveChangesAsync();
