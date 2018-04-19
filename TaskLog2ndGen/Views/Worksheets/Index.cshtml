@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TaskLog2ndGen.Models.Worksheet>
 <h2>List of Worksheets</h2>
 <p>
-    @if (Model.FirstOrDefault().Task1.taskStatus != "Cancelled")
+    @if (ViewBag.taskStatus != "Cancelled")
     {
         @Html.ActionLink("Create Worksheet", "Create", new { id = ViewBag.task }, new { @class = "btn btn-secondary" })
     }

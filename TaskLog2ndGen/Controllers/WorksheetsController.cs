@@ -27,11 +27,17 @@ namespace TaskLog2ndGen.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Models.Task task = await db.Tasks.FindAsync(id);
+            if (task == null)
+            {
+                return HttpNotFound();
+            }
             var worksheets = db.Worksheets.Where(w => w.task == id).Include(w => w.Employee1).Include(w => w.Task1).Include(w => w.WorksheetStatu);
             if (worksheets == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.taskStatus = task.taskStatus; 
             ViewBag.task = id;
             return View("Index", await worksheets.ToListAsync());
         }
