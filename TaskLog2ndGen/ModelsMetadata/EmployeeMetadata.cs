@@ -2,6 +2,9 @@
 
 namespace TaskLog2ndGen.Models
 {
+    /// <summary>
+    /// Entity for employee table
+    /// </summary>
     [MetadataType(typeof(EmployeeMetadata))]
     public partial class Employee
     {
@@ -14,6 +17,9 @@ namespace TaskLog2ndGen.Models
         }
     }
 
+    /// <summary>
+    /// Metadata class with validation annotations for employee entity
+    /// </summary>
     public class EmployeeMetadata
     {
         [Display(Name = "Service Team")]
@@ -33,6 +39,7 @@ namespace TaskLog2ndGen.Models
         [Display(Name = "E-Mail")]
         [Required(ErrorMessage = "E-mail is required.")]
         [StringLength(50, ErrorMessage = "E-mail cannot have more than 50 characters.")]
+        [RegularExpression("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage = "E-mail must be in a valid format.")]
         public string email { get; set; }
 
         [Display(Name = "Description")]

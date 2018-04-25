@@ -8,6 +8,9 @@ namespace TaskLog2ndGen.ViewModels
 
     }
 
+    /// <summary>
+    /// Metadata class with validation annotations for task viewmodel
+    /// </summary>
     public class TaskViewModelMetadata
     {
         [Display(Name = "Primary Contact")]

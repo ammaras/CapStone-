@@ -9,9 +9,9 @@
 
 namespace TaskLog2ndGen.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+    /// <summary>
+    /// Entity for worksheet audit table
+    /// </summary>
     public partial class WorksheetAudit
     {
         public int worksheetAuditId { get; set; }

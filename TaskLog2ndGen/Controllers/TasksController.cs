@@ -11,6 +11,9 @@ using System.Net.Mail;
 
 namespace TaskLog2ndGen.Controllers
 {
+    /// <summary>
+    /// Handles get and post http requests for CRUD operations on task table
+    /// </summary>
     public class TasksController : Controller
     {
         private GB_Tasklogtracker_D1Context db = new GB_Tasklogtracker_D1Context();
@@ -29,75 +32,10 @@ namespace TaskLog2ndGen.Controllers
         private const string SYSTEM_NOTIFICATION_SUBJECT = "Task Id: {0} acknowledgement notification. Do not reply.";
         private const string SYSTEM_NOTIFICATION_BODY = "Task Id: {0} has been acknowledge by {1}.";
 
-        // GET: Tasks
-        public async Task<ActionResult> Index(string searchCriterion, string sortCriterion)
-        {
-            if (System.Web.HttpContext.Current != null && Session["account"] == null)
-            {
-                return RedirectToAction("", "Login");
-            }
-            if (String.IsNullOrEmpty(sortCriterion))
-            {
-                ViewBag.statusSortCriterion = "status";
-                ViewBag.teamSortCriterion = "team";
-                ViewBag.assignmentSortCriterion = "assignment";
-            }
-            else
-            {
-                ViewBag.statusSortCriterion = sortCriterion == "status" ? "status_desc" : "status";
-                ViewBag.teamSortCriterion = sortCriterion == "team" ? "team_desc" : "team";
-                ViewBag.assignmentSortCriterion = sortCriterion == "assignment" ? "assignment_desc" : "assignment";
-            }
-            var tasks = db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.Group).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.TaskStatu).Include(t => t.Urgency1).Include(t => t.Team);
-            if (!String.IsNullOrEmpty(searchCriterion))
-            {
-                searchCriterion = searchCriterion.ToLower();
-                tasks = tasks.Where(t => t.Employee.firstName.Contains(searchCriterion)
-                                    || t.Employee.lastName.Contains(searchCriterion)
-                                    || t.Employee1.firstName.Contains(searchCriterion)
-                                    || t.Employee.lastName.Contains(searchCriterion)
-                                    || t.Team.name.Contains(searchCriterion)
-                                    || t.Group.name.Contains(searchCriterion)
-                                    || t.platform.Contains(searchCriterion)
-                                    || t.urgency.Contains(searchCriterion)
-                                    || t.BusinessUnit1.description.Contains(searchCriterion)
-                                    || t.environment.Contains(searchCriterion)
-                                    || t.category.Contains(searchCriterion)
-                                    || t.Application1.name.Contains(searchCriterion)
-                                    || t.title.Contains(searchCriterion)
-                                    || t.description.Contains(searchCriterion)
-                                    || t.highLevelEstimate.Contains(searchCriterion)
-                                    || t.links.Contains(searchCriterion)
-                                    || t.taskStatus.Contains(searchCriterion));
-            }
-            switch (sortCriterion)
-            {
-                case "status":
-                    tasks = tasks.OrderBy(t => t.taskStatus).ThenByDescending(t => t.dateSubmmited);
-                    break;
-                case "status_desc":
-                    tasks = tasks.OrderByDescending(t => t.taskStatus).ThenByDescending(t => t.dateSubmmited);
-                    break;
-                case "team":
-                    tasks = tasks.OrderBy(t => t.serviceTeam).ThenByDescending(t => t.dateSubmmited);
-                    break;
-                case "team_desc":
-                    tasks = tasks.OrderByDescending(t => t.serviceTeam).ThenByDescending(t => t.dateSubmmited);
-                    break;
-                case "assignment":
-                    tasks = tasks.OrderBy(t => t.Employee.lastName).ThenByDescending(t => t.dateSubmmited); ;
-                    break;
-                case "assignment_desc":
-                    tasks = tasks.OrderByDescending(t => t.Employee.lastName).ThenByDescending(t => t.dateSubmmited); ;
-                    break;
-                default:
-                    tasks = tasks.OrderByDescending(t => t.dateSubmmited);
-                    break;
-            }
-            return View("Index", await tasks.ToListAsync());
-        }
-
-        // GET: Tasks
+        /// <summary>
+        /// Handles get request and retrieves all tasks by assignment (assigned employees)
+        /// </summary>
+        /// <returns>View displaying retrieve tasks by assignment (assigned employees)</returns>
         public async Task<ActionResult> TasksByAssignment()
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -122,7 +60,10 @@ namespace TaskLog2ndGen.Controllers
             return View("TasksByAssignment", tasksByAssignment);
         }
 
-        // GET: Tasks
+        /// <summary>
+        /// Handles get request and retrieves all tasks by team
+        /// </summary>
+        /// <returns>View displaying retrieve tasks by team</returns>
         public async Task<ActionResult> TasksByTeam()
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -147,7 +88,10 @@ namespace TaskLog2ndGen.Controllers
             return View("TasksByTeam", tasksByTeam);
         }
 
-        // GET: Tasks
+        /// <summary>
+        /// Handles get request and retrieves all tasks by status
+        /// </summary>
+        /// <returns>View displaying retrieve tasks by status</returns>
         public async Task<ActionResult> TasksByStatus()
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -172,7 +116,10 @@ namespace TaskLog2ndGen.Controllers
             return View("TasksByStatus", tasksByStatus);
         }
 
-        // GET: Tasks
+        /// <summary>
+        /// Handles get request and retrieves all tasks by time spent
+        /// </summary>
+        /// <returns>View displaying retrieve tasks by time spent</returns>
         public async Task<ActionResult> TasksByTimeSpent()
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -227,7 +174,11 @@ namespace TaskLog2ndGen.Controllers
             return View("TasksByTimeSpent", tasksByTimeSpent);
         }
 
-        // GET: Tasks/Details/5
+        /// <summary>
+        /// Handles get request and retrieves a task
+        /// </summary>
+        /// <param name="id">Id of task to retrieve</param>
+        /// <returns>View displaying retrieved task</returns>
         public async Task<ActionResult> Details(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -246,7 +197,10 @@ namespace TaskLog2ndGen.Controllers
             return View("Details", task);
         }
 
-        // GET: Tasks/Create
+        /// <summary>
+        /// Handles get request and sets up form to create task
+        /// </summary>
+        /// <returns>View displaying form to create task</returns>
         public ActionResult Create()
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -271,9 +225,11 @@ namespace TaskLog2ndGen.Controllers
             return View();
         }
 
-        // POST: Tasks/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Handles post request and creates task
+        /// </summary>
+        /// <param name="taskReferenceViewModel">Task to create</param>
+        /// <returns>Redirection to TasksController.Details action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "primaryContact,secondaryContact,dateLogged,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,references,title,description,highLevelEstimate,links")] TaskReferenceViewModel taskReferenceViewModel)
@@ -366,7 +322,11 @@ namespace TaskLog2ndGen.Controllers
             return View(taskReferenceViewModel);
         }
 
-        // GET: Tasks/Edit/5
+        /// <summary>
+        /// Handles get request and sets up form to edit task
+        /// </summary>
+        /// <param name="id">Id of task to edit</param>
+        /// <returns>View displaying form to edit task</returns>
         public async Task<ActionResult> Edit(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -428,9 +388,11 @@ namespace TaskLog2ndGen.Controllers
             return View(taskReferenceViewModel);
         }
 
-        // POST: Tasks/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Handles post request and edits task
+        /// </summary>
+        /// <param name="taskReferenceViewModel">Task to edit</param>
+        /// <returns>Redirection to TasksController.Details action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "taskId,primaryContact,secondaryContact,serviceTeam,serviceGroup,platform,urgency,businessUnit,environment,category,application,references,title,description,highLevelEstimate,links")] TaskReferenceViewModel taskReferenceViewModel)
@@ -526,7 +488,12 @@ namespace TaskLog2ndGen.Controllers
             return View(taskReferenceViewModel);
         }
 
-        // GET: Tasks/Delete/5
+        /// <summary>
+        /// Handles get request and asks for confirmation to delete task
+        /// </summary>
+        /// <param name="id">Id of task to delete</param>
+        /// <returns>View displaying task to delete and asking for confirmation</returns>
+
         public async Task<ActionResult> Delete(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -549,7 +516,11 @@ namespace TaskLog2ndGen.Controllers
             return View(task);
         }
 
-        // POST: Tasks/Delete/5
+        /// <summary>
+        /// Handles post request and deletes task
+        /// </summary>
+        /// <param name="id">Id of task to delete</param>
+        /// <returns>Redirection to TasksController.Index action</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -588,7 +559,11 @@ namespace TaskLog2ndGen.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Tasks/Cancel/5
+        /// <summary>
+        /// Handles get request and asks for confirmation to cancel task
+        /// </summary>
+        /// <param name="id">Id of task to cancel</param>
+        /// <returns>View displaying task to cancel and asking for confirmation</returns>
         public async Task<ActionResult> Cancel(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -611,7 +586,11 @@ namespace TaskLog2ndGen.Controllers
             return View(task);
         }
 
-        // POST: Tasks/Cancel/5
+        /// <summary>
+        /// Handles post request and cancels task
+        /// </summary>
+        /// <param name="id">Id of task to cancel</param>
+        /// <returns>Redirection to TasksController.Details action</returns>
         [HttpPost, ActionName("Cancel")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CancelConfirmed(int id)
@@ -637,7 +616,11 @@ namespace TaskLog2ndGen.Controllers
             return RedirectToAction("Details", new { id = task.taskId });
         }
 
-        // GET: Tasks/Acknowledge/5
+        /// <summary>
+        /// Handles get request and asks for confirmation to acknowledge task
+        /// </summary>
+        /// <param name="id">Id of task to acknowledge</param>
+        /// <returns>View displaying task to acknowledge and asking for confirmation</returns>
         public async Task<ActionResult> Acknowledge(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -660,7 +643,11 @@ namespace TaskLog2ndGen.Controllers
             return View(task);
         }
 
-        // POST: Tasks/Acknowledge/5
+        /// <summary>
+        /// Handles post request and acknowledges task
+        /// </summary>
+        /// <param name="id">Id of task to acknowledge</param>
+        /// <returns>Redirection to TasksController.Details action</returns>
         [HttpPost, ActionName("Acknowledge")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AcknowledgeConfirmed(int id)
@@ -704,7 +691,11 @@ namespace TaskLog2ndGen.Controllers
             return RedirectToAction("Details", new { id = task.taskId });
         }
 
-        // GET: Tasks/RequestClarification/5
+        /// <summary>
+        /// Handles get request and sets up form to request clarification
+        /// </summary>
+        /// <param name="id">Id of task for which to request clarification</param>
+        /// <returns>View displaying form to request clarification</returns>
         public async Task<ActionResult> RequestClarification(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -720,20 +711,24 @@ namespace TaskLog2ndGen.Controllers
             {
                 return HttpNotFound();
             }
-            ClarificationViewModel clarificationViewModel = new ClarificationViewModel()
+            Account account = await db.Accounts.FindAsync((Session["account"] as Account).employeeId);
+            string from = System.Web.HttpContext.Current != null ? account.Employee.email : null;
+            ClarificationViewModel clarificationViewModel = new ClarificationViewModel
             {
                 taskId = task.taskId,
                 to = task.Employee.email,
                 cc = task.Employee1.email,
                 subject = "Task Id: " + task.taskId + " - " + task.title,
-                from = System.Web.HttpContext.Current != null ? (Session["account"] as Account).Employee.email : null,
+                from = from
             };
             return View(clarificationViewModel);
         }
 
-        // POST: Tasks/RequestClarification/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Handles post request and sends clarification request
+        /// </summary>
+        /// <param name="clarificationViewModel">Clarification request to send</param>
+        /// <returns>Redirection to TasksController.Details action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RequestClarification([Bind(Include = "taskId,to,cc,from,subject,body")] ClarificationViewModel clarificationViewModel)
@@ -763,7 +758,11 @@ namespace TaskLog2ndGen.Controllers
             return View(clarificationViewModel);
         }
 
-        // GET: Tasks/TaskSummary/5
+        /// <summary>
+        /// Handles get request and retrieves a task for which to display summary
+        /// </summary>
+        /// <param name="id">Id of task to retrieve</param>
+        /// <returns>View displaying retrieved task summary</returns>
         public async Task<ActionResult> TaskSummary(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -782,6 +781,10 @@ namespace TaskLog2ndGen.Controllers
             return View("TaskSummary", task);
         }
 
+        /// <summary>
+        /// Disposes controller at the end of its life cycle
+        /// </summary>
+        /// <param name="disposing">Flag to dispose database context if true</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

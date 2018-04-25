@@ -10,6 +10,9 @@ using TaskLog2ndGen.Models;
 
 namespace TaskLog2ndGen.Controllers
 {
+    /// <summary>
+    /// Handles get and post http requests for CRUD operations on worksheet table
+    /// </summary>
     public class WorksheetsController : Controller
     {
         private GB_Tasklogtracker_D1Context db = new GB_Tasklogtracker_D1Context();
@@ -20,7 +23,11 @@ namespace TaskLog2ndGen.Controllers
         private const string COMM_TASK_AUDIT_TYPE = "Communication";
         private const string STATUS_UPDATED_NOTE = "Status changed from {0} to {1}";
 
-        // GET: Worksheets
+        /// <summary>
+        /// Handles get request and retrieves all worksheets for a task
+        /// </summary>
+        /// <param name="id">Id of task for which to retrieve all worksheets</param>
+        /// <returns>View displaying all worksheets for a task</returns>
         public async Task<ActionResult> Index(int? id)
         {
             if (id == null)
@@ -37,12 +44,16 @@ namespace TaskLog2ndGen.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.taskStatus = task.taskStatus; 
+            ViewBag.taskStatus = task.taskStatus;
             ViewBag.task = id;
             return View("Index", await worksheets.ToListAsync());
         }
 
-        // GET: Worksheets/Details/5
+        /// <summary>
+        /// Handles get request and retrieves a worksheet
+        /// </summary>
+        /// <param name="id">Id of worksheet to retrieve</param>
+        /// <returns>View displaying retrieved worksheet</returns>
         public async Task<ActionResult> Details(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -61,7 +72,11 @@ namespace TaskLog2ndGen.Controllers
             return View("Details", worksheet);
         }
 
-        // GET: Worksheets/Create
+        /// <summary>
+        /// Handles get request and sets up form to create worksheet for a task
+        /// </summary>
+        /// <param name="id">Id of task for which to create worksheet</param>
+        /// <returns>View displaying form to create worksheet for a task</returns>
         public async Task<ActionResult> Create(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -82,9 +97,11 @@ namespace TaskLog2ndGen.Controllers
             return View();
         }
 
-        // POST: Worksheets/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Handles post request and creates worksheet
+        /// </summary>
+        /// <param name="worksheet">Worksheet to create</param>
+        /// <returns>Redirection to WorksheetsController.Details action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "employee,task,notes,timeSpent,overtime,onCall,links")] Worksheet worksheet)
@@ -134,7 +151,11 @@ namespace TaskLog2ndGen.Controllers
             return View(worksheet);
         }
 
-        // GET: Worksheets/Edit/5
+        /// <summary>
+        /// Handles get request and sets up form to edit worksheet
+        /// </summary>
+        /// <param name="id">Id of worksheet to edit</param>
+        /// <returns>View displaying form to edit worksheet</returns>
         public async Task<ActionResult> Edit(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -155,9 +176,11 @@ namespace TaskLog2ndGen.Controllers
             return View(worksheet);
         }
 
-        // POST: Worksheets/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Handles post request and edits worksheet
+        /// </summary>
+        /// <param name="worksheet">Worksheet to edit</param>
+        /// <returns>Redirection to WorksheetsController.Details action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "worksheetId,employee,task,worksheetStatus,dateAssigned,notes,timeSpent,overtime,onCall,links")] Worksheet worksheet)
@@ -189,7 +212,11 @@ namespace TaskLog2ndGen.Controllers
             return View(worksheet);
         }
 
-        // GET: Worksheets/Delete/5
+        /// <summary>
+        /// Handles get request and asks for confirmation to delete worksheet
+        /// </summary>
+        /// <param name="id">Id of worksheet to delete</param>
+        /// <returns>View displaying worksheet to delete and asking for confirmation</returns>
         public async Task<ActionResult> Delete(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -208,7 +235,11 @@ namespace TaskLog2ndGen.Controllers
             return View(worksheet);
         }
 
-        // POST: Worksheets/Delete/5
+        /// <summary>
+        /// Handles post request and deletes worksheet
+        /// </summary>
+        /// <param name="id">Id of worksheet to delete</param>
+        /// <returns>Redirection to WorksheetsController.Index action</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -228,6 +259,10 @@ namespace TaskLog2ndGen.Controllers
             return RedirectToAction("Index", new { id = worksheet.task });
         }
 
+        /// <summary>
+        /// Disposes controller at the end of its life cycle
+        /// </summary>
+        /// <param name="disposing">Flag to dispose database context if true</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

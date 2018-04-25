@@ -9,9 +9,11 @@
 
 namespace TaskLog2ndGen.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
+    /// <summary>
+    /// Entity for task audit type table
+    /// </summary>
     public partial class TaskAuditType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

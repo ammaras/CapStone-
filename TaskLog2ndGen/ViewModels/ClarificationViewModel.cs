@@ -1,5 +1,8 @@
 ﻿namespace TaskLog2ndGen.ViewModels
 {
+    /// <summary>
+    /// Viewmodel class for requesting clarification for a task
+    /// </summary>
     public partial class ClarificationViewModel
     {
         public int taskId { get; set; }

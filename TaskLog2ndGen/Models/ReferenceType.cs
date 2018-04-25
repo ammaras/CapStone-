@@ -9,9 +9,11 @@
 
 namespace TaskLog2ndGen.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
+    /// <summary>
+    /// Entity for reference type table
+    /// </summary>
     public partial class ReferenceType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

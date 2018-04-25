@@ -9,11 +9,17 @@ using TaskLog2ndGen.Models;
 
 namespace TaskLog2ndGen.Controllers
 {
+    /// <summary>
+    /// Handles get and post http requests for CRUD operations on employee table
+    /// </summary>
     public class EmployeesController : Controller
     {
         private GB_Tasklogtracker_D1Context db = new GB_Tasklogtracker_D1Context();
 
-        // GET: Employees
+        /// <summary>
+        /// Handles get request and retrieves all employees
+        /// </summary>
+        /// <returns>View displaying all employees</returns>
         public async Task<ActionResult> Index()
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -28,7 +34,11 @@ namespace TaskLog2ndGen.Controllers
             return View("Index", await employees.ToListAsync());
         }
 
-        // GET: Employees/Details/5
+        /// <summary>
+        /// Handles get request and retrieves an employee
+        /// </summary>
+        /// <param name="id">Id of employee to retrieve</param>
+        /// <returns>View displaying retrieved employee</returns>
         public async Task<ActionResult> Details(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -47,7 +57,10 @@ namespace TaskLog2ndGen.Controllers
             return View("Details", employee);
         }
 
-        // GET: Employees/Create
+        /// <summary>
+        /// Handles get request and sets up form to create employee
+        /// </summary>
+        /// <returns>View displaying form to create employee</returns>
         public ActionResult Create()
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -63,9 +76,11 @@ namespace TaskLog2ndGen.Controllers
             return View();
         }
 
-        // POST: Employees/Create
-        //To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Handles post request and creates employee
+        /// </summary>
+        /// <param name="employee">Employee to create</param>
+        /// <returns>Redirection to EmployeesController.Details action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "employeeId,team,lastName,firstName,email,description,middleName,phone,extension")] Employee employee)
@@ -92,7 +107,7 @@ namespace TaskLog2ndGen.Controllers
                 };
                 db.Accounts.Add(account);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = employee.employeeId });
             }
 
             ViewBag.employeeId = new SelectList(db.Accounts, "employeeId", "userName", employee.employeeId);
@@ -100,7 +115,11 @@ namespace TaskLog2ndGen.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Edit/5
+        /// <summary>
+        /// Handles get request and sets up form to edit employee
+        /// </summary>
+        /// <param name="id">Id of employee to edit</param>
+        /// <returns>View displaying form to edit employee</returns>
         public async Task<ActionResult> Edit(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -125,9 +144,11 @@ namespace TaskLog2ndGen.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Handles post request and edits employee
+        /// </summary>
+        /// <param name="employee">Employee to edit</param>
+        /// <returns>Redirection to EmployeesController.Details action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "employeeId,team,lastName,firstName,email,description,middleName,phone,extension")] Employee employee)
@@ -152,7 +173,11 @@ namespace TaskLog2ndGen.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Delete/5
+        /// <summary>
+        /// Handles get request and asks for confirmation to delete employee
+        /// </summary>
+        /// <param name="id">Id of employee to delete</param>
+        /// <returns>View displaying employee to delete and asking for confirmation</returns>
         public async Task<ActionResult> Delete(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -175,7 +200,11 @@ namespace TaskLog2ndGen.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Delete/5
+        /// <summary>
+        /// Handles post request and deletes employee
+        /// </summary>
+        /// <param name="id">Id of employee to delete</param>
+        /// <returns>Redirection to EmployeesController.Index action</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -233,6 +262,10 @@ namespace TaskLog2ndGen.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Disposes controller at the end of its life cycle
+        /// </summary>
+        /// <param name="disposing">Flag to dispose database context if true</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

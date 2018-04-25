@@ -2,12 +2,18 @@
 
 namespace TaskLog2ndGen.Models
 {
+    /// <summary>
+    /// Entity for team table
+    /// </summary>
     [MetadataType(typeof(TeamMetadata))]
     public partial class Team
     {
 
     }
 
+    /// <summary>
+    /// Metadata class with validation annotations for team entity
+    /// </summary>
     public class TeamMetadata
     {
         [Display(Name = "Name")]

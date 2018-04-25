@@ -267,11 +267,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelsMetadata\AccountViewModelMetadata.cs" />
     <Compile Include="ViewModelsMetadata\ClarificationViewModelMetadata.cs" />
-    <Compile Include="ViewModelsMetadata\DatesViewModelMetadata.cs" />
     <Compile Include="ViewModelsMetadata\TaskViewModelMetadata.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\ClarificationViewModel.cs" />
-    <Compile Include="ViewModels\DatesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesTimeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeTimeViewModel.cs" />
     <Compile Include="ViewModels\TaskByAssignmentViewModel.cs" />

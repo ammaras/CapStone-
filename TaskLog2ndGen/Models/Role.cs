@@ -9,9 +9,11 @@
 
 namespace TaskLog2ndGen.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
+    /// <summary>
+    /// Entity for role table
+    /// </summary>
     public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +21,9 @@ namespace TaskLog2ndGen.Models
         {
             this.Accounts = new HashSet<Account>();
         }
-    
+
         public string roleCode { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
     }

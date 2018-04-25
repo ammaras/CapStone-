@@ -9,9 +9,9 @@
 
 namespace TaskLog2ndGen.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+    /// <summary>
+    /// Entity for account table
+    /// </summary>
     public partial class Account
     {
         public int employeeId { get; set; }

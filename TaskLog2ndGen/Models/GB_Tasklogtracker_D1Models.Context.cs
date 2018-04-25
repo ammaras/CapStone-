@@ -9,22 +9,24 @@
 
 namespace TaskLog2ndGen.Models
 {
-    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
+    /// <summary>
+    /// Database context for GB_Tasklogtracker_D1 database
+    /// </summary>
     public partial class GB_Tasklogtracker_D1Context : DbContext
     {
-        public GB_Tasklogtracker_D1Context()
-            : base("name=GB_Tasklogtracker_D1Context")
+        public GB_Tasklogtracker_D1Context() : base("name=GB_Tasklogtracker_D1Context")
         {
+
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Application> Applications { get; set; }
         public virtual DbSet<BusinessUnit> BusinessUnits { get; set; }

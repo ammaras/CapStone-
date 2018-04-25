@@ -2,6 +2,9 @@
 
 namespace TaskLog2ndGen.ViewModels
 {
+    /// <summary>
+    /// Viewmodel class for grouping tasks by time spent
+    /// </summary>
     public class TaskByTimeSpentViewModel
     {
         public decimal totalTimeSpent;

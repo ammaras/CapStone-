@@ -9,11 +9,17 @@ using TaskLog2ndGen.Models;
 
 namespace TaskLog2ndGen.Controllers
 {
+    /// <summary>
+    /// Handles get and post http requests for CRUD operations on team table
+    /// </summary>
     public class TeamsController : Controller
     {
         private GB_Tasklogtracker_D1Context db = new GB_Tasklogtracker_D1Context();
 
-        // GET: Teams
+        /// <summary>
+        /// Handles get request and retrieves all teams
+        /// </summary>
+        /// <returns>View displaying all teams</returns>
         public async Task<ActionResult> Index()
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -23,7 +29,11 @@ namespace TaskLog2ndGen.Controllers
             return View("Index", await db.Teams.ToListAsync());
         }
 
-        // GET: Teams/Details/5
+        /// <summary>
+        /// Handles get request and retrieves all employees for a team
+        /// </summary>
+        /// <param name="id">Id of team for wich to retrieve all employees</param>
+        /// <returns>View displaying retrieved employees for a team</returns>
         public async Task<ActionResult> Details(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -43,7 +53,10 @@ namespace TaskLog2ndGen.Controllers
             return View("Details", employees);
         }
 
-        // GET: Teams/Create
+        /// <summary>
+        /// Handles get request and sets up form to create team
+        /// </summary>
+        /// <returns>View displaying form to create team</returns>
         public ActionResult Create()
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -57,9 +70,11 @@ namespace TaskLog2ndGen.Controllers
             return View("Create");
         }
 
-        // POST: Teams/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Handles post request and creates team
+        /// </summary>
+        /// <param name="team">Team to create</param>
+        /// <returns>Redirection to TeamsController.Details action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "teamId,name")] Team team)
@@ -81,7 +96,11 @@ namespace TaskLog2ndGen.Controllers
             return View(team);
         }
 
-        // GET: Teams/Edit/5
+        /// <summary>
+        /// Handles get request and sets up form to edit team
+        /// </summary>
+        /// <param name="id">Id of team to edit</param>
+        /// <returns>View displaying form to edit team</returns>
         public async Task<ActionResult> Edit(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -104,9 +123,11 @@ namespace TaskLog2ndGen.Controllers
             return View(team);
         }
 
-        // POST: Teams/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Handles post request and edits team
+        /// </summary>
+        /// <param name="team">Team to edit</param>
+        /// <returns>Redirection to TeamsController.Details action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "teamId,name")] Team team)
@@ -128,7 +149,11 @@ namespace TaskLog2ndGen.Controllers
             return View(team);
         }
 
-        // GET: Teams/Delete/5
+        /// <summary>
+        /// Handles get request and asks for confirmation to delete team
+        /// </summary>
+        /// <param name="id">Id of team to delete</param>
+        /// <returns>View displaying team to delete and asking for confirmation</returns>
         public async Task<ActionResult> Delete(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -151,7 +176,11 @@ namespace TaskLog2ndGen.Controllers
             return View(team);
         }
 
-        // POST: Teams/Delete/5
+        /// <summary>
+        /// Handles post request and deletes team
+        /// </summary>
+        /// <param name="id">Id of team to delete</param>
+        /// <returns>Redirection to TeamsController.Index action</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -214,7 +243,11 @@ namespace TaskLog2ndGen.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Teams/AddEmployee/5
+        /// <summary>
+        /// Handles get request and sets up form to add an employee to team
+        /// </summary>
+        /// <param name="id">Id of team to which to add an employee</param>
+        /// <returns>View displaying form to add an employee to team</returns>
         public async Task<ActionResult> AddEmployee(int? id)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -240,7 +273,12 @@ namespace TaskLog2ndGen.Controllers
             return View(team);
         }
 
-        // POST: Teams/AddEmployee/5
+        /// <summary>
+        /// Handles post request and adds an employee to team
+        /// </summary>
+        /// <param name="teamId">Id of team to which to add an employee</param>
+        /// <param name="employees">Id of employee to add to team</param>
+        /// <returns>Redirection to TeamsController.Details action</returns>
         [HttpPost, ActionName("AddEmployee")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddEmployeeConfirmed(int? teamId, int? employees)
@@ -276,6 +314,10 @@ namespace TaskLog2ndGen.Controllers
             return RedirectToAction("Details", new { id = teamId });
         }
 
+        /// <summary>
+        /// Disposes controller at the end of its life cycle
+        /// </summary>
+        /// <param name="disposing">Flag to dispose database context if true</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

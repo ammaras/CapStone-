@@ -9,9 +9,11 @@
 
 namespace TaskLog2ndGen.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
+    /// <summary>
+    /// Entity for high level estimate table
+    /// </summary>
     public partial class HighLevelEstimate
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

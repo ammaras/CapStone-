@@ -2,6 +2,9 @@
 
 namespace TaskLog2ndGen.ViewModels
 {
+    /// <summary>
+    /// Viewmodel class for generating employee time report
+    /// </summary>
     public class EmployeeTimeViewModel
     {
         public Task task;

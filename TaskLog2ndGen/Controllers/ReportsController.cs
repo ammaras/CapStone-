@@ -11,11 +11,17 @@ using System.Net.Mail;
 
 namespace TaskLog2ndGen.Controllers
 {
+    /// <summary>
+    /// Handles get and post http requests for displaying reports
+    /// </summary>
     public class ReportsController : Controller
     {
         private GB_Tasklogtracker_D1Context db = new GB_Tasklogtracker_D1Context();
 
-        // GET: Reports
+        /// <summary>
+        /// Handles get request and sets up forms to display reports
+        /// </summary>
+        /// <returns>View displaying forms</returns>
         public ActionResult Index()
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -26,7 +32,12 @@ namespace TaskLog2ndGen.Controllers
             return View();
         }
 
-        // POST: Reports/Admin
+        /// <summary>
+        /// Handles post request and displays admin report
+        /// </summary>
+        /// <param name="startDate1">Start date to display admin report</param>
+        /// <param name="endDate1">End date to display admin report</param>
+        /// <returns>View displaying admin report</returns>
         public async Task<ActionResult> Admin(DateTime? startDate1, DateTime? endDate1)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -59,7 +70,12 @@ namespace TaskLog2ndGen.Controllers
             return View("Admin", employees);
         }
 
-        // POST: Reports/EmployeesTime
+        /// <summary>
+        /// Handles post request and displays employees time report
+        /// </summary>
+        /// <param name="startDate2">Start date to display employees time report</param>
+        /// <param name="endDate2">End date to display employees time report</param>
+        /// <returns>View displaying employees time report</returns>
         public async Task<ActionResult> EmployeesTime(DateTime? startDate2, DateTime? endDate2)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -132,7 +148,12 @@ namespace TaskLog2ndGen.Controllers
             return View("EmployeesTime", employeesTimes);
         }
 
-        // POST: Reports/EmployeeTime
+        /// <summary>
+        /// Handles post request and displays employee time report
+        /// </summary>
+        /// <param name="startDate3">Start date to display employee time report</param>
+        /// <param name="endDate3">End date to display employee time report</param>
+        /// <returns>View displaying employee time report</returns>
         public async Task<ActionResult> EmployeeTime(DateTime? startDate3, DateTime? endDate3)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -188,6 +209,19 @@ namespace TaskLog2ndGen.Controllers
                 }
             }
             return View("EmployeeTime", employeeTimes);
+        }
+
+        /// <summary>
+        /// Disposes controller at the end of its life cycle
+        /// </summary>
+        /// <param name="disposing">Flag to dispose database context if true</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

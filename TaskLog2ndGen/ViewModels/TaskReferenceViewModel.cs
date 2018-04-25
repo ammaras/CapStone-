@@ -3,6 +3,9 @@ using TaskLog2ndGen.Models;
 
 namespace TaskLog2ndGen.ViewModels
 {
+    /// <summary>
+    /// Viewmodel class for creating and editing a task and its references
+    /// </summary>
     public partial class TaskReferenceViewModel
     {
         public int taskId { get; set; }

@@ -39,7 +39,7 @@ namespace TaskLog2ndGen.Tests.Controllers
         public void SearchTasksSucceed()
         {
             // Arrange
-            TasksController controller = new TasksController();
+            HomeController controller = new HomeController();
 
             // Act
             Task<ActionResult> actionResult = controller.Index("Not Assigned", String.Empty);

@@ -8,6 +8,9 @@ namespace TaskLog2ndGen.ViewModels
 
     }
 
+    /// <summary>
+    /// Metadata class with validation annotations for clarification viewmodel
+    /// </summary>
     public class ClarificationViewModelMetadata
     {
         public int taskId { get; set; }

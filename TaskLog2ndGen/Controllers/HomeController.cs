@@ -9,10 +9,19 @@ using TaskLog2ndGen.ViewModels;
 
 namespace TaskLog2ndGen.Controllers
 {
+    /// <summary>
+    /// Handles get http requests for retrieving all tasks
+    /// </summary>
     public class HomeController : Controller
     {
         private GB_Tasklogtracker_D1Context db = new GB_Tasklogtracker_D1Context();
 
+        /// <summary>
+        /// Handles get requests, and retrieves, filters and sorts all tasks
+        /// </summary>
+        /// <param name="searchCriterion">Criterion to filter all tasks</param>
+        /// <param name="sortCriterion">Criterion to sort all tasks</param>
+        /// <returns>View displaying all tasks, filtered or sorted</returns>
         public async Task<ActionResult> Index(string searchCriterion, string sortCriterion)
         {
             if (System.Web.HttpContext.Current != null && Session["account"] == null)
@@ -24,12 +33,14 @@ namespace TaskLog2ndGen.Controllers
                 ViewBag.statusSortCriterion = "status";
                 ViewBag.teamSortCriterion = "team";
                 ViewBag.assignmentSortCriterion = "assignment";
+                ViewBag.timeSpentSortCriterion = "timeSpent";
             }
             else
             {
                 ViewBag.statusSortCriterion = sortCriterion == "status" ? "status_desc" : "status";
                 ViewBag.teamSortCriterion = sortCriterion == "team" ? "team_desc" : "team";
                 ViewBag.assignmentSortCriterion = sortCriterion == "assignment" ? "assignment_desc" : "assignment";
+                ViewBag.timeSpentSortCriterion = sortCriterion == "timeSpent" ? "timeSpent_desc" : "timeSpent";
             }
             var tasks = db.Tasks.Include(t => t.Application1).Include(t => t.BusinessUnit1).Include(t => t.Category1).Include(t => t.Employee).Include(t => t.Employee1).Include(t => t.Environment1).Include(t => t.Group).Include(t => t.HighLevelEstimate1).Include(t => t.Platform1).Include(t => t.TaskStatu).Include(t => t.Urgency1).Include(t => t.Team);
             var taskViewModels = new List<TaskViewModel>();
@@ -100,16 +111,35 @@ namespace TaskLog2ndGen.Controllers
                     taskViewModels = taskViewModels.OrderByDescending(t => t.task.serviceTeam).ThenByDescending(t => t.task.dateSubmmited).ToList();
                     break;
                 case "assignment":
-                    taskViewModels = taskViewModels.OrderBy(t => t.task.Employee.lastName).ThenByDescending(t => t.task.dateSubmmited).ToList();
+                    taskViewModels = taskViewModels.OrderBy(t => t.assignedEmployees).ThenByDescending(t => t.task.dateSubmmited).ToList();
                     break;
                 case "assignment_desc":
-                    taskViewModels = taskViewModels.OrderByDescending(t => t.task.Employee.lastName).ThenByDescending(t => t.task.dateSubmmited).ToList();
+                    taskViewModels = taskViewModels.OrderByDescending(t => t.assignedEmployees).ThenByDescending(t => t.task.dateSubmmited).ToList();
+                    break;
+                case "timeSpent":
+                    taskViewModels = taskViewModels.OrderBy(t => t.totalTimeSpent).ThenByDescending(t => t.task.dateSubmmited).ToList();
+                    break;
+                case "timeSpent_desc":
+                    taskViewModels = taskViewModels.OrderByDescending(t => t.totalTimeSpent).ThenByDescending(t => t.task.dateSubmmited).ToList();
                     break;
                 default:
                     taskViewModels = taskViewModels.OrderByDescending(t => t.task.dateSubmmited).ToList();
                     break;
             }
             return View("Index", taskViewModels);
+        }
+
+        /// <summary>
+        /// Disposes controller at the end of its life cycle
+        /// </summary>
+        /// <param name="disposing">Flag to dispose database context if true</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

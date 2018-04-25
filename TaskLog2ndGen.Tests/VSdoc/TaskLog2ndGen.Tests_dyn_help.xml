@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="TaskLog2ndGen.Tests" Title="TaskLog2ndGen.Tests Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.AcknowledgeTaskSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000001E.html" LinkGroup="TaskLog2ndGen.Tests">AcknowledgeTaskSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.CancelTaskSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000001C.html" LinkGroup="TaskLog2ndGen.Tests">CancelTaskSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.CreateTaskFail" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000018.html" LinkGroup="TaskLog2ndGen.Tests">CreateTaskFail Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.CreateTaskSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000017.html" LinkGroup="TaskLog2ndGen.Tests">CreateTaskSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TeamsControllerTest.CreateTeamFail" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000025.html" LinkGroup="TaskLog2ndGen.Tests">CreateTeamFail Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TeamsControllerTest.CreateTeamSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000024.html" LinkGroup="TaskLog2ndGen.Tests">CreateTeamSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.WorksheetsControllerTest.CreateWorksheetFail" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000002E.html" LinkGroup="TaskLog2ndGen.Tests">CreateWorksheetFail Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.WorksheetsControllerTest.CreateWorksheetSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000002D.html" LinkGroup="TaskLog2ndGen.Tests">CreateWorksheetSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.EmployeesControllerTest.DeleteEmployeeSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000007.html" LinkGroup="TaskLog2ndGen.Tests">DeleteEmployeeSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.DeleteTaskSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000001D.html" LinkGroup="TaskLog2ndGen.Tests">DeleteTaskSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TeamsControllerTest.DeleteTeamSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000029.html" LinkGroup="TaskLog2ndGen.Tests">DeleteTeamSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.WorksheetsControllerTest.DeleteWorksheetSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000032.html" LinkGroup="TaskLog2ndGen.Tests">DeleteWorksheetSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.EmployeesControllerTest.EditEmployeeFail" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000006.html" LinkGroup="TaskLog2ndGen.Tests">EditEmployeeFail Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.EmployeesControllerTest.EditEmployeeSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000005.html" LinkGroup="TaskLog2ndGen.Tests">EditEmployeeSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.EditTaskFail" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000001B.html" LinkGroup="TaskLog2ndGen.Tests">EditTaskFail Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.EditTaskSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000001A.html" LinkGroup="TaskLog2ndGen.Tests">EditTaskSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TeamsControllerTest.EditTeamFail" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000028.html" LinkGroup="TaskLog2ndGen.Tests">EditTeamFail Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TeamsControllerTest.EditTeamSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000027.html" LinkGroup="TaskLog2ndGen.Tests">EditTeamSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.WorksheetsControllerTest.EditWorksheetFail" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000031.html" LinkGroup="TaskLog2ndGen.Tests">EditWorksheetFail Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.WorksheetsControllerTest.EditWorksheetSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000030.html" LinkGroup="TaskLog2ndGen.Tests">EditWorksheetSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.EmployeesControllerTest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000001.html" LinkGroup="TaskLog2ndGen.Tests">EmployeesControllerTest Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.EmployeesControllerTest.EmployeesControllerTest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000002.html" LinkGroup="TaskLog2ndGen.Tests">EmployeesControllerTest Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.ReportsControllerTest.GenerateAdminReportSucced" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000000C.html" LinkGroup="TaskLog2ndGen.Tests">GenerateAdminReportSucced Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.ReportsControllerTest.GenerateEmployeeTimeReportSucced" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000000D.html" LinkGroup="TaskLog2ndGen.Tests">GenerateEmployeeTimeReportSucced Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.ReportsControllerTest.GenerateEmployeesTimeReportSucced" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000000E.html" LinkGroup="TaskLog2ndGen.Tests">GenerateEmployeesTimeReportSucced Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.LoginControllerTest.LogInFail" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000000A.html" LinkGroup="TaskLog2ndGen.Tests">LogInFail Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.LoginControllerTest.LogInSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000009.html" LinkGroup="TaskLog2ndGen.Tests">LogInSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.LoginControllerTest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000008.html" LinkGroup="TaskLog2ndGen.Tests">LoginControllerTest Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.ReportsControllerTest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000000B.html" LinkGroup="TaskLog2ndGen.Tests">ReportsControllerTest Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.RequestClarificationSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000001F.html" LinkGroup="TaskLog2ndGen.Tests">RequestClarificationSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.SearchTasksSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000012.html" LinkGroup="TaskLog2ndGen.Tests">SearchTasksSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000033.html" LinkGroup="TaskLog2ndGen.Tests">TaskLog2ndGen.Tests Reference</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000000.html" LinkGroup="TaskLog2ndGen.Tests">TaskLog2ndGen.Tests.Controllers Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000000F.html" LinkGroup="TaskLog2ndGen.Tests">TasksControllerTest Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.TasksControllerTest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000010.html" LinkGroup="TaskLog2ndGen.Tests">TasksControllerTest Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TeamsControllerTest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000021.html" LinkGroup="TaskLog2ndGen.Tests">TeamsControllerTest Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TeamsControllerTest.TeamsControllerTest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000022.html" LinkGroup="TaskLog2ndGen.Tests">TeamsControllerTest Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.EmployeesControllerTest.ViewEmployeeSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000004.html" LinkGroup="TaskLog2ndGen.Tests">ViewEmployeeSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.EmployeesControllerTest.ViewEmployeesSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000003.html" LinkGroup="TaskLog2ndGen.Tests">ViewEmployeesSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.ViewTaskSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000019.html" LinkGroup="TaskLog2ndGen.Tests">ViewTaskSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.ViewTaskSummarySucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000020.html" LinkGroup="TaskLog2ndGen.Tests">ViewTaskSummarySucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.ViewTasksByAssignmentSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000013.html" LinkGroup="TaskLog2ndGen.Tests">ViewTasksByAssignmentSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.ViewTasksByStatusSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000016.html" LinkGroup="TaskLog2ndGen.Tests">ViewTasksByStatusSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.ViewTasksByTeamSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000014.html" LinkGroup="TaskLog2ndGen.Tests">ViewTasksByTeamSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.ViewTasksByTimeSpentSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000015.html" LinkGroup="TaskLog2ndGen.Tests">ViewTasksByTimeSpentSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TasksControllerTest.ViewTasksSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000011.html" LinkGroup="TaskLog2ndGen.Tests">ViewTasksSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TeamsControllerTest.ViewTeamSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000026.html" LinkGroup="TaskLog2ndGen.Tests">ViewTeamSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.TeamsControllerTest.ViewTeamsSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_0000000000000023.html" LinkGroup="TaskLog2ndGen.Tests">ViewTeamsSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.WorksheetsControllerTest.ViewWorksheetSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000002F.html" LinkGroup="TaskLog2ndGen.Tests">ViewWorksheetSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.WorksheetsControllerTest.ViewWorksheetsSucceed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000002C.html" LinkGroup="TaskLog2ndGen.Tests">ViewWorksheetsSucceed Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.WorksheetsControllerTest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000002A.html" LinkGroup="TaskLog2ndGen.Tests">WorksheetsControllerTest Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="TaskLog2ndGen.Tests.Controllers.WorksheetsControllerTest.WorksheetsControllerTest" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:TaskLog2ndGen.Tests.chm::/topic_000000000000002B.html" LinkGroup="TaskLog2ndGen.Tests">WorksheetsControllerTest Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+

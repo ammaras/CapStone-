@@ -9,9 +9,9 @@
 
 namespace TaskLog2ndGen.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+    /// <summary>
+    /// Entity for task audit table
+    /// </summary>
     public partial class TaskAudit
     {
         public int taskAuditId { get; set; }

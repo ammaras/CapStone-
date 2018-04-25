@@ -2,12 +2,18 @@
 
 namespace TaskLog2ndGen.Models
 {
+    /// <summary>
+    /// Entity for task table
+    /// </summary>
     [MetadataType(typeof(TaskMetadata))]
     public partial class Task
     {
 
     }
 
+    /// <summary>
+    /// Metadata class with validation annotations for task entity
+    /// </summary>
     public class TaskMetadata
     {
         [Display(Name = "Primary Contact")]

@@ -8,6 +8,9 @@ namespace TaskLog2ndGen.ViewModels
 
     }
 
+    /// <summary>
+    /// Metadata class with validation annotations for account viewmodel
+    /// </summary>
     public class AccountViewModelMetadata
     {
         [Display(Name = "Username")]

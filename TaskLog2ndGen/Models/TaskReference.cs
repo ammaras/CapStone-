@@ -9,9 +9,9 @@
 
 namespace TaskLog2ndGen.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+    /// <summary>
+    /// Entity for task reference table
+    /// </summary>
     public partial class TaskReference
     {
         public int taskReferenceId { get; set; }

@@ -3,12 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TaskLog2ndGen.Models
 {
+    /// <summary>
+    /// Entity for worksheet table
+    /// </summary>
     [MetadataType(typeof(WorksheetMetadata))]
     public partial class Worksheet
     {
 
     }
 
+    /// <summary>
+    /// Metadata class with validation annotations for worksheet entity
+    /// </summary>
     public class WorksheetMetadata
     {
         [Display(Name = "Employee Assigned")]

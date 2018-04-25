@@ -3,6 +3,9 @@ using TaskLog2ndGen.Models;
 
 namespace TaskLog2ndGen.ViewModels
 {
+    /// <summary>
+    /// Viewmodel class for grouping tasks by team
+    /// </summary>
     public class TaskByTeamViewModel
     {
         public Team team;
