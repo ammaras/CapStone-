@@ -684,9 +684,11 @@ namespace TaskLog2ndGen.Controllers
             {
                 mailMessage.To.Add(new MailAddress(task.Employee1.email));
             }
+            Employee employee = await db.Employees.FindAsync((Session["account"] as Account).employeeId);
+            string fullName = System.Web.HttpContext.Current != null ? employee.fullName : null;
             mailMessage.Sender = new MailAddress(SYSTEM_NOTIFICATION_MAIL);
             mailMessage.Subject = String.Format(SYSTEM_NOTIFICATION_SUBJECT, task.taskId);
-            mailMessage.Body = String.Format(SYSTEM_NOTIFICATION_BODY, task.taskId, System.Web.HttpContext.Current != null ? (Session["account"] as Account).Employee.fullName : null);
+            mailMessage.Body = String.Format(SYSTEM_NOTIFICATION_BODY, task.taskId, fullName);
             //client.Send(mailMessage); /////////////////////////// WILL FAIL, AS NO MAIL SERVER /////////////////////////// 
             return RedirectToAction("Details", new { id = task.taskId });
         }

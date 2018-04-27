@@ -63,9 +63,10 @@ namespace TaskLog2ndGen.Controllers
                 TempData["startDate1Error"] = "Start date cannot be more recent than end date.";
                 return RedirectToAction("");
             }
+            Employee employee = await db.Employees.FindAsync((Session["account"] as Account).employeeId);
             ViewBag.startDate = startDate1;
             ViewBag.endDate = endDate1;
-            ViewBag.createdBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).Employee.fullName : "Jackson, Peter";
+            ViewBag.createdBy = System.Web.HttpContext.Current != null ? employee.fullName : "Jackson, Peter";
             var employees = await db.Employees.Where(e => e.lastChanged >= startDate1 && e.lastChanged <= endDate1).ToListAsync();
             return View("Admin", employees);
         }
@@ -101,9 +102,10 @@ namespace TaskLog2ndGen.Controllers
                 TempData["startDate2Error"] = "Start date cannot be more recent than end date.";
                 return RedirectToAction("");
             }
+            Employee emp = await db.Employees.FindAsync((Session["account"] as Account).employeeId);
             ViewBag.startDate = startDate2;
             ViewBag.endDate = endDate2;
-            ViewBag.createdBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).Employee.fullName : "Jackson, Peter";
+            ViewBag.createdBy = System.Web.HttpContext.Current != null ? emp.fullName : "Jackson, Peter";
             var employees = await db.Employees.OrderByDescending(e => e.lastName).ToListAsync();
             var tasks = await db.Tasks.OrderByDescending(t => t.dateSubmmited).ToListAsync();
             var employeesTimes = new List<EmployeesTimeViewModel>();
@@ -175,9 +177,10 @@ namespace TaskLog2ndGen.Controllers
                 TempData["startDate3Error"] = "Start date cannot be more recent than end date.";
                 return RedirectToAction("");
             }
+            Employee employee = await db.Employees.FindAsync((Session["account"] as Account).employeeId);
             ViewBag.startDate = startDate3;
             ViewBag.endDate = endDate3;
-            ViewBag.createdBy = System.Web.HttpContext.Current != null ? (Session["account"] as Account).Employee.fullName : "Jackson, Peter";
+            ViewBag.createdBy = System.Web.HttpContext.Current != null ? employee.fullName : "Jackson, Peter";
             var tasks = await db.Tasks.OrderByDescending(t => t.dateSubmmited).ToListAsync();
             var employeeTimes = new List<EmployeeTimeViewModel>();
             foreach (var task in tasks)
