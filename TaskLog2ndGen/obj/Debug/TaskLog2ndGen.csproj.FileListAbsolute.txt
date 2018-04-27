@@ -554,6 +554,12 @@ E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.csprojResolveAss
 E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.csproj.CoreCompileInputs.cache
 E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.dll
 E:\Capstone\TaskLog2ndGen\TaskLog2ndGen\obj\Debug\TaskLog2ndGen.pdb
+C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\System.IO.Compression.dll
+C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\VBCSCompiler.exe
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\ApplicationInsights.config
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\TaskLog2ndGen.dll.config
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\TaskLog2ndGen.dll
@@ -565,13 +571,9 @@ C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\csi.exe
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\csi.exe.config
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\csi.rsp
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\Microsoft.Win32.Primitives.dll
@@ -581,7 +583,6 @@ C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\System.Consol
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\System.Diagnostics.Process.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\System.Diagnostics.StackTrace.dll
-C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\System.IO.Compression.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\System.IO.FileSystem.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\System.IO.FileSystem.Primitives.dll
@@ -604,7 +605,6 @@ C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\System.Xml.XP
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\vbc.exe
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\vbc.exe.config
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\vbc.rsp
-C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\VBCSCompiler.exe
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\Antlr3.Runtime.dll
 C:\Users\nagin\OneDrive\Desktop\CapStone-\TaskLog2ndGen\bin\EntityFramework.dll

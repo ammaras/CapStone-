@@ -556,7 +556,7 @@ namespace TaskLog2ndGen.Controllers
             }
             db.Tasks.Remove(task);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
